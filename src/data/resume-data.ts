@@ -88,6 +88,7 @@ export const resumeData: ResumeData = {
       highlights: [
         "基于百度OCR实现表格智能识别，自主设计值班表排表算法，值班表生成效率提升90% ",
         "设计密钥认证体系替代传统登录，提升用户留存率",
+        "https://schedule.honlnk.top"
       ],
       techStack: ["Vue3", "ElementPlus", "SpringBoot3", "Mybatis", "SpringMail"]
     },
