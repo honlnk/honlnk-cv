@@ -1,7 +1,7 @@
 **鸿影（网名） | Java全栈开发工程师 | 21岁**  
 📍期望城市：济南  💰期望薪资：3-6K  
 ☎ 19563491369  
-✉ jihongshen1@outlook.com  
+✉ jhshonlnk@gmail.com  
 🌐 https://www.honlnk.top
 🐱 https://gitee.com/hong-ying-19
 
