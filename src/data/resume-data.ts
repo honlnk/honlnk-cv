@@ -37,7 +37,7 @@ export const resumeData: ResumeData = {
   name: "纪洪申",
   position: "Java全栈开发工程师 | 21岁",
   contact: {
-    phone: "15066637145",
+    phone: "19563491369",
     email: "jihongshen1@outlook.com",
     location: "期望城市：济南",
     salary: "期望薪资：3-6K",
