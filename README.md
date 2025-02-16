@@ -1,39 +1,56 @@
-# honlnk-online-resume
+**纪洪申 | Java全栈开发工程师 | 21岁**  
+📍期望城市：济南  💰期望薪资：3-6K  
+☎ 15066637145  
+✉ jihongshen1@outlook.com  
+🌐 https://www.honlnk.top
+🐱 https://gitee.com/hong-ying-19
 
-This template should help get you started developing with Vue 3 in Vite.
+---
+### 🔍 核心优势
+**全栈开发**：SpringBoot+Vue.js技术栈 | MySQL+Redis数据层 | 独立完成2个全栈项目开发
+**技术深度**：SpringBoot3/MybatisPlus/SpringAI | Vue3+Pinia+ElementPlus | Hutool工具链
+**工程能力**：OCR/AI集成（百度智能云/通义百练） | 前后端部署 | 跨端协同开发
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### 🚀 项目经历
+**词砖·智能单词系统**（全栈开发 2024.11-至今）
+- 集成牛津/百度翻译API实现多维度单词解析，开发AI辅助学习场景（SpringAI+通义百练）
+- 创新应用IndexedDB实现浏览器端数据缓存，响应速度拥有显著提升
+- 技术栈：Vue3+ElementPlus+SpringBoot3+Mybatis+Redis
 
-## Type Support for `.vue` Imports in TS
+**逐雁排程系统**（全栈开发 2024.02-2024.05）
+- 基于百度OCR实现表格智能识别，自主设计值班表排表算法，值班表生成效率提升90%
+- 设计密钥认证体系替代传统登录，提升用户留存率
+- 技术栈：Vue3+SpringBoot+Mybatis+Hutool
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+**高考志愿系统**（独立前端 2023.05-2023.11）
+- 首创霍兰德测试与志愿推荐融合算法
+- 获省级二等奖/国家三等奖
+- 技术栈：Vue2+Vuex+Axios
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### 🎓 教育背景
+山东商业职业技术学院 | 软件技术 | 专科（2022-2025）
 
-## Project Setup
+**校园经历**
+1. 自主学习15+项技术栈，独立开发2个项目，共落地4个项目
+2. 获得技能类比赛，国奖1项，省奖多项
+3. 担任云计算实训中心学生负责人，时长一年半，与部门师生合作管理学院的实训室
+4. 与其他同学合作开发“实训室管理平台”
+5. 积极与同学老师交流学习先进技术栈
 
-```sh
-npm install
-```
+---
 
-### Compile and Hot-Reload for Development
+### 🌟 附加价值
+- **技术视野**：
+    - 持续跟进SpringAI/大模型应用开发，落地2个AI集成项目
+    - 对通用大模型使用与训练有较高的兴趣 开
+- **质量保障**：
+    - 开发“实训室管理平台”实现全年0教学事故
+    - 开发“逐雁排程”提升排表效率达90%
+- **学习能力**：
+    - 自主学习15+技术栈，2年内从零基础到全栈开发者
 
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+---
