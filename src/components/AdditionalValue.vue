@@ -18,7 +18,11 @@ defineProps<{
       >
         <div class="card-icon">{{ item.icon }}</div>
         <h3 class="card-title">{{ item.title }}</h3>
-        <p class="card-content">{{ item.content }}</p>
+        <div class="card-content">
+          <p v-for="(line, lIndex) in item.content" :key="lIndex">
+            {{ line }}
+          </p>
+        </div>
       </div>
     </div>
   </section>

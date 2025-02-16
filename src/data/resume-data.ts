@@ -29,7 +29,7 @@ export interface ResumeData {
   additionalValues: {
     icon: string
     title: string
-    content: string
+    content: string[]
   }[]
 }
 
@@ -117,17 +117,23 @@ export const resumeData: ResumeData = {
     {
       icon: "🚀",
       title: "技术视野",
-      content: "持续跟进SpringAI/大模型应用开发，落地2个AI集成项目"
+      content: [
+        "持续跟进SpringAI/大模型应用开发，落地2个AI集成项目",
+        "对通用大模型使用与训练有较高的兴趣"
+      ]
     },
     {
       icon: "🛡️",
       title: "质量保障",
-      content: '开发"实训室管理平台"实现全年0教学事故'
+      content: [
+        '开发"实训室管理平台"实现全年0教学事故',
+        '开发“逐雁排程”提升排表效率达90%'
+      ]
     },
     {
       icon: "📚",
       title: "学习能力",
-      content: "自主学习10+技术栈，2年内从零基础到全栈开发者"
+      content: ["自主学习10+技术栈，2年内从零基础到全栈开发者"]
     }
   ]
 }
