@@ -34,7 +34,7 @@ export interface ResumeData {
 }
 
 export const resumeData: ResumeData = {
-  name: "纪洪申",
+  name: "鸿影（网名）",
   position: "Java全栈开发工程师 | 21岁",
   contact: {
     phone: "19563491369",
