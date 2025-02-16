@@ -76,11 +76,10 @@ export const resumeData: ResumeData = {
       duration: "2024.11-至今",
       role: "全栈开发",
       highlights: [
-        "集成牛津/百度翻译API实现多维度单词解析",
-        "创新应用IndexedDB实现浏览器端数据缓存",
-        "响应速度提升显著"
+        "集成牛津/百度翻译API实现多维度单词解析，开发AI辅助学习场景（SpringAI+通义百练） ",
+        "创新应用IndexedDB实现浏览器端数据缓存，响应速度拥有显著提升",
       ],
-      techStack: ["Vue3", "ElementPlus", "SpringBoot3", "Mybatis", "Redis"]
+      techStack: ["Vue3", "ElementPlus", "SpringBoot3", "Mybatis", "Redis", "Hutool", "SpringDataRedis", "SpringMail"]
     },
     {
       title: "逐雁排程系统",
@@ -90,14 +89,15 @@ export const resumeData: ResumeData = {
         "基于百度OCR实现表格智能识别，自主设计值班表排表算法，值班表生成效率提升90% ",
         "设计密钥认证体系替代传统登录，提升用户留存率",
       ],
-      techStack: ["Vue3", "ElementPlus", "SpringBoot3", "Mybatis", "Hutool"]
+      techStack: ["Vue3", "ElementPlus", "SpringBoot3", "Mybatis", "SpringMail"]
     },
     {
       title: "高考志愿系统",
       duration: "2023.05-2023.11",
       role: "独立前端",
       highlights: [
-        "首创霍兰德测试与志愿推荐融合算法，获省级二等奖/国家三等奖",
+        "首创霍兰德测试与志愿推荐融合算法",
+        "获省级二等奖/国家三等奖"
       ],
       techStack: ["Vue2", "Vuex", "Axios"]
     }
