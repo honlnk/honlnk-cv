@@ -57,10 +57,9 @@ defineProps<{
 }
 
 .advantage-item {
-  padding: 0.8rem 0;
   border-bottom: 1px solid #eee;
   position: relative;
-  padding-left: 1.5rem;
+  padding: 0.8rem 0 0.8rem 1.5rem;
 }
 
 .advantage-item:last-child {

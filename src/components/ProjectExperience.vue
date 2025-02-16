@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Project } from '@/data/resume-data'
+import type { ResumeData } from '@/data/resume-data'
 
 defineProps<{
-  projects: Project[]
+  projects: ResumeData['projects']
 }>()
 
 const expandedProject = ref<string | null>(null)
@@ -105,19 +105,5 @@ const toggleDetails = (title: string) => {
   margin: 4px;
   border-radius: 4px;
   font-size: 0.85em;
-}
-
-.slide-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-leave-active {
-  transition: all 0.2s ease-in;
-}
-
-.slide-enter-from,
-.slide-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
 }
 </style>

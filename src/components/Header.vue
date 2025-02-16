@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <header class="header-section">
+  <header class="header-section" data="ResumeData">
     <div class="name-group">
       <h1 class="name">{{ data.name }}</h1>
       <h2 class="position">{{ data.position }}</h2>
