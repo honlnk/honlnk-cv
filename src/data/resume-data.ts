@@ -135,7 +135,7 @@ export const resumeData: ResumeData = {
     {
       icon: "📚",
       title: "学习能力",
-      content: ["自主学习10+技术栈，2年内从零基础到全栈开发者"]
+      content: ["自主学习15+技术栈，2年内从零基础到全栈开发者"]
     }
   ]
 }
