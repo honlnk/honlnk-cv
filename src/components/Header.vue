@@ -1,107 +1,99 @@
 <script setup lang="ts">
 import type { ResumeData } from '@/data/resume-data'
 
+defineOptions({
+  name: 'ResumeHeader'
+})
+
 defineProps<{
   data: ResumeData
 }>()
 </script>
 
 <template>
-  <header class="header-section" data="ResumeData">
-    <div class="name-group">
-      <h1 class="name">{{ data.name }}</h1>
-      <h2 class="position">{{ data.position }}</h2>
+  <header class="card header-gradient" data="ResumeData">
+    <div class="name-group mb-6 text-center">
+      <h1
+        class="name text-4xl font-bold text-primary mb-2"
+        v-motion
+        :initial="{ opacity: 0, y: -20 }"
+        :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }"
+      >
+        {{ data.name }}
+      </h1>
+      <h2
+        class="position text-xl text-secondary"
+        v-motion
+        :initial="{ opacity: 0, y: -10 }"
+        :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 800 } }"
+      >
+        {{ data.position }}
+      </h2>
     </div>
 
-    <div class="contact-group">
-      <div class="contact-item">
-        <span class="icon">📍</span>
-        <span>{{ data.contact.location }}</span>
+    <div class="contact-group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div
+        class="contact-item flex items-center gap-3 p-3 bg-white/90 backdrop-blur rounded-lg"
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :enter="{ opacity: 1, scale: 1, transition: { delay: 800, duration: 600 } }"
+      >
+        <span class="icon text-xl">📍</span>
+        <span class="text-sm">{{ data.contact.location }}</span>
       </div>
-      <div class="contact-item">
-        <span class="icon">💰</span>
-        <span>{{ data.contact.salary }}</span>
+      <div
+        class="contact-item flex items-center gap-3 p-3 bg-white/90 backdrop-blur rounded-lg"
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :enter="{ opacity: 1, scale: 1, transition: { delay: 900, duration: 600 } }"
+      >
+        <span class="icon text-xl">💰</span>
+        <span class="text-sm">{{ data.contact.salary }}</span>
       </div>
-      <a class="contact-item" :href="`mailto:${data.contact.email}`">
-        <span class="icon">✉️</span>
-        <span>{{ data.contact.email }}</span>
+      <a
+        class="contact-link contact-item flex items-center gap-3 p-3 bg-white/90 backdrop-blur rounded-lg hover:bg-white transition-colors duration-200"
+        :href="`mailto:${data.contact.email}`"
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :enter="{ opacity: 1, scale: 1, transition: { delay: 1000, duration: 600 } }"
+      >
+        <span class="icon text-xl">✉️</span>
+        <span class="text-sm">{{ data.contact.email }}</span>
       </a>
-      <a class="contact-item" :href="`tel:${data.contact.phone}`">
-        <span class="icon">📱</span>
-        <span>{{ data.contact.phone }}</span>
+      <a
+        class="contact-link contact-item flex items-center gap-3 p-3 bg-white/90 backdrop-blur rounded-lg hover:bg-white transition-colors duration-200"
+        :href="`tel:${data.contact.phone}`"
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :enter="{ opacity: 1, scale: 1, transition: { delay: 1100, duration: 600 } }"
+      >
+        <span class="icon text-xl">📱</span>
+        <span class="text-sm">{{ data.contact.phone }}</span>
       </a>
-      <a rel="noopener noreferrer" class="contact-item" :href="data.contact.website" target="_blank">
-        <span class="icon">🌐</span>
-        <span>{{data.contact.website}}</span>
+      <a
+        class="contact-link contact-item flex items-center gap-3 p-3 bg-white/90 backdrop-blur rounded-lg hover:bg-white transition-colors duration-200"
+        rel="noopener noreferrer"
+        :href="data.contact.website"
+        target="_blank"
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :enter="{ opacity: 1, scale: 1, transition: { delay: 1200, duration: 600 } }"
+      >
+        <span class="icon text-xl">🌐</span>
+        <span class="text-sm">{{data.contact.website}}</span>
       </a>
-      <a rel="noopener noreferrer" class="contact-item" :href="data.contact.gitee" target="_blank">
-        <span class="icon">🐱</span>
-        <span>{{data.contact.gitee}}</span>
+      <a
+        class="contact-link contact-item flex items-center gap-3 p-3 bg-white/90 backdrop-blur rounded-lg hover:bg-white transition-colors duration-200"
+        rel="noopener noreferrer"
+        :href="data.contact.gitee"
+        target="_blank"
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :enter="{ opacity: 1, scale: 1, transition: { delay: 1300, duration: 600 } }"
+      >
+        <span class="icon text-xl">🐱</span>
+        <span class="text-sm">{{data.contact.gitee}}</span>
       </a>
     </div>
   </header>
 </template>
-
-<style scoped>
-.header-section {
-  background: var(--header-bg);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.name-group {
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.name {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  margin: 0;
-}
-
-.position {
-  font-size: 1.2rem;
-  color: var(--secondary-color);
-  margin: 0.5rem 0;
-}
-
-.contact-group {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.8rem;
-  background: rgba(255,255,255,0.9);
-  border-radius: 8px;
-  transition: transform 0.2s ease;
-  color: var(--text-primary);
-  text-decoration: none;
-}
-
-.contact-item:hover {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,1);
-}
-
-.icon {
-  font-size: 1.2em;
-}
-
-@media (max-width: 768px) {
-  .name {
-    font-size: 2rem;
-  }
-
-  .contact-group {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

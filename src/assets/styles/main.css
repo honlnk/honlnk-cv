@@ -1,37 +1,98 @@
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background: #f5f6fa;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans leading-relaxed text-text-primary bg-section-bg;
+    @apply antialiased;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-primary font-semibold;
+    line-height: 1.2;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  a {
+    @apply text-secondary no-underline;
+    @apply hover:text-secondary/80 transition-colors duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-secondary/50;
+  }
+
+  p {
+    @apply my-4;
+    line-height: 1.7;
+  }
+
+  ul, ol {
+    @apply pl-6;
+    margin: 1rem 0;
+  }
+
+  li {
+    @apply mb-2;
+  }
 }
 
-h1, h2, h3 {
-    color: var(--primary-color);
+@layer components {
+  .section-title::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-16 h-1 bg-secondary rounded-full;
+  }
+
+  .contact-link {
+    @apply text-secondary hover:text-secondary/80 transition-colors duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-secondary/50 rounded;
+  }
+
+  .tech-tag {
+    @apply inline-block bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm;
+    @apply mr-2 mb-2 transition-all duration-200 hover:bg-secondary/20;
+  }
+
+  /* .project-timeline styles removed to eliminate vertical line */
 }
 
-a {
-    color: var(--secondary-color);
-    text-decoration: none;
-}
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .resume-container {
-        padding: 1rem;
-    }
+  .text-pretty {
+    text-wrap: pretty;
+  }
 
-    .project-card {
-        margin: 0 -1rem;
-        border-radius: 0;
-    }
-}
+  .glass {
+    @apply glass-effect;
+  }
 
+  .card {
+    @apply card-base card-float;
+  }
 
-/* 在 Header.vue 的 <style> 中添加链接样式 */
-.contact-item[href] {
-    color: var(--link-color);
-}
-
-.contact-item[href]:hover {
-    color: var(--link-hover-color);
+  .text-gradient {
+    @apply bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent;
+  }
 }
