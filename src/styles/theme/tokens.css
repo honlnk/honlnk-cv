@@ -162,10 +162,71 @@
  * Dark Mode Overrides - 暗色模式覆盖
  * ================================ */
 
+/* 暗色模式 - 手动设置 */
+:root[data-theme="dark"] {
+  /* 背景色系 */
+  --color-section-bg: 26 26 26;     /* #1a1a1a */
+  --color-header-bg: 45 45 45;      /* #2d2d2d */
+  --color-gray-50: 26 26 26;        /* #1a1a1a */
+  --color-gray-100: 45 45 45;       /* #2d2d2d */
+  --color-gray-200: 64 64 64;       /* #404040 */
+  --color-gray-300: 96 96 96;       /* #606060 */
+
+  /* 文字色系 */
+  --color-text-primary: 255 255 255;      /* #ffffff */
+  --color-text-secondary: 160 160 160;    /* #a0a0a0 */
+  --color-gray-400: 160 160 160;          /* #a0a0a0 */
+  --color-gray-500: 180 180 180;          /* #b4b4b4 */
+  --color-gray-600: 200 200 200;          /* #c8c8c8 */
+  --color-gray-700: 220 220 220;          /* #dcdcdc */
+
+  /* 卡片背景 */
+  --card-bg: 45 45 45;             /* #2d2d2d */
+  --card-border: 64 64 64;         /* #404040 */
+
+  /* 状态背景色 */
+  --loading-bg: 45 45 45;         /* #2d2d2d */
+  --error-bg: rgba(231, 76, 60, 0.1);     /* 错误背景 */
+  --empty-bg: rgba(108, 117, 125, 0.1);   /* 空状态背景 */
+}
+
+/* 暗色模式 - 系统偏好（仅在未手动设置时生效） */
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* TODO: 实现完整的暗色模式变量映射 */
-    --color-section-bg: var(--color-dark-bg-primary);
-    --color-header-bg: var(--color-dark-bg-secondary);
+  :root:not([data-theme="light"]) {
+    /* 背景色系 */
+    --color-section-bg: 26 26 26;     /* #1a1a1a */
+    --color-header-bg: 45 45 45;      /* #2d2d2d */
+    --color-gray-50: 26 26 26;        /* #1a1a1a */
+    --color-gray-100: 45 45 45;       /* #2d2d2d */
+    --color-gray-200: 64 64 64;       /* #404040 */
+    --color-gray-300: 96 96 96;       /* #606060 */
+
+    /* 文字色系 */
+    --color-text-primary: 255 255 255;      /* #ffffff */
+    --color-text-secondary: 160 160 160;    /* #a0a0a0 */
+    --color-gray-400: 160 160 160;          /* #a0a0a0 */
+    --color-gray-500: 180 180 180;          /* #b4b4b4 */
+    --color-gray-600: 200 200 200;          /* #c8c8c8 */
+    --color-gray-700: 220 220 220;          /* #dcdcdc */
+
+    /* 卡片背景 */
+    --card-bg: 45 45 45;             /* #2d2d2d */
+    --card-border: 64 64 64;         /* #404040 */
+
+    /* 状态背景色 */
+    --loading-bg: 45 45 45;         /* #2d2d2d */
+    --error-bg: rgba(231, 76, 60, 0.1);     /* 错误背景 */
+    --empty-bg: rgba(108, 117, 125, 0.1);   /* 空状态背景 */
   }
+}
+
+/* 亮色模式 - 手动设置（确保覆盖暗色模式） */
+:root[data-theme="light"] {
+  /* 确保亮色模式变量 */
+  --color-section-bg: 248 249 250;      /* #f8f9fa */
+  --color-header-bg: 248 249 250;        /* #f8f9fa */
+  --color-text-primary: 44 62 80;        /* #2c3e50 */
+  --color-text-secondary: 127 140 141;   /* #7f8c8d */
+  --card-bg: 255 255 255;               /* white */
+  --card-border: 233 236 239;           /* #e9ecef */
 }

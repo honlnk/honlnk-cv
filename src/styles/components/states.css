@@ -16,8 +16,8 @@
     text-align: center;
     padding: var(--spacing-xl);
     border-radius: var(--border-radius-lg);
-    background-color: rgb(var(--color-gray-50));
-    border: var(--border-width-1) solid rgb(var(--color-gray-200));
+    background-color: rgb(var(--color-section-bg));
+    border: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
   }
 
   /* 加载状态 */
@@ -41,7 +41,7 @@
 
   /* 错误状态 */
   .error-state {
-    background-color: rgba(var(--color-error), 0.05);
+    background-color: rgb(var(--error-bg, rgba(231, 76, 60, 0.05)));
     border-color: rgba(var(--color-error), 0.2);
   }
 
@@ -63,7 +63,7 @@
 
   /* 空状态 */
   .empty-state {
-    background-color: rgba(var(--color-gray-100), 0.5);
+    background-color: rgb(var(--empty-bg, rgba(108, 117, 125, 0.1)));
   }
 
   .empty-state .empty-title {
