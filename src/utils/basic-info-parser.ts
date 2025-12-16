@@ -1,9 +1,5 @@
-import type { BasicInfoField } from '@/config/basic-info-fields'
+import type { BasicInfoField, ParsedBasicInfo } from '@/types/types'
 import { getFieldConfig, getFieldsByGroup } from '@/config/basic-info-fields'
-
-export interface ParsedBasicInfo {
-  [key: string]: string | number
-}
 
 /**
  * 解析基本信息部分

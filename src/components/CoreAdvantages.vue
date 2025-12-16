@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ResumeData } from '@/data/resume-data'
+import type { ResumeData } from '@/types/types'
 
 defineProps<{
   advantages: ResumeData['coreAdvantages']

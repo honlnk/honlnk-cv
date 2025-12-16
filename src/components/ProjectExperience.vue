@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { ResumeData } from '@/data/resume-data'
+import type { ResumeData } from '@/types/types'
 
 defineProps<{
   projects: ResumeData['projects']

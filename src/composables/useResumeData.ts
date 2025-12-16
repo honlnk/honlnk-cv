@@ -1,37 +1,7 @@
 import { ref, computed } from 'vue'
-import type { ResumeData } from '@/data/resume-data'
+import type { ResumeData, ProjectData, AdvantageData, AdditionalValueData, EducationData } from '@/types/types'
 import { parseTitleWithEmoji } from '@/utils/emoji-parser'
-import { parseBasicInfo } from '@/utils/basic-info-parser'
-
-// 定义项目类型
-interface ProjectData {
-  title: string
-  role: string
-  duration: string
-  highlights: string[]
-  techStack: string[]
-}
-
-// 定义优势类型
-interface AdvantageData {
-  title: string
-  items: string[]
-}
-
-// 定义附加价值类型
-interface AdditionalValueData {
-  icon: string
-  title: string
-  content: string[]
-}
-
-// 定义教育背景类型
-interface EducationData {
-  school: string
-  major: string
-  duration: string
-  experiences: string[]
-}
+import { parseBasicInfo, validateBasicInfo } from '@/utils/basic-info-parser'
 
 export function useResumeData() {
   const resumeData = ref<ResumeData>()
@@ -43,25 +13,10 @@ export function useResumeData() {
     error.value = ''
 
     try {
-      // 在开发环境中，我们可以使用README.md文件
-      // 在生产环境中，我们可以使用静态数据或从API获取
-      if (import.meta.env.DEV) {
-        // 开发环境：尝试从README.md解析
-        try {
-          const response = await fetch('/README.md')
-          const markdown = await response.text()
-          resumeData.value = parseResumeFromMarkdown(markdown)
-        } catch {
-          console.warn('无法加载README.md，使用备用数据')
-          // 退回到静态数据
-          const { resumeData: staticData } = await import('@/data/resume-data')
-          resumeData.value = staticData
-        }
-      } else {
-        // 生产环境：直接使用静态数据
-        const { resumeData: staticData } = await import('@/data/resume-data')
-        resumeData.value = staticData
-      }
+      // 从 README.md 解析数据
+      const response = await fetch('/README.md')
+      const markdown = await response.text()
+      resumeData.value = parseResumeFromMarkdown(markdown)
     } catch (err) {
       error.value = err instanceof Error ? err.message : '加载数据失败'
       console.error('加载简历数据失败:', err)
@@ -114,6 +69,19 @@ export function useResumeData() {
 
     // 解析基本信息
     const basicInfo = parseBasicInfo(basicInfoSection)
+
+    // 验证基本信息
+    const validation = validateBasicInfo(basicInfo)
+    if (!validation.valid) {
+      console.group('🚨 基本信息验证失败')
+      validation.errors.forEach(error => {
+        console.error(`❌ ${error.field}: ${error.message}`)
+      })
+      console.warn('请检查 README.md 中的基本信息格式是否正确')
+      console.groupEnd()
+    } else {
+      console.log('✅ 基本信息验证通过')
+    }
 
     // 解析其他内容
     const otherContent = otherLines.join('\n')

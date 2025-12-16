@@ -3,31 +3,7 @@
  * 定义简历中支持的基本信息字段类型、图标和验证规则
  */
 
-export interface BasicInfoField {
-  /** 字段标识符 */
-  key: string
-  /** 显示名称 */
-  label: string
-  /** 图标（内置，用户不需要在README中写emoji） */
-  icon: string
-  /** 是否必填字段 */
-  required?: boolean
-  /** 字段类型，用于验证和格式化 */
-  type: 'text' | 'url' | 'email' | 'phone' | 'number' | 'date'
-  /** 字段分组，用于显示组织 */
-  group?: 'personal' | 'contact' | 'professional' | 'location' | 'online' | 'other'
-  /** 排序权重，数字越小越靠前 */
-  order?: number
-  /** 字段描述/占位符 */
-  placeholder?: string
-  /** 验证规则 */
-  validation?: {
-    pattern?: RegExp
-    minLength?: number
-    maxLength?: number
-    message?: string
-  }
-}
+import type { BasicInfoField } from '@/types/types'
 
 /** 基本信息字段配置 */
 export const BASIC_INFO_FIELDS: BasicInfoField[] = [
@@ -37,47 +13,32 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     label: '姓名',
     icon: '👤',
     required: true,
-    type: 'text',
-    group: 'personal',
-    order: 1,
-    placeholder: '张三'
+    group: 'personal'
   },
   {
     key: 'age',
     label: '年龄',
     icon: '🎂',
-    type: 'number',
-    group: 'personal',
-    order: 2,
-    placeholder: '25'
+    group: 'personal'
   },
   {
     key: 'position',
     label: '职位',
     icon: '💼',
     required: true,
-    type: 'text',
-    group: 'professional',
-    order: 1,
-    placeholder: '前端开发工程师'
+    group: 'professional'
   },
   {
     key: 'experience',
     label: '工作经验',
     icon: '💪',
-    type: 'text',
-    group: 'professional',
-    order: 2,
-    placeholder: '3年'
+    group: 'professional'
   },
   {
     key: 'education',
     label: '学历',
     icon: '🎓',
-    type: 'text',
-    group: 'professional',
-    order: 3,
-    placeholder: '本科'
+    group: 'professional'
   },
 
   // 联系方式
@@ -85,10 +46,7 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'phone',
     label: '手机号',
     icon: '📱',
-    type: 'phone',
     group: 'contact',
-    order: 1,
-    placeholder: '13800138000',
     validation: {
       pattern: /^1[3-9]\d{9}$/,
       message: '请输入有效的手机号'
@@ -98,10 +56,7 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'email',
     label: '邮箱',
     icon: '✉️',
-    type: 'email',
     group: 'contact',
-    order: 2,
-    placeholder: 'example@email.com',
     validation: {
       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       message: '请输入有效的邮箱地址'
@@ -111,10 +66,7 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'wechat',
     label: '微信号',
     icon: '💬',
-    type: 'text',
-    group: 'contact',
-    order: 3,
-    placeholder: 'wechat_id'
+    group: 'contact'
   },
 
   // 位置信息
@@ -122,19 +74,13 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'location',
     label: '期望城市',
     icon: '📍',
-    type: 'text',
-    group: 'location',
-    order: 1,
-    placeholder: '北京'
+    group: 'location'
   },
   {
     key: 'salary',
     label: '期望薪资',
     icon: '💰',
-    type: 'text',
-    group: 'location',
-    order: 2,
-    placeholder: '15-25K'
+    group: 'location'
   },
 
   // 在线平台
@@ -142,46 +88,31 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'website',
     label: '个人网站',
     icon: '🌐',
-    type: 'url',
-    group: 'online',
-    order: 1,
-    placeholder: 'https://example.com'
+    group: 'online'
   },
   {
     key: 'github',
     label: 'GitHub',
     icon: '🐙',
-    type: 'url',
-    group: 'online',
-    order: 2,
-    placeholder: 'https://github.com/username'
+    group: 'online'
   },
   {
     key: 'gitee',
     label: 'Gitee',
     icon: '🐱',
-    type: 'url',
-    group: 'online',
-    order: 3,
-    placeholder: 'https://gitee.com/username'
+    group: 'online'
   },
   {
     key: 'blog',
     label: '技术博客',
     icon: '📝',
-    type: 'url',
-    group: 'online',
-    order: 4,
-    placeholder: 'https://blog.example.com'
+    group: 'online'
   },
   {
     key: 'linkedin',
     label: 'LinkedIn',
     icon: '💼',
-    type: 'url',
-    group: 'online',
-    order: 5,
-    placeholder: 'https://linkedin.com/in/username'
+    group: 'online'
   },
 
   // 其他信息
@@ -189,19 +120,13 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'status',
     label: '求职状态',
     icon: '🚀',
-    type: 'text',
-    group: 'other',
-    order: 1,
-    placeholder: '在职-考虑机会'
+    group: 'other'
   },
   {
     key: 'other',
     label: '其他',
     icon: '📌',
-    type: 'text',
-    group: 'other',
-    order: 999,
-    placeholder: '其他自定义信息'
+    group: 'other'
   }
 ]
 
@@ -216,14 +141,11 @@ export function getFieldIcon(key: string): string {
   return field?.icon || '📌'
 }
 
-
 /** 按分组获取字段 */
 export function getFieldsByGroup(group?: string): BasicInfoField[] {
-  const fields = group
+  return group
     ? BASIC_INFO_FIELDS.filter(field => field.group === group)
     : BASIC_INFO_FIELDS
-
-  return fields.sort((a, b) => (a.order || 999) - (b.order || 999))
 }
 
 /** 验证字段值 */
