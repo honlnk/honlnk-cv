@@ -1,6 +1,14 @@
 export interface ResumeData {
+  /** 基本信息 - 支持灵活的字段结构 */
+  basicInfo?: {
+    [key: string]: string | number
+  }
+
+  /** 兼容性：保持原有的name字段 */
   name: string
+  /** 兼容性：保持原有的position字段 */
   position: string
+  /** 兼容性：保持原有的contact字段 */
   contact: {
     phone: string
     email: string
@@ -9,6 +17,7 @@ export interface ResumeData {
     website: string
     gitee: string
   }
+
   coreAdvantages: {
     title: string
     items: string[]

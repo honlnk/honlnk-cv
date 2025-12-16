@@ -1,3 +1,5 @@
+import type { ResumeData } from '@/data/resume-data'
+
 /**
  * Emoji 解析工具函数
  * 用于提取和处理字符串中的emoji字符
@@ -77,4 +79,83 @@ export function parseTitleWithEmoji(title: string): { emoji: string; cleanTitle:
     emoji: getSafeEmoji(emoji),
     cleanTitle: text
   }
+}
+
+/**
+ * 联系方式emoji映射配置
+ */
+const CONTACT_EMOJI_MAP: Record<string, keyof ResumeData['contact']> = {
+  '📱': 'phone',
+  '✉': 'email',
+  '📧': 'email',
+  '🌐': 'website',
+  '🔗': 'website',
+  '🐱': 'gitee',
+  '🐙': 'gitee',
+  '📍': 'location',
+  '💰': 'salary'
+}
+
+/**
+ * 解析联系方式行，提取emoji和联系信息
+ * @param line 联系方式行文本
+ * @returns 包含联系方式和值的对象
+ */
+export function parseContactLine(line: string): { type: keyof ResumeData['contact'] | null; value: string } {
+  if (!line || line.trim().length === 0) {
+    return { type: null, value: '' }
+  }
+
+  const { emoji, text } = extractEmojiFromStart(line.trim())
+
+  if (!emoji) {
+    // 尝试查找行中的任何emoji
+    const baseEmojiRegex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F900}-\u{1F9FF}]|[\u{1F018}-\u{1F270}]/u
+    const complexEmojiPattern = '(' + baseEmojiRegex.source + '(?:\\uFE0F|\\u200D(?:' + baseEmojiRegex.source + '))*)+'
+    const emojiMatch = line.match(new RegExp(complexEmojiPattern, 'u'))
+
+    if (emojiMatch) {
+      const foundEmoji = emojiMatch[0]
+      const contactType = CONTACT_EMOJI_MAP[foundEmoji]
+      if (contactType) {
+        return {
+          type: contactType,
+          value: line.replace(foundEmoji, '').replace(/^[\s-:]*/, '').trim()
+        }
+      }
+    }
+
+    return { type: null, value: line.trim() }
+  }
+
+  const contactType = CONTACT_EMOJI_MAP[emoji]
+
+  return {
+    type: contactType || null,
+    value: text
+  }
+}
+
+/**
+ * 检查行是否为联系方式行
+ * @param line 文本行
+ * @param currentSection 当前解析的章节
+ * @returns 是否为联系方式行
+ */
+export function isContactLine(line: string, currentSection: string): boolean {
+  const trimmed = line.trim()
+
+  // 如果明确是基本信息章节，检查是否包含联系方式emoji
+  if (currentSection === '基本信息') {
+    const { type } = parseContactLine(trimmed)
+    return type !== null
+  }
+
+  // 检查是否为列表项且包含联系方式emoji
+  if (trimmed.startsWith('-') || trimmed.includes('联系方式:')) {
+    const { type } = parseContactLine(trimmed)
+    return type !== null
+  }
+
+  return false
 }

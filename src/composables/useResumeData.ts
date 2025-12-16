@@ -1,6 +1,38 @@
 import { ref, computed } from 'vue'
 import type { ResumeData } from '@/data/resume-data'
+import type { ParsedBasicInfo } from '@/utils/basic-info-parser'
 import { parseTitleWithEmoji } from '@/utils/emoji-parser'
+import { parseBasicInfo } from '@/utils/basic-info-parser'
+
+// 定义项目类型
+interface ProjectData {
+  title: string
+  role: string
+  duration: string
+  highlights: string[]
+  techStack: string[]
+}
+
+// 定义优势类型
+interface AdvantageData {
+  title: string
+  items: string[]
+}
+
+// 定义附加价值类型
+interface AdditionalValueData {
+  icon: string
+  title: string
+  content: string[]
+}
+
+// 定义教育背景类型
+interface EducationData {
+  school: string
+  major: string
+  duration: string
+  experiences: string[]
+}
 
 export function useResumeData() {
   const resumeData = ref<ResumeData>()
@@ -40,50 +72,88 @@ export function useResumeData() {
   }
 
   function parseResumeFromMarkdown(markdown: string): ResumeData {
-    // 简化的解析逻辑，专门针对当前README.md格式
     const lines = markdown.split('\n')
 
-    const data: ResumeData = {
-      name: '',
-      position: '',
+    // 使用新的基本信息解析器
+    const basicInfoSection: string[] = []
+    const otherLines: string[] = []
+    let inBasicInfoSection = false
+    let inCommentBlock = false
+
+    // 分离基本信息部分和其他内容
+    for (const line of lines) {
+      const trimmed = line.trim()
+
+      // 处理注释块
+      if (trimmed === '<!--') {
+        inCommentBlock = true
+        continue
+      } else if (trimmed === '-->') {
+        inCommentBlock = false
+        continue
+      }
+
+      if (inCommentBlock) continue
+
+      // 检测章节
+      if (trimmed.startsWith('## ')) {
+        if (trimmed === '## 基本信息') {
+          inBasicInfoSection = true
+          continue
+        } else {
+          inBasicInfoSection = false
+        }
+      }
+
+      // 分离基本信息和其他内容
+      if (inBasicInfoSection && trimmed.startsWith('- **')) {
+        basicInfoSection.push(line)
+      } else if (!inBasicInfoSection) {
+        otherLines.push(line)
+      }
+    }
+
+    // 解析基本信息
+    const basicInfo = parseBasicInfo(basicInfoSection)
+
+    // 解析其他内容
+    const otherContent = otherLines.join('\n')
+    const otherData = parseOtherContent(otherContent, basicInfo)
+
+    return {
+      basicInfo,
+      ...otherData
+    }
+  }
+
+  function parseOtherContent(markdown: string, basicInfo: ParsedBasicInfo): Omit<ResumeData, 'basicInfo'> {
+    const lines = markdown.split('\n')
+
+    const data = {
+      name: String(basicInfo.name || ''),
+      position: String(basicInfo.position || ''),
       contact: {
-        phone: '',
-        email: '',
-        location: '',
-        salary: '',
-        website: '',
-        gitee: ''
+        phone: String(basicInfo.phone || ''),
+        email: String(basicInfo.email || ''),
+        location: String(basicInfo.location || ''),
+        salary: String(basicInfo.salary || ''),
+        website: String(basicInfo.website || ''),
+        gitee: String(basicInfo.gitee || '')
       },
-      coreAdvantages: [],
-      projects: [],
+      coreAdvantages: [] as AdvantageData[],
+      projects: [] as ProjectData[],
       education: {
         school: '',
         major: '',
         duration: '',
-        experiences: []
-      },
-      additionalValues: []
+        experiences: [] as string[]
+      } as EducationData,
+      additionalValues: [] as AdditionalValueData[]
     }
 
     let currentSection = ''
-    let currentAdvantage: { title: string; items: string[] } | null = null
-
-    interface ProjectData {
-      title: string
-      role: string
-      duration: string
-      highlights: string[]
-      techStack: string[]
-    }
-
+    let currentAdvantage: AdvantageData | null = null
     let currentProject: ProjectData | null = null
-
-    interface AdditionalValueData {
-      icon: string
-      title: string
-      content: string[]
-    }
-
     let currentValue: AdditionalValueData | null = null
 
     for (const line of lines) {
@@ -93,8 +163,8 @@ export function useResumeData() {
       if (trimmed.startsWith('# ')) {
         const title = trimmed.substring(2).trim()
         const parts = title.split('|').map((p: string) => p.trim())
-        data.name = parts[0] || ''
-        data.position = parts[1] || ''
+        data.name = String(basicInfo.name || parts[0] || '')
+        data.position = String(basicInfo.position || parts[1] || '')
       }
       // 解析二级标题（章节）
       else if (trimmed.startsWith('## ')) {
@@ -131,46 +201,6 @@ export function useResumeData() {
           // 校园经历的开始
         }
       }
-      // 解析基本信息列表
-      else if (currentSection === '基本信息' && trimmed.startsWith('- **')) {
-        if (trimmed.includes('**姓名**:')) {
-          data.name = trimmed.split('**姓名**:')[1]?.trim() || data.name
-        } else if (trimmed.includes('**年龄**:')) {
-          const age = trimmed.split('**年龄**:')[1]?.trim()
-          if (age) {
-            data.position = `${data.position} | ${age}`
-          }
-        } else if (trimmed.includes('**职位**:')) {
-          data.position = trimmed.split('**职位**:')[1]?.trim() || data.position
-        } else if (trimmed.includes('**期望城市**:')) {
-          data.contact.location = trimmed.split('**期望城市**:')[1]?.trim() || ''
-        } else if (trimmed.includes('**期望薪资**:')) {
-          data.contact.salary = trimmed.split('**期望薪资**:')[1]?.trim() || ''
-        }
-      }
-      // 解析联系方式
-      else if (trimmed.includes('联系方式:')) {
-        // 联系方式标题行，继续处理下一行
-      }
-      else if ((trimmed.startsWith('  - 📱') ||
-                trimmed.startsWith('  - ✉') ||
-                trimmed.startsWith('  - 🌐') ||
-                trimmed.startsWith('  - 🐱')) ||
-               (trimmed.includes('📱') && currentSection === '基本信息') ||
-               (trimmed.includes('✉') && currentSection === '基本信息') ||
-               (trimmed.includes('🌐') && currentSection === '基本信息') ||
-               (trimmed.includes('🐱') && currentSection === '基本信息')) {
-
-        if (trimmed.includes('📱')) {
-          data.contact.phone = trimmed.replace(/^[\s-]*📱/, '').trim()
-        } else if (trimmed.includes('✉')) {
-          data.contact.email = trimmed.replace(/^[\s-]*✉/, '').trim()
-        } else if (trimmed.includes('🌐')) {
-          data.contact.website = trimmed.replace(/^[\s-]*🌐/, '').trim()
-        } else if (trimmed.includes('🐱')) {
-          data.contact.gitee = trimmed.replace(/^[\s-]*🐱/, '').trim()
-        }
-      }
       // 解析核心优势内容
       else if (currentSection === '核心优势' && trimmed.startsWith('- ') && currentAdvantage) {
         currentAdvantage.items.push(trimmed.substring(2))
@@ -189,7 +219,7 @@ export function useResumeData() {
 
         if (content.includes('**技术栈**:')) {
           const techStackText = content.replace('**技术栈**:', '').trim()
-          currentProject.techStack = techStackText.split(/[+,、，]/).map((t: string) => t.trim())
+          currentProject.techStack = techStackText.split(/[+,、，]/).map(t => t.trim())
         } else {
           currentProject.highlights.push(content)
         }
