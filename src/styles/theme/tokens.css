@@ -1,0 +1,289 @@
+/**
+ * CSS Design Tokens
+ * 设计系统核心变量定义
+ */
+
+:root {
+  /* ================================
+   * Color Tokens - 色彩系统
+   * ================================ */
+
+  /* Core Brand Colors - 核心品牌色彩 */
+  --color-primary: 44 62 80; /* #2c3e50 - 深蓝灰，主色调 */
+  --color-secondary: 52 152 219; /* #3498db - 亮蓝色，强调色 */
+  --color-accent: 52 73 94; /* #34495e - 深灰，辅助色 */
+
+  /* Semantic Colors - 语义化色彩 */
+  --color-success: 39 174 96; /* #27ae60 - 成功绿 */
+  --color-warning: 243 156 18; /* #f39c12 - 警告橙 */
+  --color-error: 231 76 60; /* #e74c3c - 错误红 */
+  --color-info: 52 152 219; /* #3498db - 信息蓝 */
+
+  /* Neutral Colors - 中性色 */
+  --color-gray-50: 248 249 250; /* #f8f9fa */
+  --color-gray-100: 233 236 239; /* #e9ecef */
+  --color-gray-200: 206 212 218; /* #ced4da */
+  --color-gray-300: 173 181 189; /* #adb5bd */
+  --color-gray-400: 108 117 125; /* #6c757d */
+  --color-gray-500: 73 80 87; /* #495057 */
+  --color-gray-600: 52 58 64; /* #343a40 */
+  --color-gray-700: 33 37 41; /* #212529 */
+
+  /* Theme Specific Colors - 主题专用色 */
+  --color-section-bg: var(--color-gray-50);
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: 127 140 141; /* #7f8c8d */
+  --color-header-bg: var(--color-gray-50);
+
+  /* Enhanced Card Colors - 高对比度卡片颜色系统 */
+  --card-bg: 255 255 255;              /* #ffffff - pure white for strong contrast */
+  --card-bg-hover: 248 250 252;        /* #f8fafc - subtle hover effect */
+  --card-border: 203 213 225;          /* #cbd5e1 - much more defined border */
+  --card-border-hover: 160 174 192;    /* #a0aec0 - darker border on hover */
+  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
+  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.20); /* stronger shadow on hover */
+
+  /* Component Accent Colors - 组件强调色 */
+  --accent-project: 59 130 246;        /* #3b82f6 - 项目卡片蓝 */
+  --accent-advantage: 16 185 129;      /* #10b981 - 优势卡片绿 */
+  --accent-education: 245 158 11;      /* #f59e0b - 教育卡片橙 */
+  --accent-value: 139 92 246;          /* #8b5cf6 - 价值卡片紫 */
+
+  /* ================================
+   * Typography Tokens - 排印系统
+   * ================================ */
+
+  /* Font Families - 字体族 */
+  --font-family-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', Monaco, monospace;
+
+  /* Font Sizes - 字体大小 */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+
+  /* Font Weights - 字重 */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights - 行高 */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* ================================
+   * Spacing Tokens - 间距系统
+   * ================================ */
+
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+
+  /* ================================
+   * Animation Tokens - 动画系统
+   * ================================ */
+
+  /* Durations - 动画时长 */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* Easing Functions - 缓动函数 */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ================================
+   * Shadow Tokens - 阴影系统
+   * ================================ */
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+  /* Component Specific Shadows - 组件专用阴影 */
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+  /* ================================
+   * Border Tokens - 边框系统
+   * ================================ */
+
+  /* Border Widths - 边框宽度 */
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+
+  /* Border Radius - 圆角 */
+  --border-radius-sm: 0.125rem; /* 2px */
+  --border-radius-md: 0.25rem;  /* 4px */
+  --border-radius-lg: 0.5rem;   /* 8px */
+  --border-radius-xl: 0.75rem;  /* 12px */
+  --border-radius-2xl: 1rem;    /* 16px */
+  --border-radius-full: 9999px;
+
+  /* Component Specific Radius - 组件专用圆角 */
+  --border-radius-card: var(--border-radius-xl);
+
+  /* ================================
+   * Effect Tokens - 效果系统
+   * ================================ */
+
+  /* Gradients - 渐变 */
+  --gradient-header: linear-gradient(135deg, rgb(var(--color-secondary) / 0.08) 0%, rgb(var(--color-primary) / 0.05) 50%, rgb(var(--color-header-bg)) 100%);
+  --gradient-primary: linear-gradient(135deg, rgb(var(--color-secondary)) 0%, rgb(var(--color-primary)) 100%);
+  --gradient-text: linear-gradient(90deg, rgb(var(--color-secondary)) 0%, rgb(var(--color-accent)) 100%);
+
+  /* Backdrops - 背景效果 */
+  --backdrop-blur-sm: blur(4px);
+  --backdrop-blur-md: blur(8px);
+  --backdrop-blur-lg: blur(16px);
+
+  /* Opacity - 透明度 */
+  --opacity-backdrop: 0.8;
+  --opacity-hover: 0.8;
+  --opacity-disabled: 0.5;
+
+  /* ================================
+   * Dark Mode Tokens - 暗色模式
+   * ================================ */
+
+  /* Dark mode color tokens - 预留 */
+  --color-dark-bg-primary: 26 26 26; /* #1a1a1a */
+  --color-dark-bg-secondary: 45 45 45; /* #2d2d2d */
+  --color-dark-text-primary: 255 255 255; /* #ffffff */
+  --color-dark-text-secondary: 160 160 160; /* #a0a0a0 */
+}
+
+/* ================================
+ * Dark Mode Overrides - 暗色模式覆盖
+ * ================================ */
+
+/* 暗色模式 - 手动设置 */
+:root[data-theme="dark"] {
+  /* 背景色系 */
+  --color-section-bg: 26 26 26;     /* #1a1a1a */
+  --color-header-bg: 45 45 45;      /* #2d2d2d */
+  --color-gray-50: 26 26 26;        /* #1a1a1a */
+  --color-gray-100: 45 45 45;       /* #2d2d2d */
+  --color-gray-200: 64 64 64;       /* #404040 */
+  --color-gray-300: 96 96 96;       /* #606060 */
+
+  /* 文字色系 - 增强对比度 */
+  --color-text-primary: 255 255 255;      /* #ffffff */
+  --color-text-secondary: 209 213 219;    /* #d1d5db - 更亮的次要文字 */
+  --color-gray-400: 209 213 219;          /* #d1d5db - 更亮的灰色文字 */
+  --color-gray-500: 229 231 235;          /* #e5e7eb - 更亮的灰色 */
+  --color-gray-600: 243 244 246;          /* #f3f4f6 - 接近白色 */
+  --color-gray-700: 249 250 251;          /* #f9fafb - 非常接近白色 */
+
+  /* Enhanced Card Colors - 暗色模式高对比度卡片颜色系统 */
+  --card-bg: 51 55 64;              /* #333740 - much lighter than background for contrast */
+  --card-bg-hover: 63 67 78;        /* #3f434e - hover effect */
+  --card-border: 107 114 128;        /* #6b7280 - much more defined border */
+  --card-border-hover: 156 163 175;  /* #9ca3af - darker border on hover */
+  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.40); /* enhanced shadow */
+  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.50); /* stronger shadow on hover */
+
+  /* Component Accent Colors - 暗色模式组件强调色 */
+  --accent-project: 96 165 250;      /* #60a5fa - 项目卡片亮蓝 */
+  --accent-advantage: 52 211 153;    /* #34d399 - 优势卡片亮绿 */
+  --accent-education: 251 191 36;    /* #fbbf24 - 教育卡片亮橙 */
+  --accent-value: 167 139 250;        /* #a78bfa - 价值卡片亮紫 */
+
+  /* Enhanced Header Gradient - 暗色模式更显眼的头部背景 */
+  --gradient-header: linear-gradient(135deg, rgb(var(--color-secondary) / 0.12) 0%, rgb(var(--color-primary) / 0.08) 50%, rgb(var(--color-header-bg)) 100%);
+  --header-border-color: rgb(var(--color-secondary) / 0.3); /* 暗色模式头部边框颜色 */
+
+  /* 状态背景色 */
+  --loading-bg: 45 45 45;         /* #2d2d2d */
+  --error-bg: rgba(231, 76, 60, 0.1);     /* 错误背景 */
+  --empty-bg: rgba(108, 117, 125, 0.1);   /* 空状态背景 */
+}
+
+/* 暗色模式 - 系统偏好（仅在未手动设置时生效） */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* 背景色系 */
+    --color-section-bg: 26 26 26;     /* #1a1a1a */
+    --color-header-bg: 45 45 45;      /* #2d2d2d */
+    --color-gray-50: 26 26 26;        /* #1a1a1a */
+    --color-gray-100: 45 45 45;       /* #2d2d2d */
+    --color-gray-200: 64 64 64;       /* #404040 */
+    --color-gray-300: 96 96 96;       /* #606060 */
+
+    /* 文字色系 - 增强对比度 */
+    --color-text-primary: 255 255 255;      /* #ffffff */
+    --color-text-secondary: 209 213 219;    /* #d1d5db - 更亮的次要文字 */
+    --color-gray-400: 209 213 219;          /* #d1d5db - 更亮的灰色文字 */
+    --color-gray-500: 229 231 235;          /* #e5e7eb - 更亮的灰色 */
+    --color-gray-600: 243 244 246;          /* #f3f4f6 - 接近白色 */
+    --color-gray-700: 249 250 251;          /* #f9fafb - 非常接近白色 */
+
+    /* Enhanced Card Colors - 系统偏好暗色模式高对比度卡片颜色系统 */
+    --card-bg: 51 55 64;              /* #333740 - much lighter than background for contrast */
+    --card-bg-hover: 63 67 78;        /* #3f434e - hover effect */
+    --card-border: 107 114 128;        /* #6b7280 - much more defined border */
+    --card-border-hover: 156 163 175;  /* #9ca3af - darker border on hover */
+    --card-shadow: 0 4px 25px rgba(0 0 0 / 0.40); /* enhanced shadow */
+    --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.50); /* stronger shadow on hover */
+
+    /* Component Accent Colors - 系统偏好暗色模式组件强调色 */
+    --accent-project: 96 165 250;      /* #60a5fa - 项目卡片亮蓝 */
+    --accent-advantage: 52 211 153;    /* #34d399 - 优势卡片亮绿 */
+    --accent-education: 251 191 36;    /* #fbbf24 - 教育卡片亮橙 */
+    --accent-value: 167 139 250;        /* #a78bfa - 价值卡片亮紫 */
+
+    /* Enhanced Header Gradient - 系统偏好暗色模式更显眼的头部背景 */
+    --gradient-header: linear-gradient(135deg, rgb(var(--color-secondary) / 0.12) 0%, rgb(var(--color-primary) / 0.08) 50%, rgb(var(--color-header-bg)) 100%);
+    --header-border-color: rgb(var(--color-secondary) / 0.3); /* 系统偏好暗色模式头部边框颜色 */
+
+    /* 状态背景色 */
+    --loading-bg: 45 45 45;         /* #2d2d2d */
+    --error-bg: rgba(231, 76, 60, 0.1);     /* 错误背景 */
+    --empty-bg: rgba(108, 117, 125, 0.1);   /* 空状态背景 */
+  }
+}
+
+/* 亮色模式 - 手动设置（确保覆盖暗色模式） */
+:root[data-theme="light"] {
+  /* 确保亮色模式变量 */
+  --color-section-bg: 248 249 250;      /* #f8f9fa */
+  --color-header-bg: 248 249 250;        /* #f8f9fa */
+  --color-text-primary: 44 62 80;        /* #2c3e50 */
+  --color-text-secondary: 127 140 141;   /* #7f8c8d */
+  /* Enhanced Card Colors - 亮色模式高对比度卡片颜色系统 */
+  --card-bg: 255 255 255;              /* #ffffff - pure white for strong contrast */
+  --card-bg-hover: 248 250 252;        /* #f8fafc - subtle hover effect */
+  --card-border: 203 213 225;          /* #cbd5e1 - much more defined border */
+  --card-border-hover: 160 174 192;    /* #a0aec0 - darker border on hover */
+  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
+  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.20); /* stronger shadow on hover */
+
+  /* Component Accent Colors - 亮色模式组件强调色 */
+  --accent-project: 59 130 246;        /* #3b82f6 - 项目卡片蓝 */
+  --accent-advantage: 16 185 129;      /* #10b981 - 优势卡片绿 */
+  --accent-education: 245 158 11;      /* #f59e0b - 教育卡片橙 */
+  --accent-value: 139 92 246;          /* #8b5cf6 - 价值卡片紫 */
+
+  /* Enhanced Header Gradient - 亮色模式更显眼的头部背景 */
+  --gradient-header: linear-gradient(135deg, rgb(var(--color-secondary) / 0.08) 0%, rgb(var(--color-primary) / 0.05) 50%, rgb(var(--color-header-bg)) 100%);
+  --header-border-color: rgb(var(--color-secondary) / 0.2); /* 头部边框颜色 */
+}

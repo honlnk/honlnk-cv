@@ -1,0 +1,147 @@
+/**
+ * State Components
+ * 状态组件样式
+ */
+
+@layer components {
+  /* 通用状态容器 */
+  .loading-state,
+  .error-state,
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 12.5rem; /* 200px using token */
+    text-align: center;
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    background-color: rgb(var(--color-section-bg));
+    border: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
+  }
+
+  /* 加载状态 */
+  .loading-state {
+    position: relative;
+  }
+
+  .loading-state::before {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2rem;
+    height: 2rem;
+    border: var(--border-width-2) solid rgb(var(--color-gray-200));
+    border-top: var(--border-width-2) solid rgb(var(--color-secondary));
+    border-radius: var(--border-radius-full);
+    animation: spin 1s linear infinite;
+  }
+
+  /* 错误状态 */
+  .error-state {
+    background-color: rgb(var(--error-bg, rgba(231, 76, 60, 0.05)));
+    border-color: rgba(var(--color-error), 0.2);
+  }
+
+  .error-state .error-title {
+    color: rgb(var(--color-error));
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+    margin-top: 3rem; /* 为loading动画留空间 */
+  }
+
+  .error-state .error-message {
+    color: rgb(var(--color-text-secondary));
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    max-width: 400px;
+    margin: 0 auto var(--spacing-lg);
+  }
+
+  /* 空状态 */
+  .empty-state {
+    background-color: rgb(var(--empty-bg, rgba(108, 117, 125, 0.1)));
+  }
+
+  .empty-state .empty-title {
+    color: rgb(var(--color-text-secondary));
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-sm);
+    margin-top: 3rem; /* 为loading动画留空间 */
+  }
+
+  .empty-state .empty-message {
+    color: rgb(var(--color-gray-500));
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    max-width: 400px;
+    margin: 0 auto var(--spacing-lg);
+  }
+
+  /* 状态图标 */
+  .state-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.6;
+  }
+
+  .error-state .state-icon {
+    color: rgb(var(--color-error));
+  }
+
+  .empty-state .state-icon {
+    color: rgb(var(--color-gray-400));
+  }
+
+  /* 重试按钮 */
+  .retry-btn {
+    background-color: rgb(var(--color-secondary));
+    color: rgb(var(--color-gray-50, 255 255 255));
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    border: none;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .retry-btn:hover {
+    background-color: rgba(var(--color-secondary), var(--opacity-hover));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .retry-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) rgba(var(--color-secondary), 0.5);
+  }
+
+  .retry-btn:active {
+    transform: translateY(0);
+  }
+
+  /* 状态动画 */
+  @keyframes spin {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) rotate(360deg); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .loading-state,
+  .error-state,
+  .empty-state {
+    animation: fadeIn var(--duration-normal) var(--ease-out);
+  }
+}

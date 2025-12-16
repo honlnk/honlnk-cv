@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { ResumeData } from '@/data/resume-data'
+  import type { ResumeData } from '@/types/types'
+  import { ref } from 'vue'
 
-defineProps<{
-  projects: ResumeData['projects']
-}>()
+  defineProps<{
+    projects: ResumeData['projects']
+  }>()
 
-const expandedProject = ref<string | null>(null)
+  const expandedProject = ref<string | null>(null)
 
-const toggleDetails = (title: string) => {
-  expandedProject.value = expandedProject.value === title ? null : title
-}
+  const toggleDetails = (title: string) => {
+    expandedProject.value = expandedProject.value === title ? null : title
+  }
 </script>
 
 <template>
@@ -18,27 +18,59 @@ const toggleDetails = (title: string) => {
     <h2 class="section-title">🚀 项目经历</h2>
 
     <div
-      v-for="project in projects"
+      v-for="(project, index) in projects"
       :key="project.title"
-      class="project-card"
-      :class="{ expanded: expandedProject === project.title }"
+      class="project-card mb-4"
+      :class="{ 'ring-2 ring-secondary/20': expandedProject === project.title }"
+      v-motion
+      :initial="{ opacity: 0, x: -30 }"
+      :visible-once="{ opacity: 1, x: 0 }"
+      :transition="{
+        delay: index * 200,
+        duration: 600,
+        type: 'spring',
+        stiffness: 80,
+      }"
     >
-      <div class="card-header" @click="toggleDetails(project.title)">
-        <div class="header-left">
-          <h3>{{ project.title }}</h3>
-          <span class="duration">{{ project.duration }}</span>
+      <div
+        class="card-header flex justify-between items-center p-6 cursor-pointer"
+        @click="toggleDetails(project.title)"
+      >
+        <div class="header-left flex-1">
+          <h3 class="text-xl font-semibold text-primary m-0">{{ project.title }}</h3>
+          <span class="duration text-text-secondary text-sm">{{ project.duration }}</span>
         </div>
-        <span class="role-tag">{{ project.role }}</span>
+        <span
+          class="role-tag bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-gray-50))] px-3 py-1 rounded-full text-sm"
+        >
+          {{ project.role }}
+        </span>
       </div>
 
-      <transition name="slide">
-        <div v-if="expandedProject === project.title" class="card-details">
-          <ul class="highlights">
-            <li v-for="(item, index) in project.highlights" :key="index">
-              {{ item }}
+      <transition
+        name="slide"
+        enter-active-class="transition-all duration-300 ease-out"
+        leave-active-class="transition-all duration-300 ease-in"
+        enter-from-class="opacity-0 transform -translate-y-2"
+        enter-to-class="opacity-100 transform translate-y-0"
+        leave-from-class="opacity-100 transform translate-y-0"
+        leave-to-class="opacity-0 transform -translate-y-2"
+      >
+        <div
+          v-if="expandedProject === project.title"
+          class="card-details px-6 pb-6 border-t border-b-[rgb(var(--card-border))]"
+        >
+          <ul class="highlights my-4 space-y-3">
+            <li
+              v-for="(item, index) in project.highlights"
+              :key="index"
+              class="text-text-primary flex items-start"
+            >
+              <span class="text-secondary mr-2 mt-1">•</span>
+              <span>{{ item }}</span>
             </li>
           </ul>
-          <div class="tech-stack">
+          <div class="tech-stack flex flex-wrap gap-2">
             <span v-for="tech in project.techStack" :key="tech" class="tech-tag">
               {{ tech }}
             </span>
@@ -48,62 +80,3 @@ const toggleDetails = (title: string) => {
     </div>
   </section>
 </template>
-
-<style scoped>
-.projects {
-  margin: 2rem 0;
-}
-
-.project-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem;
-  cursor: pointer;
-}
-
-.header-left h3 {
-  margin: 0;
-  color: #2c3e50;
-}
-
-.duration {
-  color: #7f8c8d;
-  font-size: 0.9em;
-}
-
-.role-tag {
-  background: #3498db;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.9em;
-}
-
-.card-details {
-  padding: 0 1.5rem 1.5rem;
-  border-top: 1px solid #eee;
-}
-
-.highlights li {
-  margin: 0.8rem 0;
-  color: #34495e;
-}
-
-.tech-tag {
-  display: inline-block;
-  background: #ecf0f1;
-  padding: 4px 12px;
-  margin: 4px;
-  border-radius: 4px;
-  font-size: 0.85em;
-}
-</style>

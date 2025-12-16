@@ -28,3 +28,10 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Obsidian 工作区配置（参考学习笔记仓库）
+docs/.obsidian/workspace.json
+docs/.obsidian/workspaces.json
+docs/.obsidian/workspace-mobile.json
+docs/.trash/
+docs/.obsidian/plugins/obsidian-image-auto-upload-plugin/data.json

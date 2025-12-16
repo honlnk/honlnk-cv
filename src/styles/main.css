@@ -1,0 +1,451 @@
+/**
+ * Main Stylesheet
+ * 主样式文件 - 统一导入所有模块
+ */
+
+/* ================================
+ * Design System Tokens
+ * 设计系统令牌
+ * ================================ */
+@import './theme/tokens.css';
+
+/* ================================
+ * Base Styles
+ * 基础样式
+ * ================================ */
+@import './base/reset.css';
+@import './base/typography.css';
+@import './base/layout.css';
+
+/* ================================
+ * Component Styles
+ * 组件样式
+ * ================================ */
+@import './components/cards.css';
+@import './components/states.css';
+
+/* ================================
+ * Utility Classes & Effects
+ * 工具类与效果
+ * ================================ */
+
+@layer utilities {
+  /* UnoCSS集成类 - 保留必要的@apply调用 */
+  .glass {
+    @apply glass-effect;
+  }
+
+  .card {
+    @apply card-base card-float;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent;
+  }
+
+  /* 文字颜色支持 - 确保暗色模式下对比度 */
+  .text-primary {
+    color: rgb(var(--color-text-primary));
+  }
+
+  .text-secondary {
+    color: rgb(var(--color-text-secondary));
+  }
+
+  .text-text-primary {
+    color: rgb(var(--color-text-primary));
+  }
+
+  .text-text-secondary {
+    color: rgb(var(--color-text-secondary));
+  }
+
+  /* 默认文字颜色设置 */
+  body {
+    color: rgb(var(--color-text-primary));
+  }
+
+  .hover-lift {
+    @apply hover-lift;
+  }
+
+  /* ================================
+   * Animation Utilities
+   * 动画工具类
+   * ================================ */
+
+  /* 漂浮动画 */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* 脉冲动画 */
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* 弹跳进入动画 */
+  .animate-bounce-in {
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* 滑动进入动画 */
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  @keyframes slideInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* 淡入动画 */
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* ================================
+   * Scroll Reveal Animation
+   * 滚动显示动画
+   * ================================ */
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ================================
+   * Visual Effects
+   * 视觉效果
+   * ================================ */
+
+  /* 渐变背景 */
+  .gradient-bg {
+    background: var(--gradient-header);
+  }
+
+  /* Header 渐变边框样式 - 大盒子套小盒子实现 */
+  .header-container {
+    padding: 4px; /* 边框厚度 */
+    background: linear-gradient(135deg,
+      rgb(var(--color-secondary)),
+      rgb(var(--color-primary))
+    );
+    border-radius: calc(var(--border-radius-card) + 4px);
+    position: relative;
+  }
+
+  .header-inner {
+    background: var(--gradient-header);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-card);
+  }
+
+  /* 为暗色模式调整边框透明度 */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .header-container {
+      background: linear-gradient(135deg,
+        rgb(var(--color-secondary) / 0.8),
+        rgb(var(--color-primary) / 0.7)
+      );
+    }
+  }
+
+  /* 手动暗色模式 */
+  :root[data-theme="dark"] .header-container {
+    background: linear-gradient(135deg,
+      rgb(var(--color-secondary) / 0.8),
+      rgb(var(--color-primary) / 0.7)
+    );
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* 玻璃态效果 */
+  .glass-card {
+    backdrop-filter: var(--backdrop-blur-md);
+    background-color: rgba(255, 255, 255, var(--opacity-backdrop));
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    border: var(--border-width-1) solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* 暗色模式下的玻璃态卡片 */
+  @media (prefers-color-scheme: dark) {
+    .glass-card {
+      background-color: rgba(17, 24, 39, var(--opacity-backdrop));
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  /* 发光效果 */
+  .glow {
+    box-shadow: 0 0 20px rgba(var(--color-secondary), 0.3);
+  }
+
+  .glow-hover:hover {
+    box-shadow: 0 0 30px rgba(var(--color-secondary), 0.5);
+    transition: box-shadow var(--duration-normal) var(--ease-out);
+  }
+
+  /* 霓虹效果 */
+  .neon {
+    position: relative;
+    color: rgb(var(--color-secondary));
+  }
+
+  .neon::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: rgba(var(--color-secondary), 0.3);
+    filter: blur(10px);
+    z-index: -1;
+  }
+
+  /* ================================
+   * Interactive Effects
+   * 交互效果
+   * ================================ */
+
+  /* 鼠标跟随效果容器 */
+  .mouse-glow-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mouse-glow-container::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(var(--color-secondary), 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: opacity var(--duration-normal) var(--ease-out);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .mouse-glow-container:hover::before {
+    opacity: 1;
+  }
+
+  /* 打字机效果容器 */
+  .typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid rgb(var(--color-secondary));
+    animation:
+      typing 3s steps(40, end),
+      blink 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: rgb(var(--color-secondary));
+    }
+  }
+
+  /* ================================
+   * Layout Utilities
+   * 布局工具类
+   * ================================ */
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .container-sm {
+    max-width: 640px;
+  }
+
+  .container-md {
+    max-width: 768px;
+  }
+
+  .container-lg {
+    max-width: 1024px;
+  }
+
+  .container-xl {
+    max-width: 1280px;
+  }
+
+  /* 间隔工具类 */
+  .gap-xs {
+    gap: var(--spacing-xs);
+  }
+  .gap-sm {
+    gap: var(--spacing-sm);
+  }
+  .gap-md {
+    gap: var(--spacing-md);
+  }
+  .gap-lg {
+    gap: var(--spacing-lg);
+  }
+  .gap-xl {
+    gap: var(--spacing-xl);
+  }
+  .gap-2xl {
+    gap: var(--spacing-2xl);
+  }
+
+  /* ================================
+   * Responsive Utilities
+   * 响应式工具类
+   * ================================ */
+
+  .show-mobile {
+    display: none;
+  }
+
+  .hide-mobile {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .show-mobile {
+      display: block;
+    }
+
+    .hide-mobile {
+      display: none;
+    }
+
+    .container {
+      padding: 0 var(--spacing-md);
+    }
+  }
+}

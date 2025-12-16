@@ -5,4 +5,4 @@ module.exports = {
     // 禁用 "component-names" 规则
     'vue/multi-word-component-names': 'off',
   },
-};
+}
