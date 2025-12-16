@@ -35,54 +35,56 @@
 </script>
 
 <template>
-  <header class="card header-gradient" data="ResumeData">
-    <div class="name-group mb-6 text-center">
-      <h1
-        class="name text-4xl font-bold text-primary mb-2"
-        v-motion
-        :initial="{ opacity: 0, y: -20 }"
-        :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }"
-      >
-        {{ data.basicInfo.name }}
-      </h1>
-      <h2
-        class="position text-xl text-secondary"
-        v-motion
-        :initial="{ opacity: 0, y: -10 }"
-        :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 800 } }"
-      >
-        {{ data.basicInfo.position }}
-        <span v-if="data.basicInfo.age" class="ml-2"> | {{ data.basicInfo.age }} </span>
-      </h2>
-    </div>
-
-    <div class="contact-group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <template v-for="(value, key, index) in data.basicInfo" :key="key">
-        <!-- 跳过已在顶部展示的核心字段 -->
-        <div
-          v-if="!['name', 'age', 'position'].includes(String(key))"
-          class="contact-item flex items-center gap-3 p-3 glass-effect rounded-lg"
+  <header class="header-container" data="ResumeData">
+    <div class="header-inner card">
+      <div class="name-group mb-6 text-center">
+        <h1
+          class="name text-4xl font-bold text-primary mb-2"
           v-motion
-          :initial="{ opacity: 0, scale: 0.9 }"
-          :enter="{ opacity: 1, scale: 1, transition: { delay: 800 + index * 100, duration: 600 } }"
+          :initial="{ opacity: 0, y: -20 }"
+          :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }"
         >
-          <span class="icon text-xl">{{ getFieldIcon(String(key)) }}</span>
+          {{ data.basicInfo.name }}
+        </h1>
+        <h2
+          class="position text-xl text-secondary"
+          v-motion
+          :initial="{ opacity: 0, y: -10 }"
+          :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 800 } }"
+        >
+          {{ data.basicInfo.position }}
+          <span v-if="data.basicInfo.age" class="ml-2"> | {{ data.basicInfo.age }} </span>
+        </h2>
+      </div>
 
-          <!-- 链接字段 -->
-          <a
-            v-if="isLinkField(String(key)) && value"
-            :href="generateContactLink(String(key), String(value))"
-            :rel="String(key) === 'email' ? '' : 'noopener noreferrer'"
-            :target="isLinkField(String(key)) ? '_blank' : undefined"
-            class="contact-link text-sm hover:text-secondary transition-colors duration-200"
+      <div class="contact-group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <template v-for="(value, key, index) in data.basicInfo" :key="key">
+          <!-- 跳过已在顶部展示的核心字段 -->
+          <div
+            v-if="!['name', 'age', 'position'].includes(String(key))"
+            class="contact-item flex items-center gap-3 p-3 glass-effect rounded-lg"
+            v-motion
+            :initial="{ opacity: 0, scale: 0.9 }"
+            :enter="{ opacity: 1, scale: 1, transition: { delay: 800 + index * 100, duration: 600 } }"
           >
-            {{ value }}
-          </a>
+            <span class="icon text-xl">{{ getFieldIcon(String(key)) }}</span>
 
-          <!-- 普通字段 -->
-          <span v-else class="text-sm">{{ value }}</span>
-        </div>
-      </template>
+            <!-- 链接字段 -->
+            <a
+              v-if="isLinkField(String(key)) && value"
+              :href="generateContactLink(String(key), String(value))"
+              :rel="String(key) === 'email' ? '' : 'noopener noreferrer'"
+              :target="isLinkField(String(key)) ? '_blank' : undefined"
+              class="contact-link text-sm hover:text-secondary transition-colors duration-200"
+            >
+              {{ value }}
+            </a>
+
+            <!-- 普通字段 -->
+            <span v-else class="text-sm">{{ value }}</span>
+          </div>
+        </template>
+      </div>
     </div>
   </header>
 </template>

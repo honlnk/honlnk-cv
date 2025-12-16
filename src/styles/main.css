@@ -80,7 +80,8 @@
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px);
     }
     50% {
@@ -94,7 +95,8 @@
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
@@ -218,6 +220,42 @@
     background: var(--gradient-header);
   }
 
+  /* Header 渐变边框样式 - 大盒子套小盒子实现 */
+  .header-container {
+    padding: 4px; /* 边框厚度 */
+    background: linear-gradient(135deg,
+      rgb(var(--color-secondary)),
+      rgb(var(--color-primary))
+    );
+    border-radius: calc(var(--border-radius-card) + 4px);
+    position: relative;
+  }
+
+  .header-inner {
+    background: var(--gradient-header);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-card);
+  }
+
+  /* 为暗色模式调整边框透明度 */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .header-container {
+      background: linear-gradient(135deg,
+        rgb(var(--color-secondary) / 0.8),
+        rgb(var(--color-primary) / 0.7)
+      );
+    }
+  }
+
+  /* 手动暗色模式 */
+  :root[data-theme="dark"] .header-container {
+    background: linear-gradient(135deg,
+      rgb(var(--color-secondary) / 0.8),
+      rgb(var(--color-primary) / 0.7)
+    );
+  }
+
   .gradient-primary {
     background: var(--gradient-primary);
   }
@@ -312,17 +350,28 @@
     overflow: hidden;
     white-space: nowrap;
     border-right: 3px solid rgb(var(--color-secondary));
-    animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    animation:
+      typing 3s steps(40, end),
+      blink 0.75s step-end infinite;
   }
 
   @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
   }
 
   @keyframes blink {
-    from, to { border-color: transparent }
-    50% { border-color: rgb(var(--color-secondary)) }
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: rgb(var(--color-secondary));
+    }
   }
 
   /* ================================
@@ -354,12 +403,24 @@
   }
 
   /* 间隔工具类 */
-  .gap-xs { gap: var(--spacing-xs); }
-  .gap-sm { gap: var(--spacing-sm); }
-  .gap-md { gap: var(--spacing-md); }
-  .gap-lg { gap: var(--spacing-lg); }
-  .gap-xl { gap: var(--spacing-xl); }
-  .gap-2xl { gap: var(--spacing-2xl); }
+  .gap-xs {
+    gap: var(--spacing-xs);
+  }
+  .gap-sm {
+    gap: var(--spacing-sm);
+  }
+  .gap-md {
+    gap: var(--spacing-md);
+  }
+  .gap-lg {
+    gap: var(--spacing-lg);
+  }
+  .gap-xl {
+    gap: var(--spacing-xl);
+  }
+  .gap-2xl {
+    gap: var(--spacing-2xl);
+  }
 
   /* ================================
    * Responsive Utilities
