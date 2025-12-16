@@ -1,6 +1,5 @@
 import { ref, computed } from 'vue'
 import type { ResumeData } from '@/data/resume-data'
-import type { ParsedBasicInfo } from '@/utils/basic-info-parser'
 import { parseTitleWithEmoji } from '@/utils/emoji-parser'
 import { parseBasicInfo } from '@/utils/basic-info-parser'
 
@@ -118,7 +117,7 @@ export function useResumeData() {
 
     // 解析其他内容
     const otherContent = otherLines.join('\n')
-    const otherData = parseOtherContent(otherContent, basicInfo)
+    const otherData = parseOtherContent(otherContent)
 
     return {
       basicInfo,
@@ -126,20 +125,10 @@ export function useResumeData() {
     }
   }
 
-  function parseOtherContent(markdown: string, basicInfo: ParsedBasicInfo): Omit<ResumeData, 'basicInfo'> {
+  function parseOtherContent(markdown: string): Omit<ResumeData, 'basicInfo'> {
     const lines = markdown.split('\n')
 
     const data = {
-      name: String(basicInfo.name || ''),
-      position: String(basicInfo.position || ''),
-      contact: {
-        phone: String(basicInfo.phone || ''),
-        email: String(basicInfo.email || ''),
-        location: String(basicInfo.location || ''),
-        salary: String(basicInfo.salary || ''),
-        website: String(basicInfo.website || ''),
-        gitee: String(basicInfo.gitee || '')
-      },
       coreAdvantages: [] as AdvantageData[],
       projects: [] as ProjectData[],
       education: {
@@ -159,15 +148,8 @@ export function useResumeData() {
     for (const line of lines) {
       const trimmed = line.trim()
 
-      // 解析标题
-      if (trimmed.startsWith('# ')) {
-        const title = trimmed.substring(2).trim()
-        const parts = title.split('|').map((p: string) => p.trim())
-        data.name = String(basicInfo.name || parts[0] || '')
-        data.position = String(basicInfo.position || parts[1] || '')
-      }
       // 解析二级标题（章节）
-      else if (trimmed.startsWith('## ')) {
+      if (trimmed.startsWith('## ')) {
         currentSection = trimmed.substring(3).trim()
       }
       // 解析三级标题
@@ -264,7 +246,7 @@ export function useResumeData() {
   }
 
   const hasError = computed(() => !!error.value)
-  const isEmpty = computed(() => !resumeData.value || !resumeData.value.name)
+  const isEmpty = computed(() => !resumeData.value || !resumeData.value.basicInfo.name)
 
   return {
     resumeData,

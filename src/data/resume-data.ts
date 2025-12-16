@@ -1,21 +1,7 @@
 export interface ResumeData {
   /** 基本信息 - 支持灵活的字段结构 */
-  basicInfo?: {
+  basicInfo: {
     [key: string]: string | number
-  }
-
-  /** 兼容性：保持原有的name字段 */
-  name: string
-  /** 兼容性：保持原有的position字段 */
-  position: string
-  /** 兼容性：保持原有的contact字段 */
-  contact: {
-    phone: string
-    email: string
-    location: string
-    salary: string
-    website: string
-    gitee: string
   }
 
   coreAdvantages: {
@@ -43,15 +29,20 @@ export interface ResumeData {
 }
 
 export const resumeData: ResumeData = {
-  name: "鸿影（网名）",
-  position: "Java全栈开发工程师 | 21岁",
-  contact: {
+  basicInfo: {
+    name: "鸿影（网名）",
+    position: "Java全栈开发工程师",
+    age: 21,
+    experience: "2年",
+    education: "专科",
     phone: "19563491369",
     email: "jhshonlnk@gmail.com",
-    location: "期望城市：济南",
-    salary: "期望薪资：3-6K",
+    location: "济南",
+    salary: "3-6K",
     website: "https://www.honlnk.top",
-    gitee: "https://gitee.com/hong-ying-19"
+    gitee: "https://gitee.com/hong-ying-19",
+    github: "https://github.com/honlnk",
+    status: "在职-考虑机会"
   },
   coreAdvantages: [
     {
