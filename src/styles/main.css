@@ -43,6 +43,111 @@
     @apply bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent;
   }
 
+  /* 文字颜色支持 - 确保暗色模式下对比度 */
+  .text-primary {
+    color: rgb(var(--color-text-primary, 44 62 80)) !important;
+  }
+
+  .text-secondary {
+    color: rgb(var(--color-text-secondary, 127 140 141)) !important;
+  }
+
+  .text-text-primary {
+    color: rgb(var(--color-text-primary, 44 62 80)) !important;
+  }
+
+  .text-text-secondary {
+    color: rgb(var(--color-text-secondary, 127 140 141)) !important;
+  }
+
+  /* UnoCSS 颜色别名支持 - 覆盖UnoCSS生成的颜色 */
+  .text-primary {
+    color: rgb(var(--color-text-primary, 44 62 80)) !important;
+  }
+
+  /* 确保UnoCSS的默认颜色也被覆盖 */
+  [data-theme="dark"] .text-primary,
+  html.dark .text-primary,
+  :root[data-theme="dark"] .text-primary {
+    color: rgb(var(--color-text-primary, 255 255 255)) !important;
+  }
+
+  [data-theme="dark"] .text-secondary,
+  html.dark .text-secondary,
+  :root[data-theme="dark"] .text-secondary {
+    color: rgb(var(--color-text-secondary, 209 213 219)) !important;
+  }
+
+  [data-theme="dark"] .text-text-primary,
+  html.dark .text-text-primary,
+  :root[data-theme="dark"] .text-text-primary {
+    color: rgb(var(--color-text-primary, 255 255 255)) !important;
+  }
+
+  [data-theme="dark"] .text-text-secondary,
+  html.dark .text-text-secondary,
+  :root[data-theme="dark"] .text-text-secondary {
+    color: rgb(var(--color-text-secondary, 209 213 219)) !important;
+  }
+
+  /* 系统偏好暗色模式支持 */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .text-primary {
+      color: rgb(var(--color-text-primary, 255 255 255)) !important;
+    }
+
+    :root:not([data-theme="light"]) .text-secondary {
+      color: rgb(var(--color-text-secondary, 209 213 219)) !important;
+    }
+
+    :root:not([data-theme="light"]) .text-text-primary {
+      color: rgb(var(--color-text-primary, 255 255 255)) !important;
+    }
+
+    :root:not([data-theme="light"]) .text-text-secondary {
+      color: rgb(var(--color-text-secondary, 209 213 219)) !important;
+    }
+  }
+
+  /* 默认文字颜色覆盖 - 解决没有特定颜色类的文字问题 */
+  body {
+    color: rgb(var(--color-text-primary, 44 62 80));
+  }
+
+  [data-theme="dark"] body,
+  html.dark body,
+  :root[data-theme="dark"] body {
+    color: rgb(var(--color-text-primary, 255 255 255)) !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body {
+      color: rgb(var(--color-text-primary, 255 255 255)) !important;
+    }
+  }
+
+  /* 为常见文字元素设置暗色模式默认颜色 */
+  [data-theme="dark"] span:not([class*="text-"]):not(.text-gradient):not(.text-transparent),
+  html.dark span:not([class*="text-"]):not(.text-gradient):not(.text-transparent),
+  :root[data-theme="dark"] span:not([class*="text-"]):not(.text-gradient):not(.text-transparent),
+  [data-theme="dark"] p:not([class*="text-"]):not(.text-gradient):not(.text-transparent),
+  html.dark p:not([class*="text-"]):not(.text-gradient):not(.text-transparent),
+  :root[data-theme="dark"] p:not([class*="text-"]):not(.text-gradient):not(.text-transparent),
+  [data-theme="dark"] div:not([class*="text-"]):not(.text-gradient):not(.text-transparent):not(.card):not(.value-card):not(.project-card):not(.advantage-card):not(.education-card),
+  html.dark div:not([class*="text-"]):not(.text-gradient):not(.text-transparent):not(.card):not(.value-card):not(.project-card):not(.advantage-card):not(.education-card),
+  :root[data-theme="dark"] div:not([class*="text-"]):not(.text-gradient):not(.text-transparent):not(.card):not(.value-card):not(.project-card):not(.advantage-card):not(.education-card) {
+    color: rgb(var(--color-text-primary, 255 255 255)) !important;
+  }
+
+  /* 系统偏好暗色模式支持 */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) span:not([class*="text-"]):not(.text-gradient):not(.text-transparent),
+    :root:not([data-theme="light"]) p:not([class*="text-"]):not(.text-gradient):not(.text-transparent),
+    :root:not([data-theme="light"]) div:not([class*="text-"]):not(.text-gradient):not(.text-transparent):not(.card):not(.value-card):not(.project-card):not(.advantage-card):not(.education-card) {
+      color: rgb(var(--color-text-primary, 255 255 255)) !important;
+    }
+  }
+
   .hover-lift {
     @apply hover-lift;
   }

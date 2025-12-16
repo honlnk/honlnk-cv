@@ -23,6 +23,17 @@ export default defineConfig({
       'text-primary': '#2c3e50',
       'text-secondary': '#7f8c8d',
       'header-bg': '#f8f9fa',
+      // 为暗色模式添加更亮的文字颜色
+      dark: {
+        primary: '#ffffff',
+        secondary: '#60a5fa',
+        accent: '#d1d5db',
+        success: '#34d399',
+        warning: '#fbbf24',
+        error: '#f87171',
+        'text-primary': '#ffffff',
+        'text-secondary': '#d1d5db',
+      },
     },
     fontFamily: {
       sans: ['Inter', 'system-ui', 'sans-serif'],

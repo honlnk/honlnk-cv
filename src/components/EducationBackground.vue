@@ -11,7 +11,7 @@
     <h2 class="section-title">🎓 教育背景</h2>
 
     <div
-      class="card card-hover"
+      class="education-card"
       v-motion
       :initial="{ opacity: 0, y: 30 }"
       :visible-once="{ opacity: 1, y: 0 }"

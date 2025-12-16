@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
   import type { ResumeData } from '@/types/types'
+  import { ref } from 'vue'
 
   defineProps<{
     projects: ResumeData['projects']
@@ -20,7 +20,7 @@
     <div
       v-for="(project, index) in projects"
       :key="project.title"
-      class="card card-hover mb-4"
+      class="project-card mb-4"
       :class="{ 'ring-2 ring-secondary/20': expandedProject === project.title }"
       v-motion
       :initial="{ opacity: 0, x: -30 }"
@@ -40,7 +40,9 @@
           <h3 class="text-xl font-semibold text-primary m-0">{{ project.title }}</h3>
           <span class="duration text-text-secondary text-sm">{{ project.duration }}</span>
         </div>
-        <span class="role-tag bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-gray-50))] px-3 py-1 rounded-full text-sm">
+        <span
+          class="role-tag bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-gray-50))] px-3 py-1 rounded-full text-sm"
+        >
           {{ project.role }}
         </span>
       </div>

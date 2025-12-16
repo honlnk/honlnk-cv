@@ -15,7 +15,7 @@
       <div
         v-for="(item, index) in values"
         :key="index"
-        class="card card-hover text-center"
+        class="value-card text-center"
         v-motion
         :initial="{ opacity: 0, scale: 0.9, y: 20 }"
         :visible-once="{ opacity: 1, scale: 1, y: 0 }"

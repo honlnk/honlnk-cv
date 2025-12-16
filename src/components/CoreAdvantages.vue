@@ -14,7 +14,7 @@
       <div
         v-for="(item, index) in advantages"
         :key="index"
-        class="card card-hover"
+        class="advantage-card"
         v-motion
         :initial="{ opacity: 0, y: 30, scale: 0.95 }"
         :visible-once="{ opacity: 1, y: 0, scale: 1 }"

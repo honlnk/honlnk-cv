@@ -35,6 +35,20 @@
   --color-text-secondary: 127 140 141; /* #7f8c8d */
   --color-header-bg: var(--color-gray-50);
 
+  /* Enhanced Card Colors - 高对比度卡片颜色系统 */
+  --card-bg: 255 255 255;              /* #ffffff - pure white for strong contrast */
+  --card-bg-hover: 248 250 252;        /* #f8fafc - subtle hover effect */
+  --card-border: 203 213 225;          /* #cbd5e1 - much more defined border */
+  --card-border-hover: 160 174 192;    /* #a0aec0 - darker border on hover */
+  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
+  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.20); /* stronger shadow on hover */
+
+  /* Accent Colors for Different Card Types - 不同卡片类型的强调色 */
+  --accent-primary: 59 130 246;        /* #3b82f6 - modern blue */
+  --accent-success: 16 185 129;        /* #10b981 - vibrant green */
+  --accent-warning: 245 158 11;        /* #f59e0b - warm amber */
+  --accent-purple: 139 92 246;         /* #8b5cf6 - modern purple */
+
   /* ================================
    * Typography Tokens - 排印系统
    * ================================ */
@@ -172,17 +186,27 @@
   --color-gray-200: 64 64 64;       /* #404040 */
   --color-gray-300: 96 96 96;       /* #606060 */
 
-  /* 文字色系 */
+  /* 文字色系 - 增强对比度 */
   --color-text-primary: 255 255 255;      /* #ffffff */
-  --color-text-secondary: 160 160 160;    /* #a0a0a0 */
-  --color-gray-400: 160 160 160;          /* #a0a0a0 */
-  --color-gray-500: 180 180 180;          /* #b4b4b4 */
-  --color-gray-600: 200 200 200;          /* #c8c8c8 */
-  --color-gray-700: 220 220 220;          /* #dcdcdc */
+  --color-text-secondary: 209 213 219;    /* #d1d5db - 更亮的次要文字 */
+  --color-gray-400: 209 213 219;          /* #d1d5db - 更亮的灰色文字 */
+  --color-gray-500: 229 231 235;          /* #e5e7eb - 更亮的灰色 */
+  --color-gray-600: 243 244 246;          /* #f3f4f6 - 接近白色 */
+  --color-gray-700: 249 250 251;          /* #f9fafb - 非常接近白色 */
 
-  /* 卡片背景 */
-  --card-bg: 45 45 45;             /* #2d2d2d */
-  --card-border: 64 64 64;         /* #404040 */
+  /* Enhanced Card Colors - 暗色模式高对比度卡片颜色系统 */
+  --card-bg: 51 55 64;              /* #333740 - much lighter than background for contrast */
+  --card-bg-hover: 63 67 78;        /* #3f434e - hover effect */
+  --card-border: 107 114 128;        /* #6b7280 - much more defined border */
+  --card-border-hover: 156 163 175;  /* #9ca3af - darker border on hover */
+  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.40); /* enhanced shadow */
+  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.50); /* stronger shadow on hover */
+
+  /* Accent Colors for Different Card Types - 暗色模式强调色 */
+  --accent-primary: 96 165 250;      /* #60a5fa - lighter blue */
+  --accent-success: 52 211 153;      /* #34d399 - brighter green */
+  --accent-warning: 251 191 36;      /* #fbbf24 - brighter amber */
+  --accent-purple: 167 139 250;      /* #a78bfa - lighter purple */
 
   /* 状态背景色 */
   --loading-bg: 45 45 45;         /* #2d2d2d */
@@ -201,17 +225,27 @@
     --color-gray-200: 64 64 64;       /* #404040 */
     --color-gray-300: 96 96 96;       /* #606060 */
 
-    /* 文字色系 */
+    /* 文字色系 - 增强对比度 */
     --color-text-primary: 255 255 255;      /* #ffffff */
-    --color-text-secondary: 160 160 160;    /* #a0a0a0 */
-    --color-gray-400: 160 160 160;          /* #a0a0a0 */
-    --color-gray-500: 180 180 180;          /* #b4b4b4 */
-    --color-gray-600: 200 200 200;          /* #c8c8c8 */
-    --color-gray-700: 220 220 220;          /* #dcdcdc */
+    --color-text-secondary: 209 213 219;    /* #d1d5db - 更亮的次要文字 */
+    --color-gray-400: 209 213 219;          /* #d1d5db - 更亮的灰色文字 */
+    --color-gray-500: 229 231 235;          /* #e5e7eb - 更亮的灰色 */
+    --color-gray-600: 243 244 246;          /* #f3f4f6 - 接近白色 */
+    --color-gray-700: 249 250 251;          /* #f9fafb - 非常接近白色 */
 
-    /* 卡片背景 */
-    --card-bg: 45 45 45;             /* #2d2d2d */
-    --card-border: 64 64 64;         /* #404040 */
+    /* Enhanced Card Colors - 系统偏好暗色模式高对比度卡片颜色系统 */
+    --card-bg: 51 55 64;              /* #333740 - much lighter than background for contrast */
+    --card-bg-hover: 63 67 78;        /* #3f434e - hover effect */
+    --card-border: 107 114 128;        /* #6b7280 - much more defined border */
+    --card-border-hover: 156 163 175;  /* #9ca3af - darker border on hover */
+    --card-shadow: 0 4px 25px rgba(0 0 0 / 0.40); /* enhanced shadow */
+    --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.50); /* stronger shadow on hover */
+
+    /* Accent Colors for Different Card Types - 系统偏好暗色模式强调色 */
+    --accent-primary: 96 165 250;      /* #60a5fa - lighter blue */
+    --accent-success: 52 211 153;      /* #34d399 - brighter green */
+    --accent-warning: 251 191 36;      /* #fbbf24 - brighter amber */
+    --accent-purple: 167 139 250;      /* #a78bfa - lighter purple */
 
     /* 状态背景色 */
     --loading-bg: 45 45 45;         /* #2d2d2d */
@@ -227,6 +261,17 @@
   --color-header-bg: 248 249 250;        /* #f8f9fa */
   --color-text-primary: 44 62 80;        /* #2c3e50 */
   --color-text-secondary: 127 140 141;   /* #7f8c8d */
-  --card-bg: 255 255 255;               /* white */
-  --card-border: 233 236 239;           /* #e9ecef */
+  /* Enhanced Card Colors - 亮色模式高对比度卡片颜色系统 */
+  --card-bg: 255 255 255;              /* #ffffff - pure white for strong contrast */
+  --card-bg-hover: 248 250 252;        /* #f8fafc - subtle hover effect */
+  --card-border: 203 213 225;          /* #cbd5e1 - much more defined border */
+  --card-border-hover: 160 174 192;    /* #a0aec0 - darker border on hover */
+  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
+  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.20); /* stronger shadow on hover */
+
+  /* Accent Colors for Different Card Types - 亮色模式强调色 */
+  --accent-primary: 59 130 246;        /* #3b82f6 - modern blue */
+  --accent-success: 16 185 129;        /* #10b981 - vibrant green */
+  --accent-warning: 245 158 11;        /* #f59e0b - warm amber */
+  --accent-purple: 139 92 246;         /* #8b5cf6 - modern purple */
 }

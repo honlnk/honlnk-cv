@@ -7,7 +7,7 @@
   /* 基础卡片 */
   .card-base {
     background-color: rgb(var(--card-bg, 255 255 255));
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--card-shadow, var(--shadow-card));
     border-radius: var(--border-radius-card);
     padding: var(--spacing-lg);
     border: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
@@ -20,7 +20,9 @@
   }
 
   .card-hover:hover {
-    box-shadow: var(--shadow-card-hover);
+    background-color: rgb(var(--card-bg-hover, 248 250 252));
+    border-color: rgb(var(--card-border-hover, 203 213 225));
+    box-shadow: var(--card-shadow-hover, var(--shadow-card-hover));
     transform: translateY(-0.25rem);
   }
 
@@ -99,6 +101,10 @@
     @apply card-base card-hover;
     position: relative;
     overflow: hidden;
+    border-left: 4px solid rgb(var(--accent-primary, 59 130 246));
+    background: linear-gradient(135deg,
+      rgb(var(--card-bg)) 0%,
+      rgb(var(--accent-primary) / 0.03) 100%);
   }
 
   .project-card::before {
@@ -121,49 +127,49 @@
   .advantage-card {
     @apply card-base card-hover;
     background: linear-gradient(135deg,
-      rgb(var(--color-gray-50)) 0%,
-      rgb(var(--color-gray-100)) 100%);
-    border-left: 4px solid rgb(var(--color-secondary));
+      rgb(var(--card-bg)) 0%,
+      rgb(var(--accent-success) / 0.05) 100%);
+    border-left: 4px solid rgb(var(--accent-success, 16 185 129));
   }
 
   /* 教育背景卡片 */
   .education-card {
     @apply card-base;
-    background-color: rgb(var(--card-bg, 255 255 255));
-    border-left: 4px solid rgb(var(--color-success));
+    background: linear-gradient(135deg,
+      rgb(var(--card-bg)) 0%,
+      rgb(var(--accent-warning) / 0.08) 100%);
+    border-left: 4px solid rgb(var(--accent-warning, 245 158 11));
   }
 
   /* 附加价值卡片 */
   .value-card {
     @apply card-base card-hover;
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-md);
     padding: var(--spacing-lg);
+    background: linear-gradient(135deg,
+      rgb(var(--card-bg)) 0%,
+      rgb(var(--accent-purple) / 0.06) 100%);
+    border-left: 4px solid rgb(var(--accent-purple, 139 92 246));
+    position: relative;
+    overflow: hidden;
   }
 
-  .value-card .icon {
-    flex-shrink: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(var(--color-secondary) / 0.1);
-    color: rgb(var(--color-secondary));
-    border-radius: var(--border-radius-lg);
-    font-size: var(--font-size-lg);
-    transition: all var(--duration-normal) var(--ease-out);
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg,
+      rgb(var(--accent-purple, 139 92 246)),
+      rgb(var(--accent-primary, 59 130 246)));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-normal) var(--ease-out);
   }
 
-  .value-card:hover .icon {
-    background-color: rgb(var(--color-secondary));
-    color: rgb(var(--color-gray-50, 255 255 255));
-    transform: scale(1.1);
-  }
-
-  .value-card .content {
-    flex: 1;
+  .value-card:hover::before {
+    transform: scaleX(1);
   }
 
   .value-card .title {
@@ -192,8 +198,8 @@
   /* 玻璃效果 */
   .glass-effect {
     backdrop-filter: var(--backdrop-blur-md);
-    background-color: rgb(var(--color-header-bg) / 0.8);
-    border: var(--border-width-1) solid rgb(var(--color-gray-200) / 0.2);
+    background-color: rgb(var(--card-bg) / 0.8);
+    border: var(--border-width-1) solid rgb(var(--card-border) / 0.3);
   }
 
   /* 响应式调整 */
