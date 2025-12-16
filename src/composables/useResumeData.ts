@@ -8,6 +8,8 @@ import type {
 } from '@/types/types'
 import { parseTitleWithEmoji } from '@/utils/emoji-parser'
 import { parseBasicInfo, validateBasicInfo } from '@/utils/basic-info-parser'
+// 静态导入 README.md 内容
+import readmeContent from '../../../README.md?raw'
 
 export function useResumeData() {
   const resumeData = ref<ResumeData>()
@@ -19,10 +21,8 @@ export function useResumeData() {
     error.value = ''
 
     try {
-      // 从 README.md 解析数据
-      const response = await fetch('/README.md')
-      const markdown = await response.text()
-      resumeData.value = parseResumeFromMarkdown(markdown)
+      // 直接使用导入的内容，不需要网络请求
+      resumeData.value = parseResumeFromMarkdown(readmeContent)
     } catch (err) {
       error.value = err instanceof Error ? err.message : '加载数据失败'
       console.error('加载简历数据失败:', err)
