@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ResumeData } from '@/data/resume-data'
+import { getSafeEmoji } from '@/utils/emoji-parser'
 
 defineProps<{
   values: ResumeData['additionalValues']
@@ -8,7 +9,7 @@ defineProps<{
 
 <template>
   <section class="section additional-value" id="additional">
-    <h2 class="section-title">🌟 附加价值</h2>
+    <h2 class="section-title">{{ getSafeEmoji('🌟') }} 附加价值</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
@@ -25,7 +26,7 @@ defineProps<{
           stiffness: 120
         }"
       >
-        <div class="text-4xl mb-4">{{ item.icon }}</div>
+        <div class="text-4xl mb-4">{{ getSafeEmoji(item.icon) }}</div>
         <h3 class="card-title text-lg font-semibold text-secondary mb-2">{{ item.title }}</h3>
         <div class="card-content text-text-secondary leading-relaxed space-y-2">
           <p v-for="(line, lIndex) in item.content" :key="lIndex" class="m-0">

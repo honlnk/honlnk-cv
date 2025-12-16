@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import type { ResumeData } from '@/data/resume-data'
+import { parseTitleWithEmoji } from '@/utils/emoji-parser'
 
 export function useResumeData() {
   const resumeData = ref<ResumeData>()
@@ -123,9 +124,9 @@ export function useResumeData() {
           if (currentValue) {
             data.additionalValues.push(currentValue)
           }
-          const icon = title.match(/^([🚀🛡️📚])/)?.[1] || '🌟'
-          const cleanTitle = title.replace(/^[🚀🛡️📚]\s*/, '')
-          currentValue = { icon, title: cleanTitle, content: [] }
+          // 使用通用的emoji解析函数
+          const { emoji, cleanTitle } = parseTitleWithEmoji(title)
+          currentValue = { icon: emoji, title: cleanTitle, content: [] }
         } else if (currentSection === '教育背景' && trimmed.startsWith('### 校园经历')) {
           // 校园经历的开始
         }

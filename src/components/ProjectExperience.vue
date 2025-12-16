@@ -20,7 +20,7 @@ const toggleDetails = (title: string) => {
     <div
       v-for="(project, index) in projects"
       :key="project.title"
-      class="card card-hover mb-4 ml-6 md:ml-8"
+      class="card card-hover mb-4"
       :class="{ 'ring-2 ring-secondary/20': expandedProject === project.title }"
       v-motion
       :initial="{ opacity: 0, x: -30 }"
