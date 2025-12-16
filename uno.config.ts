@@ -12,29 +12,8 @@ export default defineConfig({
   ],
   transformers: [transformerDirectives()],
   theme: {
-    colors: {
-      primary: '#2c3e50',
-      secondary: '#3498db',
-      accent: '#34495e',
-      success: '#27ae60',
-      warning: '#f39c12',
-      error: '#e74c3c',
-      'section-bg': '#f8f9fa',
-      'text-primary': '#2c3e50',
-      'text-secondary': '#7f8c8d',
-      'header-bg': '#f8f9fa',
-      // 为暗色模式添加更亮的文字颜色
-      dark: {
-        primary: '#ffffff',
-        secondary: '#60a5fa',
-        accent: '#d1d5db',
-        success: '#34d399',
-        warning: '#fbbf24',
-        error: '#f87171',
-        'text-primary': '#ffffff',
-        'text-secondary': '#d1d5db',
-      },
-    },
+      // UnoCSS 颜色现在由 CSS 变量管理，不在此处定义
+      // 所有的颜色定义请参考: src/styles/theme/tokens.css
     fontFamily: {
       sans: ['Inter', 'system-ui', 'sans-serif'],
       mono: ['JetBrains Mono', 'monospace'],
@@ -48,13 +27,12 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    'card-base': 'shadow-card rounded-card p-6 border border-gray-100',
+    'card-base': 'shadow-card rounded-card p-6 border',
     'card-hover': 'hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300',
-    'section-title': 'text-2xl font-bold mb-6 text-text-primary relative pb-3',
-    'btn-primary':
-      'bg-secondary text-white px-6 py-3 rounded-lg hover:bg-secondary/90 transition-all duration-300',
-    'text-gradient': 'bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent',
-    'glass-effect': 'backdrop-blur-md border border-white/20',
+    'section-title': 'text-2xl font-bold mb-6 relative pb-3',
+    'btn-primary': 'px-6 py-3 rounded-lg transition-all duration-300',
+    'text-gradient': 'bg-gradient-to-r bg-clip-text text-transparent',
+    'glass-effect': 'backdrop-blur-md border',
     'hover-lift': 'transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl',
   },
   rules: [
@@ -62,7 +40,7 @@ export default defineConfig({
     [
       'header-gradient',
       {
-        background: 'linear-gradient(135deg, var(--header-bg) 0%, #e9ecef 100%)',
+        background: 'linear-gradient(135deg, var(--header-bg) 0%, var(--color-gray-100) 100%)',
       },
     ],
     // 卡片悬浮效果

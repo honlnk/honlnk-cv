@@ -101,10 +101,10 @@
     @apply card-base card-hover;
     position: relative;
     overflow: hidden;
-    border-left: 4px solid rgb(var(--accent-primary, 59 130 246));
+    border-left: 4px solid rgb(var(--accent-project, 59 130 246));
     background: linear-gradient(135deg,
       rgb(var(--card-bg)) 0%,
-      rgb(var(--accent-primary) / 0.03) 100%);
+      rgb(var(--accent-project) / 0.03) 100%);
   }
 
   .project-card::before {
@@ -128,8 +128,8 @@
     @apply card-base card-hover;
     background: linear-gradient(135deg,
       rgb(var(--card-bg)) 0%,
-      rgb(var(--accent-success) / 0.05) 100%);
-    border-left: 4px solid rgb(var(--accent-success, 16 185 129));
+      rgb(var(--accent-advantage) / 0.05) 100%);
+    border-left: 4px solid rgb(var(--accent-advantage, 16 185 129));
   }
 
   /* 教育背景卡片 */
@@ -137,8 +137,8 @@
     @apply card-base;
     background: linear-gradient(135deg,
       rgb(var(--card-bg)) 0%,
-      rgb(var(--accent-warning) / 0.08) 100%);
-    border-left: 4px solid rgb(var(--accent-warning, 245 158 11));
+      rgb(var(--accent-education) / 0.08) 100%);
+    border-left: 4px solid rgb(var(--accent-education, 245 158 11));
   }
 
   /* 附加价值卡片 */
@@ -147,8 +147,8 @@
     padding: var(--spacing-lg);
     background: linear-gradient(135deg,
       rgb(var(--card-bg)) 0%,
-      rgb(var(--accent-purple) / 0.06) 100%);
-    border-left: 4px solid rgb(var(--accent-purple, 139 92 246));
+      rgb(var(--accent-value) / 0.06) 100%);
+    border-left: 4px solid rgb(var(--accent-value, 139 92 246));
     position: relative;
     overflow: hidden;
   }
@@ -161,8 +161,8 @@
     width: 100%;
     height: 3px;
     background: linear-gradient(90deg,
-      rgb(var(--accent-purple, 139 92 246)),
-      rgb(var(--accent-primary, 59 130 246)));
+      rgb(var(--accent-value, 139 92 246)),
+      rgb(var(--accent-project, 59 130 246)));
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--duration-normal) var(--ease-out);

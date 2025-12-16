@@ -8,16 +8,16 @@
    * Color Tokens - 色彩系统
    * ================================ */
 
-  /* Brand Colors - 品牌主色 */
-  --color-primary: 44 62 80; /* #2c3e50 */
-  --color-secondary: 52 152 219; /* #3498db */
-  --color-accent: 52 73 94; /* #34495e */
+  /* Core Brand Colors - 核心品牌色彩 */
+  --color-primary: 44 62 80; /* #2c3e50 - 深蓝灰，主色调 */
+  --color-secondary: 52 152 219; /* #3498db - 亮蓝色，强调色 */
+  --color-accent: 52 73 94; /* #34495e - 深灰，辅助色 */
 
-  /* Semantic Colors - 语义色彩 */
-  --color-success: 39 174 96; /* #27ae60 */
-  --color-warning: 243 156 18; /* #f39c12 */
-  --color-error: 231 76 60; /* #e74c3c */
-  --color-info: 52 152 219; /* #3498db */
+  /* Semantic Colors - 语义化色彩 */
+  --color-success: 39 174 96; /* #27ae60 - 成功绿 */
+  --color-warning: 243 156 18; /* #f39c12 - 警告橙 */
+  --color-error: 231 76 60; /* #e74c3c - 错误红 */
+  --color-info: 52 152 219; /* #3498db - 信息蓝 */
 
   /* Neutral Colors - 中性色 */
   --color-gray-50: 248 249 250; /* #f8f9fa */
@@ -43,11 +43,11 @@
   --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
   --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.20); /* stronger shadow on hover */
 
-  /* Accent Colors for Different Card Types - 不同卡片类型的强调色 */
-  --accent-primary: 59 130 246;        /* #3b82f6 - modern blue */
-  --accent-success: 16 185 129;        /* #10b981 - vibrant green */
-  --accent-warning: 245 158 11;        /* #f59e0b - warm amber */
-  --accent-purple: 139 92 246;         /* #8b5cf6 - modern purple */
+  /* Component Accent Colors - 组件强调色 */
+  --accent-project: 59 130 246;        /* #3b82f6 - 项目卡片蓝 */
+  --accent-advantage: 16 185 129;      /* #10b981 - 优势卡片绿 */
+  --accent-education: 245 158 11;      /* #f59e0b - 教育卡片橙 */
+  --accent-value: 139 92 246;          /* #8b5cf6 - 价值卡片紫 */
 
   /* ================================
    * Typography Tokens - 排印系统
@@ -202,11 +202,11 @@
   --card-shadow: 0 4px 25px rgba(0 0 0 / 0.40); /* enhanced shadow */
   --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.50); /* stronger shadow on hover */
 
-  /* Accent Colors for Different Card Types - 暗色模式强调色 */
-  --accent-primary: 96 165 250;      /* #60a5fa - lighter blue */
-  --accent-success: 52 211 153;      /* #34d399 - brighter green */
-  --accent-warning: 251 191 36;      /* #fbbf24 - brighter amber */
-  --accent-purple: 167 139 250;      /* #a78bfa - lighter purple */
+  /* Component Accent Colors - 暗色模式组件强调色 */
+  --accent-project: 96 165 250;      /* #60a5fa - 项目卡片亮蓝 */
+  --accent-advantage: 52 211 153;    /* #34d399 - 优势卡片亮绿 */
+  --accent-education: 251 191 36;    /* #fbbf24 - 教育卡片亮橙 */
+  --accent-value: 167 139 250;        /* #a78bfa - 价值卡片亮紫 */
 
   /* 状态背景色 */
   --loading-bg: 45 45 45;         /* #2d2d2d */
@@ -241,11 +241,11 @@
     --card-shadow: 0 4px 25px rgba(0 0 0 / 0.40); /* enhanced shadow */
     --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.50); /* stronger shadow on hover */
 
-    /* Accent Colors for Different Card Types - 系统偏好暗色模式强调色 */
-    --accent-primary: 96 165 250;      /* #60a5fa - lighter blue */
-    --accent-success: 52 211 153;      /* #34d399 - brighter green */
-    --accent-warning: 251 191 36;      /* #fbbf24 - brighter amber */
-    --accent-purple: 167 139 250;      /* #a78bfa - lighter purple */
+    /* Component Accent Colors - 系统偏好暗色模式组件强调色 */
+    --accent-project: 96 165 250;      /* #60a5fa - 项目卡片亮蓝 */
+    --accent-advantage: 52 211 153;    /* #34d399 - 优势卡片亮绿 */
+    --accent-education: 251 191 36;    /* #fbbf24 - 教育卡片亮橙 */
+    --accent-value: 167 139 250;        /* #a78bfa - 价值卡片亮紫 */
 
     /* 状态背景色 */
     --loading-bg: 45 45 45;         /* #2d2d2d */
@@ -269,9 +269,9 @@
   --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
   --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.20); /* stronger shadow on hover */
 
-  /* Accent Colors for Different Card Types - 亮色模式强调色 */
-  --accent-primary: 59 130 246;        /* #3b82f6 - modern blue */
-  --accent-success: 16 185 129;        /* #10b981 - vibrant green */
-  --accent-warning: 245 158 11;        /* #f59e0b - warm amber */
-  --accent-purple: 139 92 246;         /* #8b5cf6 - modern purple */
+  /* Component Accent Colors - 亮色模式组件强调色 */
+  --accent-project: 59 130 246;        /* #3b82f6 - 项目卡片蓝 */
+  --accent-advantage: 16 185 129;      /* #10b981 - 优势卡片绿 */
+  --accent-education: 245 158 11;      /* #f59e0b - 教育卡片橙 */
+  --accent-value: 139 92 246;          /* #8b5cf6 - 价值卡片紫 */
 }
