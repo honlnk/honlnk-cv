@@ -37,13 +37,13 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    'card-base': 'bg-white shadow-card rounded-card p-6 border border-gray-100',
+    'card-base': 'shadow-card rounded-card p-6 border border-gray-100',
     'card-hover': 'hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300',
     'section-title': 'text-2xl font-bold mb-6 text-text-primary relative pb-3',
     'btn-primary':
       'bg-secondary text-white px-6 py-3 rounded-lg hover:bg-secondary/90 transition-all duration-300',
     'text-gradient': 'bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent',
-    'glass-effect': 'backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border border-white/20',
+    'glass-effect': 'backdrop-blur-md border border-white/20',
     'hover-lift': 'transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl',
   },
   rules: [

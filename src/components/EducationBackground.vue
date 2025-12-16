@@ -34,7 +34,7 @@
         <li
           v-for="(exp, index) in data.experiences"
           :key="index"
-          class="flex items-start py-3 border-b border-gray-100 last:border-b-0"
+          class="flex items-start py-3 border-b border-b-[rgb(var(--card-border))] last:border-b-0"
         >
           <span class="text-secondary font-bold mr-3 mt-1">•</span>
           <span class="flex-1">{{ exp }}</span>

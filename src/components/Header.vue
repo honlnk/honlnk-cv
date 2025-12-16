@@ -61,7 +61,7 @@
         <!-- 跳过已在顶部展示的核心字段 -->
         <div
           v-if="!['name', 'age', 'position'].includes(String(key))"
-          class="contact-item flex items-center gap-3 p-3 bg-white/90 backdrop-blur rounded-lg"
+          class="contact-item flex items-center gap-3 p-3 glass-effect rounded-lg"
           v-motion
           :initial="{ opacity: 0, scale: 0.9 }"
           :enter="{ opacity: 1, scale: 1, transition: { delay: 800 + index * 100, duration: 600 } }"

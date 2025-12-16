@@ -30,7 +30,7 @@
           <li
             v-for="(point, pIndex) in item.items"
             :key="pIndex"
-            class="relative pl-6 py-3 border-b border-gray-100 last:border-b-0"
+            class="relative pl-6 py-3 border-b border-b-[rgb(var(--card-border))] last:border-b-0"
           >
             <span class="absolute left-0 text-secondary">▹</span>
             <span>{{ point }}</span>

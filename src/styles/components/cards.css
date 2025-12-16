@@ -129,7 +129,7 @@
   /* 教育背景卡片 */
   .education-card {
     @apply card-base;
-    background: white;
+    background-color: rgb(var(--card-bg, 255 255 255));
     border-left: 4px solid rgb(var(--color-success));
   }
 
@@ -158,7 +158,7 @@
 
   .value-card:hover .icon {
     background-color: rgb(var(--color-secondary));
-    color: white;
+    color: rgb(var(--color-gray-50, 255 255 255));
     transform: scale(1.1);
   }
 
@@ -188,6 +188,13 @@
   .cards-grid-1 { grid-template-columns: 1fr; }
   .cards-grid-2 { grid-template-columns: repeat(2, 1fr); }
   .cards-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+  /* 玻璃效果 */
+  .glass-effect {
+    backdrop-filter: var(--backdrop-blur-md);
+    background-color: rgb(var(--color-header-bg) / 0.8);
+    border: var(--border-width-1) solid rgb(var(--color-gray-200) / 0.2);
+  }
 
   /* 响应式调整 */
   @media (max-width: 768px) {

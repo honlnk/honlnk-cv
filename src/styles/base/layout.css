@@ -51,7 +51,7 @@
       max-width: none;
       margin: 0;
       padding: 1rem;
-      background: white;
+      background-color: rgb(var(--color-section-bg));
     }
 
     .content {

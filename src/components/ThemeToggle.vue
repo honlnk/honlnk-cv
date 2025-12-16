@@ -22,7 +22,7 @@
     @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium;
     background-color: rgb(var(--color-section-bg));
     color: rgb(var(--color-text-secondary));
-    border: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
+    border: var(--border-width-1) solid rgb(var(--card-border));
     cursor: pointer;
     transition: all var(--duration-normal) var(--ease-out);
     backdrop-filter: var(--backdrop-blur-sm);

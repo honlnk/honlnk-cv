@@ -100,7 +100,7 @@
   /* 重试按钮 */
   .retry-btn {
     background-color: rgb(var(--color-secondary));
-    color: white;
+    color: rgb(var(--color-gray-50, 255 255 255));
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: var(--border-radius-md);
     border: none;

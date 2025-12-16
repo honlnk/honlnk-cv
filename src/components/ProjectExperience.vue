@@ -40,7 +40,7 @@
           <h3 class="text-xl font-semibold text-primary m-0">{{ project.title }}</h3>
           <span class="duration text-text-secondary text-sm">{{ project.duration }}</span>
         </div>
-        <span class="role-tag bg-secondary text-white px-3 py-1 rounded-full text-sm">
+        <span class="role-tag bg-[rgb(var(--color-secondary))] text-[rgb(var(--color-gray-50))] px-3 py-1 rounded-full text-sm">
           {{ project.role }}
         </span>
       </div>
@@ -56,7 +56,7 @@
       >
         <div
           v-if="expandedProject === project.title"
-          class="card-details px-6 pb-6 border-t border-gray-100"
+          class="card-details px-6 pb-6 border-t border-b-[rgb(var(--card-border))]"
         >
           <ul class="highlights my-4 space-y-3">
             <li
