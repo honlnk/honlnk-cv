@@ -1,15 +1,15 @@
-import { ref, computed } from 'vue'
 import type {
-  ResumeData,
-  ProjectData,
-  AdvantageData,
   AdditionalValueData,
+  AdvantageData,
   EducationData,
+  ProjectData,
+  ResumeData,
 } from '@/types/types'
-import { parseTitleWithEmoji } from '@/utils/emoji-parser'
 import { parseBasicInfo, validateBasicInfo } from '@/utils/basic-info-parser'
+import { parseTitleWithEmoji } from '@/utils/emoji-parser'
+import { computed, ref } from 'vue'
 // 静态导入 README.md 内容
-import readmeContent from '../../../README.md?raw'
+import readmeContent from '../../README.md?raw'
 
 export function useResumeData() {
   const resumeData = ref<ResumeData>()
