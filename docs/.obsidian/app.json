@@ -1,1 +1,36 @@
-{}
+{
+  "nativeMnemonics": false,
+  "showLineNumber": true,
+  "spellcheck": true,
+  "spellcheckLanguages": [
+    "zh-CN",
+    "en-US"
+  ],
+  "trimWhitespace": false,
+  "useMarkdownHeadings": true,
+  "readableLineLength": true,
+  "foldHeading": true,
+  "foldIndent": true,
+  "showFrontmatter": false,
+  "alwaysUpdateLinks": true,
+  "livePreview": true,
+  "showInlineTitle": true,
+  "linkHighlight": true,
+  "newFileLocation": "current",
+  "newFileFolderPath": "",
+  "attachmentFolderPath": "./Attachment",
+  "promptDelete": false,
+  "smartIndentList": true,
+  "trashOption": "local",
+  "vimMode": false,
+  "enableTypewriterScrollMargin": false,
+  "readableLineWidth": 700,
+  "zoomLevel": 1,
+  "lineNumberWrap": false,
+  "showIndentGuide": true,
+  "customCssTheme": "",
+  "cacheOnSave": true,
+  "communityPluginSortOrder": "downloadCount",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true
+}
