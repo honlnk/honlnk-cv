@@ -13,32 +13,32 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     label: '姓名',
     icon: '👤',
     required: true,
-    group: 'personal'
+    group: 'personal',
   },
   {
     key: 'age',
     label: '年龄',
     icon: '🎂',
-    group: 'personal'
+    group: 'personal',
   },
   {
     key: 'position',
     label: '职位',
     icon: '💼',
     required: true,
-    group: 'professional'
+    group: 'professional',
   },
   {
     key: 'experience',
     label: '工作经验',
     icon: '💪',
-    group: 'professional'
+    group: 'professional',
   },
   {
     key: 'education',
     label: '学历',
     icon: '🎓',
-    group: 'professional'
+    group: 'professional',
   },
 
   // 联系方式
@@ -49,8 +49,8 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     group: 'contact',
     validation: {
       pattern: /^1[3-9]\d{9}$/,
-      message: '请输入有效的手机号'
-    }
+      message: '请输入有效的手机号',
+    },
   },
   {
     key: 'email',
@@ -59,14 +59,14 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     group: 'contact',
     validation: {
       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      message: '请输入有效的邮箱地址'
-    }
+      message: '请输入有效的邮箱地址',
+    },
   },
   {
     key: 'wechat',
     label: '微信号',
     icon: '💬',
-    group: 'contact'
+    group: 'contact',
   },
 
   // 位置信息
@@ -74,13 +74,13 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'location',
     label: '期望城市',
     icon: '📍',
-    group: 'location'
+    group: 'location',
   },
   {
     key: 'salary',
     label: '期望薪资',
     icon: '💰',
-    group: 'location'
+    group: 'location',
   },
 
   // 在线平台
@@ -88,31 +88,31 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'website',
     label: '个人网站',
     icon: '🌐',
-    group: 'online'
+    group: 'online',
   },
   {
     key: 'github',
     label: 'GitHub',
     icon: '🐙',
-    group: 'online'
+    group: 'online',
   },
   {
     key: 'gitee',
     label: 'Gitee',
     icon: '🐱',
-    group: 'online'
+    group: 'online',
   },
   {
     key: 'blog',
     label: '技术博客',
     icon: '📝',
-    group: 'online'
+    group: 'online',
   },
   {
     key: 'linkedin',
     label: 'LinkedIn',
     icon: '💼',
-    group: 'online'
+    group: 'online',
   },
 
   // 其他信息
@@ -120,14 +120,14 @@ export const BASIC_INFO_FIELDS: BasicInfoField[] = [
     key: 'status',
     label: '求职状态',
     icon: '🚀',
-    group: 'other'
+    group: 'other',
   },
   {
     key: 'other',
     label: '其他',
     icon: '📌',
-    group: 'other'
-  }
+    group: 'other',
+  },
 ]
 
 /** 获取字段配置 */
@@ -143,13 +143,14 @@ export function getFieldIcon(key: string): string {
 
 /** 按分组获取字段 */
 export function getFieldsByGroup(group?: string): BasicInfoField[] {
-  return group
-    ? BASIC_INFO_FIELDS.filter(field => field.group === group)
-    : BASIC_INFO_FIELDS
+  return group ? BASIC_INFO_FIELDS.filter(field => field.group === group) : BASIC_INFO_FIELDS
 }
 
 /** 验证字段值 */
-export function validateFieldValue(key: string, value: string): { valid: boolean; message?: string } {
+export function validateFieldValue(
+  key: string,
+  value: string
+): { valid: boolean; message?: string } {
   const field = getFieldConfig(key)
   if (!field) {
     return { valid: true }

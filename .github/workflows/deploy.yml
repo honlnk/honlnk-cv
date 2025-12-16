@@ -20,7 +20,7 @@ permissions:
 
 # 允许一个并发的部署
 concurrency:
-  group: "pages-${{ github.ref }}"
+  group: 'pages-${{ github.ref }}'
   cancel-in-progress: true
 
 jobs:
@@ -40,8 +40,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       # 3. 安装依赖
       - name: Install dependencies
@@ -63,7 +63,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
+          path: './dist'
 
       # 8. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
@@ -83,8 +83,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       # 3. 安装依赖
       - name: Install dependencies

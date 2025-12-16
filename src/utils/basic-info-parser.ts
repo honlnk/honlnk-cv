@@ -24,7 +24,9 @@ export function parseBasicInfo(lines: string[]): ParsedBasicInfo {
       } else {
         // 未知字段归类为 "other"
         if (!info.other) info.other = ''
-        info.other = info.other ? `${info.other}, ${fieldName}: ${content.trim()}` : `${fieldName}: ${content.trim()}`
+        info.other = info.other
+          ? `${info.other}, ${fieldName}: ${content.trim()}`
+          : `${fieldName}: ${content.trim()}`
       }
     }
   }
@@ -39,56 +41,56 @@ export function parseBasicInfo(lines: string[]): ParsedBasicInfo {
 export function normalizeFieldName(userInput: string): string {
   const fieldNameMap: Record<string, string> = {
     // 个人信息
-    '姓名': 'name',
-    '年龄': 'age',
-    '性别': 'gender',
-    '生日': 'birthday',
+    姓名: 'name',
+    年龄: 'age',
+    性别: 'gender',
+    生日: 'birthday',
 
     // 职业信息
-    '职位': 'position',
-    '岗位': 'position',
-    '工作': 'position',
-    '工作经验': 'experience',
-    '工作年限': 'experience',
-    '学历': 'education',
-    '专业': 'major',
+    职位: 'position',
+    岗位: 'position',
+    工作: 'position',
+    工作经验: 'experience',
+    工作年限: 'experience',
+    学历: 'education',
+    专业: 'major',
 
     // 联系方式
-    '手机': 'phone',
-    '手机号': 'phone',
-    '电话': 'phone',
-    '邮箱': 'email',
-    '电子邮件': 'email',
-    '微信': 'wechat',
-    '微信号': 'wechat',
-    'qq': 'qq',
+    手机: 'phone',
+    手机号: 'phone',
+    电话: 'phone',
+    邮箱: 'email',
+    电子邮件: 'email',
+    微信: 'wechat',
+    微信号: 'wechat',
+    qq: 'qq',
 
     // 位置信息
-    '城市': 'location',
-    '地址': 'location',
-    '期望城市': 'location',
-    '所在地': 'location',
-    '薪资': 'salary',
-    '期望薪资': 'salary',
+    城市: 'location',
+    地址: 'location',
+    期望城市: 'location',
+    所在地: 'location',
+    薪资: 'salary',
+    期望薪资: 'salary',
 
     // 在线平台
-    '网站': 'website',
-    '个人网站': 'website',
-    '主页': 'website',
-    'github': 'github',
-    'gitee': 'gitee',
-    '博客': 'blog',
-    '技术博客': 'blog',
-    'blog': 'blog',
-    'linkedin': 'linkedin',
-    '领英': 'linkedin',
+    网站: 'website',
+    个人网站: 'website',
+    主页: 'website',
+    github: 'github',
+    gitee: 'gitee',
+    博客: 'blog',
+    技术博客: 'blog',
+    blog: 'blog',
+    linkedin: 'linkedin',
+    领英: 'linkedin',
 
     // 其他信息
-    '状态': 'status',
-    '求职状态': 'status',
-    '其他': 'other',
-    '备注': 'other',
-    '简介': 'other'
+    状态: 'status',
+    求职状态: 'status',
+    其他: 'other',
+    备注: 'other',
+    简介: 'other',
   }
 
   // 直接匹配
@@ -138,7 +140,7 @@ export function getGroupedBasicInfo(info: ParsedBasicInfo): Array<{
         key: field.key,
         label: field.label,
         icon: field.icon,
-        value: String(info[field.key] || '')
+        value: String(info[field.key] || ''),
       }))
       .filter(field => field.value) // 只显示有值的字段
 
@@ -165,7 +167,7 @@ export function validateBasicInfo(info: ParsedBasicInfo): {
     if (!info[field.key] || String(info[field.key]).trim() === '') {
       errors.push({
         field: field.key,
-        message: `${field.label}是必填项`
+        message: `${field.label}是必填项`,
       })
     }
   }
@@ -179,7 +181,7 @@ export function validateBasicInfo(info: ParsedBasicInfo): {
         if (!valid && message) {
           errors.push({
             field: key,
-            message: message
+            message: message,
           })
         }
       }
@@ -188,14 +190,17 @@ export function validateBasicInfo(info: ParsedBasicInfo): {
 
   return {
     valid: errors.length === 0,
-    errors
+    errors,
   }
 }
 
 /**
  * 使用配置验证字段值
  */
-function validateFieldValueWithConfig(field: BasicInfoField, value: string): {
+function validateFieldValueWithConfig(
+  field: BasicInfoField,
+  value: string
+): {
   valid: boolean
   message?: string
 } {

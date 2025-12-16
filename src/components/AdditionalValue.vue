@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ResumeData } from '@/types/types'
-import { getSafeEmoji } from '@/utils/emoji-parser'
+  import type { ResumeData } from '@/types/types'
+  import { getSafeEmoji } from '@/utils/emoji-parser'
 
-defineProps<{
-  values: ResumeData['additionalValues']
-}>()
+  defineProps<{
+    values: ResumeData['additionalValues']
+  }>()
 </script>
 
 <template>
@@ -23,7 +23,7 @@ defineProps<{
           delay: index * 150,
           duration: 700,
           type: 'spring',
-          stiffness: 120
+          stiffness: 120,
         }"
       >
         <div class="text-4xl mb-4">{{ getSafeEmoji(item.icon) }}</div>

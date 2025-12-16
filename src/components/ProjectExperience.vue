@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { ResumeData } from '@/types/types'
+  import { ref } from 'vue'
+  import type { ResumeData } from '@/types/types'
 
-defineProps<{
-  projects: ResumeData['projects']
-}>()
+  defineProps<{
+    projects: ResumeData['projects']
+  }>()
 
-const expandedProject = ref<string | null>(null)
+  const expandedProject = ref<string | null>(null)
 
-const toggleDetails = (title: string) => {
-  expandedProject.value = expandedProject.value === title ? null : title
-}
+  const toggleDetails = (title: string) => {
+    expandedProject.value = expandedProject.value === title ? null : title
+  }
 </script>
 
 <template>
@@ -29,7 +29,7 @@ const toggleDetails = (title: string) => {
         delay: index * 200,
         duration: 600,
         type: 'spring',
-        stiffness: 80
+        stiffness: 80,
       }"
     >
       <div
@@ -40,9 +40,7 @@ const toggleDetails = (title: string) => {
           <h3 class="text-xl font-semibold text-primary m-0">{{ project.title }}</h3>
           <span class="duration text-text-secondary text-sm">{{ project.duration }}</span>
         </div>
-        <span
-          class="role-tag bg-secondary text-white px-3 py-1 rounded-full text-sm"
-        >
+        <span class="role-tag bg-secondary text-white px-3 py-1 rounded-full text-sm">
           {{ project.role }}
         </span>
       </div>
@@ -71,11 +69,7 @@ const toggleDetails = (title: string) => {
             </li>
           </ul>
           <div class="tech-stack flex flex-wrap gap-2">
-            <span
-              v-for="tech in project.techStack"
-              :key="tech"
-              class="tech-tag"
-            >
+            <span v-for="tech in project.techStack" :key="tech" class="tech-tag">
               {{ tech }}
             </span>
           </div>

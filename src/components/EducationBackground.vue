@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { ResumeData } from '@/types/types'
+  import type { ResumeData } from '@/types/types'
 
-defineProps<{
-  data: ResumeData['education']
-}>()
+  defineProps<{
+    data: ResumeData['education']
+  }>()
 </script>
 
 <template>
@@ -19,7 +19,7 @@ defineProps<{
         delay: 300,
         duration: 600,
         type: 'spring',
-        stiffness: 100
+        stiffness: 100,
       }"
     >
       <div class="school-info mb-6">

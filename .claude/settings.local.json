@@ -1,9 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(npx tsx:*)",
-      "Bash(pnpm type-check)"
-    ],
+    "allow": ["Bash(npx tsx:*)", "Bash(pnpm type-check)"],
     "deny": [],
     "ask": []
   }

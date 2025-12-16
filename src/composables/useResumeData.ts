@@ -1,5 +1,11 @@
 import { ref, computed } from 'vue'
-import type { ResumeData, ProjectData, AdvantageData, AdditionalValueData, EducationData } from '@/types/types'
+import type {
+  ResumeData,
+  ProjectData,
+  AdvantageData,
+  AdditionalValueData,
+  EducationData,
+} from '@/types/types'
 import { parseTitleWithEmoji } from '@/utils/emoji-parser'
 import { parseBasicInfo, validateBasicInfo } from '@/utils/basic-info-parser'
 
@@ -89,7 +95,7 @@ export function useResumeData() {
 
     return {
       basicInfo,
-      ...otherData
+      ...otherData,
     }
   }
 
@@ -103,9 +109,9 @@ export function useResumeData() {
         school: '',
         major: '',
         duration: '',
-        experiences: [] as string[]
+        experiences: [] as string[],
       } as EducationData,
-      additionalValues: [] as AdditionalValueData[]
+      additionalValues: [] as AdditionalValueData[],
     }
 
     let currentSection = ''
@@ -138,7 +144,7 @@ export function useResumeData() {
             role: '',
             duration: '',
             highlights: [],
-            techStack: []
+            techStack: [],
           }
         } else if (currentSection === '附加价值') {
           if (currentValue) {
@@ -180,7 +186,12 @@ export function useResumeData() {
         currentProject.techStack = techStackText.split(/[+,、，]/).map(t => t.trim())
       }
       // 解析教育背景
-      else if (currentSection === '教育背景' && trimmed.includes('**学校**:') && trimmed.includes('**专业**:') && trimmed.includes('**时间**:')) {
+      else if (
+        currentSection === '教育背景' &&
+        trimmed.includes('**学校**:') &&
+        trimmed.includes('**专业**:') &&
+        trimmed.includes('**时间**:')
+      ) {
         const schoolMatch = trimmed.match(/\*\*学校\*\*:\s*(.+?)(?:\s*\|\s*|$)/)
         const majorMatch = trimmed.match(/\*\*专业\*\*:\s*(.+?)(?:\s*\|\s*|$)/)
         const timeMatch = trimmed.match(/\*\*时间\*\*:\s*(.+)/)
@@ -222,6 +233,6 @@ export function useResumeData() {
     error,
     hasError,
     isEmpty,
-    loadResumeData
+    loadResumeData,
   }
 }

@@ -1,4 +1,3 @@
-
 /**
  * Emoji 解析工具函数
  * 用于提取和处理字符串中的emoji字符
@@ -15,10 +14,12 @@ export function extractEmojiFromStart(str: string): { emoji: string; text: strin
   }
 
   // 更简单的emoji正则表达式，匹配常见emoji字符
-  const baseEmojiRegex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F900}-\u{1F9FF}]|[\u{1F018}-\u{1F270}]/u
+  const baseEmojiRegex =
+    /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F900}-\u{1F9FF}]|[\u{1F018}-\u{1F270}]/u
 
   // 更复杂的模式，支持emoji修饰符和零宽连字
-  const complexEmojiPattern = '^(' + baseEmojiRegex.source + '(?:\\uFE0F|\\u200D(?:' + baseEmojiRegex.source + '))*)+'
+  const complexEmojiPattern =
+    '^(' + baseEmojiRegex.source + '(?:\\uFE0F|\\u200D(?:' + baseEmojiRegex.source + '))*)+'
 
   // 尝试匹配字符串开头的连续emoji
   const match = str.match(new RegExp(complexEmojiPattern, 'u'))
@@ -44,7 +45,8 @@ export function hasValidEmoji(str: string): boolean {
   if (str.includes('�')) return false
 
   // 检查是否包含emoji
-  const emojiRegex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F900}-\u{1F9FF}]|[\u{1F018}-\u{1F270}]/u
+  const emojiRegex =
+    /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F900}-\u{1F9FF}]|[\u{1F018}-\u{1F270}]/u
   return emojiRegex.test(str)
 }
 
@@ -76,7 +78,6 @@ export function parseTitleWithEmoji(title: string): { emoji: string; cleanTitle:
 
   return {
     emoji: getSafeEmoji(emoji),
-    cleanTitle: text
+    cleanTitle: text,
   }
 }
-

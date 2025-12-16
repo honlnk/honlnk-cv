@@ -15,7 +15,12 @@
     box-sizing: border-box; /* 替代 @apply box-border */
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     /* 使用CSS变量替代 @apply text-primary font-semibold */
     color: rgb(var(--text-primary));
     font-weight: 600;
@@ -60,7 +65,8 @@
     line-height: 1.7;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: 1.5rem; /* 替代 @apply pl-6 */
     margin: 1rem 0;
   }

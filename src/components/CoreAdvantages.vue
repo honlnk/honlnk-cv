@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { ResumeData } from '@/types/types'
+  import type { ResumeData } from '@/types/types'
 
-defineProps<{
-  advantages: ResumeData['coreAdvantages']
-}>()
+  defineProps<{
+    advantages: ResumeData['coreAdvantages']
+  }>()
 </script>
 
 <template>
@@ -22,7 +22,7 @@ defineProps<{
           delay: index * 150,
           duration: 600,
           type: 'spring',
-          stiffness: 100
+          stiffness: 100,
         }"
       >
         <h3 class="text-lg font-semibold text-secondary mb-4">{{ item.title }}</h3>

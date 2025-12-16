@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import type { ResumeData } from '@/types/types'
-import { getFieldIcon } from '@/config/basic-info-fields'
+  import type { ResumeData } from '@/types/types'
+  import { getFieldIcon } from '@/config/basic-info-fields'
 
-defineOptions({
-  name: 'ResumeHeader'
-})
+  defineOptions({
+    name: 'ResumeHeader',
+  })
 
-defineProps<{
-  data: ResumeData
-}>()
+  defineProps<{
+    data: ResumeData
+  }>()
 
-// 生成联系方式链接
-function generateContactLink(field: string, value: string): string {
-  switch (field) {
-    case 'email':
-      return `mailto:${value}`
-    case 'phone':
-      return `tel:${value}`
-    case 'website':
-    case 'gitee':
-    case 'github':
-    case 'blog':
-    case 'linkedin':
-      return value
-    default:
-      return '#'
+  // 生成联系方式链接
+  function generateContactLink(field: string, value: string): string {
+    switch (field) {
+      case 'email':
+        return `mailto:${value}`
+      case 'phone':
+        return `tel:${value}`
+      case 'website':
+      case 'gitee':
+      case 'github':
+      case 'blog':
+      case 'linkedin':
+        return value
+      default:
+        return '#'
+    }
   }
-}
 
-// 判断是否为链接字段
-function isLinkField(field: string): boolean {
-  return ['email', 'website', 'gitee', 'github', 'blog', 'linkedin'].includes(field)
-}
+  // 判断是否为链接字段
+  function isLinkField(field: string): boolean {
+    return ['email', 'website', 'gitee', 'github', 'blog', 'linkedin'].includes(field)
+  }
 </script>
 
 <template>
@@ -52,9 +52,7 @@ function isLinkField(field: string): boolean {
         :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 800 } }"
       >
         {{ data.basicInfo.position }}
-        <span v-if="data.basicInfo.age" class="ml-2">
-          | {{ data.basicInfo.age }}
-        </span>
+        <span v-if="data.basicInfo.age" class="ml-2"> | {{ data.basicInfo.age }} </span>
       </h2>
     </div>
 
@@ -66,7 +64,7 @@ function isLinkField(field: string): boolean {
           class="contact-item flex items-center gap-3 p-3 bg-white/90 backdrop-blur rounded-lg"
           v-motion
           :initial="{ opacity: 0, scale: 0.9 }"
-          :enter="{ opacity: 1, scale: 1, transition: { delay: 800 + (index * 100), duration: 600 } }"
+          :enter="{ opacity: 1, scale: 1, transition: { delay: 800 + index * 100, duration: 600 } }"
         >
           <span class="icon text-xl">{{ getFieldIcon(String(key)) }}</span>
 

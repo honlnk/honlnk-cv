@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useResumeData } from '@/composables/useResumeData'
-import Header from '@/components/Header.vue'
-import CoreAdvantages from '@/components/CoreAdvantages.vue'
-import ProjectExperience from '@/components/ProjectExperience.vue'
-import EducationBackground from '@/components/EducationBackground.vue'
-import AdditionalValue from '@/components/AdditionalValue.vue'
+  import { onMounted } from 'vue'
+  import { useResumeData } from '@/composables/useResumeData'
+  import Header from '@/components/Header.vue'
+  import CoreAdvantages from '@/components/CoreAdvantages.vue'
+  import ProjectExperience from '@/components/ProjectExperience.vue'
+  import EducationBackground from '@/components/EducationBackground.vue'
+  import AdditionalValue from '@/components/AdditionalValue.vue'
 
-const { resumeData, isLoading, hasError, isEmpty, loadResumeData } = useResumeData()
+  const { resumeData, isLoading, hasError, isEmpty, loadResumeData } = useResumeData()
 
-// 页面加载时获取简历数据
-onMounted(() => {
-  loadResumeData()
-})
+  // 页面加载时获取简历数据
+  onMounted(() => {
+    loadResumeData()
+  })
 </script>
 
 <template>
@@ -48,41 +48,41 @@ onMounted(() => {
 </template>
 
 <style>
-@import '@/assets/styles/variables.css';
-@import '@/assets/styles/main.css';
+  @import '@/assets/styles/variables.css';
+  @import '@/assets/styles/main.css';
 
-.resume-container {
-  max-width: 660px;
-  margin: 0 auto;
-  padding: 2rem;
-}
+  .resume-container {
+    /* max-width: 660px; */
+    margin: 0 10rem;
+    padding: 2rem;
+  }
 
-.content {
-  margin-top: 2rem;
-}
+  .content {
+    margin-top: 2rem;
+  }
 
-/* 状态样式 */
-.loading-state,
-.error-state,
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-  text-align: center;
-}
+  /* 状态样式 */
+  .loading-state,
+  .error-state,
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    text-align: center;
+  }
 
-.error-state p {
-  color: rgb(var(--error));
-  margin-bottom: 1rem;
-}
+  .error-state p {
+    color: rgb(var(--error));
+    margin-bottom: 1rem;
+  }
 
-.retry-btn {
-  @apply btn-primary;
-}
+  .retry-btn {
+    @apply btn-primary;
+  }
 
-.empty-state p {
-  color: rgb(var(--text-secondary));
-}
+  .empty-state p {
+    color: rgb(var(--text-secondary));
+  }
 </style>

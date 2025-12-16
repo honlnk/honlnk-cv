@@ -3,6 +3,8 @@
     "Vue.volar",
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
-    "antfu.unocss"
+    "antfu.unocss",
+    "esbenp.prettier-vscode",
+    "CoenraadS.bracket-pair-colorizer-2"
   ]
 }

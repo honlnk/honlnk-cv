@@ -35,12 +35,14 @@ pnpm preview
 ## 项目架构
 
 ### 核心技术栈
+
 - **前端框架**: Vue 3 + Composition API + `<script setup>`
 - **构建工具**: Vite 6.0.11
 - **语言**: TypeScript
 - **包管理器**: pnpm（同时支持 npm）
 
 ### 目录结构
+
 ```
 src/
 ├── components/           # 组件化模块

@@ -1,31 +1,31 @@
 :root {
-    /* UnoCSS色彩变量映射 */
-    --primary: 44 62 80;        /* #2c3e50 */
-    --secondary: 52 152 219;     /* #3498db */
-    --accent: 52 73 94;          /* #34495e */
-    --success: 39 174 96;        /* #27ae60 */
-    --warning: 243 156 18;       /* #f39c12 */
-    --error: 231 76 60;          /* #e74c3c */
-    --section-bg: 248 249 250;   /* #f8f9fa */
-    --text-primary: 44 62 80;    /* #2c3e50 */
-    --text-secondary: 127 140 141; /* #7f8c8d */
-    --header-bg: 248 249 250;    /* #f8f9fa */
+  /* UnoCSS色彩变量映射 */
+  --primary: 44 62 80; /* #2c3e50 */
+  --secondary: 52 152 219; /* #3498db */
+  --accent: 52 73 94; /* #34495e */
+  --success: 39 174 96; /* #27ae60 */
+  --warning: 243 156 18; /* #f39c12 */
+  --error: 231 76 60; /* #e74c3c */
+  --section-bg: 248 249 250; /* #f8f9fa */
+  --text-primary: 44 62 80; /* #2c3e50 */
+  --text-secondary: 127 140 141; /* #7f8c8d */
+  --header-bg: 248 249 250; /* #f8f9fa */
 
-    /* 动态计算的CSS变量 */
-    --header-gradient: linear-gradient(135deg, rgb(var(--header-bg)) 0%, #e9ecef 100%);
-    --animation-duration: 0.3s;
-    --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  /* 动态计算的CSS变量 */
+  --header-gradient: linear-gradient(135deg, rgb(var(--header-bg)) 0%, #e9ecef 100%);
+  --animation-duration: 0.3s;
+  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* 暗色模式变量（预留） */
-    --bg-primary-dark: 26 26 26;     /* #1a1a1a */
-    --bg-secondary-dark: 45 45 45;   /* #2d2d2d */
-    --text-primary-dark: 255 255 255; /* #ffffff */
-    --text-secondary-dark: 160 160 160; /* #a0a0a0 */
+  /* 暗色模式变量（预留） */
+  --bg-primary-dark: 26 26 26; /* #1a1a1a */
+  --bg-secondary-dark: 45 45 45; /* #2d2d2d */
+  --text-primary-dark: 255 255 255; /* #ffffff */
+  --text-secondary-dark: 160 160 160; /* #a0a0a0 */
 }
 
 /* 暗色模式支持（预留） */
 @media (prefers-color-scheme: dark) {
-    :root {
-        /* 暗色模式样式 */
-    }
+  :root {
+    /* 暗色模式样式 */
+  }
 }
