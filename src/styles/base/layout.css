@@ -1,0 +1,61 @@
+/**
+ * Layout System
+ * 应用布局系统
+ */
+
+@layer base {
+  /* 应用根容器 */
+  .app-container {
+    min-height: 100vh;
+    background-color: rgb(var(--color-section-bg));
+  }
+
+  /* 简历容器 */
+  .resume-container {
+    width: 100%;
+    max-width: 1200px; /* 适合现代简历的宽度 */
+    margin: 0 auto;
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    box-sizing: border-box;
+  }
+
+  /* 主要内容区域 */
+  .content {
+    margin-top: var(--spacing-2xl);
+  }
+
+  /* 响应式布局 */
+  @media (max-width: 768px) {
+    .resume-container {
+      padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .content {
+      margin-top: var(--spacing-xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .resume-container {
+      padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .content {
+      margin-top: var(--spacing-lg);
+    }
+  }
+
+  /* 打印样式 */
+  @media print {
+    .resume-container {
+      max-width: none;
+      margin: 0;
+      padding: 1rem;
+      background: white;
+    }
+
+    .content {
+      margin-top: 1rem;
+    }
+  }
+}

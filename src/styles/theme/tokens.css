@@ -1,0 +1,171 @@
+/**
+ * CSS Design Tokens
+ * 设计系统核心变量定义
+ */
+
+:root {
+  /* ================================
+   * Color Tokens - 色彩系统
+   * ================================ */
+
+  /* Brand Colors - 品牌主色 */
+  --color-primary: 44 62 80; /* #2c3e50 */
+  --color-secondary: 52 152 219; /* #3498db */
+  --color-accent: 52 73 94; /* #34495e */
+
+  /* Semantic Colors - 语义色彩 */
+  --color-success: 39 174 96; /* #27ae60 */
+  --color-warning: 243 156 18; /* #f39c12 */
+  --color-error: 231 76 60; /* #e74c3c */
+  --color-info: 52 152 219; /* #3498db */
+
+  /* Neutral Colors - 中性色 */
+  --color-gray-50: 248 249 250; /* #f8f9fa */
+  --color-gray-100: 233 236 239; /* #e9ecef */
+  --color-gray-200: 206 212 218; /* #ced4da */
+  --color-gray-300: 173 181 189; /* #adb5bd */
+  --color-gray-400: 108 117 125; /* #6c757d */
+  --color-gray-500: 73 80 87; /* #495057 */
+  --color-gray-600: 52 58 64; /* #343a40 */
+  --color-gray-700: 33 37 41; /* #212529 */
+
+  /* Theme Specific Colors - 主题专用色 */
+  --color-section-bg: var(--color-gray-50);
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: 127 140 141; /* #7f8c8d */
+  --color-header-bg: var(--color-gray-50);
+
+  /* ================================
+   * Typography Tokens - 排印系统
+   * ================================ */
+
+  /* Font Families - 字体族 */
+  --font-family-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', Monaco, monospace;
+
+  /* Font Sizes - 字体大小 */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+
+  /* Font Weights - 字重 */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights - 行高 */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* ================================
+   * Spacing Tokens - 间距系统
+   * ================================ */
+
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+
+  /* ================================
+   * Animation Tokens - 动画系统
+   * ================================ */
+
+  /* Durations - 动画时长 */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* Easing Functions - 缓动函数 */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ================================
+   * Shadow Tokens - 阴影系统
+   * ================================ */
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+  /* Component Specific Shadows - 组件专用阴影 */
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+  /* ================================
+   * Border Tokens - 边框系统
+   * ================================ */
+
+  /* Border Widths - 边框宽度 */
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+
+  /* Border Radius - 圆角 */
+  --border-radius-sm: 0.125rem; /* 2px */
+  --border-radius-md: 0.25rem;  /* 4px */
+  --border-radius-lg: 0.5rem;   /* 8px */
+  --border-radius-xl: 0.75rem;  /* 12px */
+  --border-radius-2xl: 1rem;    /* 16px */
+  --border-radius-full: 9999px;
+
+  /* Component Specific Radius - 组件专用圆角 */
+  --border-radius-card: var(--border-radius-xl);
+
+  /* ================================
+   * Effect Tokens - 效果系统
+   * ================================ */
+
+  /* Gradients - 渐变 */
+  --gradient-header: linear-gradient(135deg, rgb(var(--color-header-bg)) 0%, rgb(var(--color-gray-100)) 100%);
+  --gradient-primary: linear-gradient(135deg, rgb(var(--color-secondary)) 0%, rgb(var(--color-primary)) 100%);
+  --gradient-text: linear-gradient(90deg, rgb(var(--color-secondary)) 0%, rgb(var(--color-accent)) 100%);
+
+  /* Backdrops - 背景效果 */
+  --backdrop-blur-sm: blur(4px);
+  --backdrop-blur-md: blur(8px);
+  --backdrop-blur-lg: blur(16px);
+
+  /* Opacity - 透明度 */
+  --opacity-backdrop: 0.8;
+  --opacity-hover: 0.8;
+  --opacity-disabled: 0.5;
+
+  /* ================================
+   * Dark Mode Tokens - 暗色模式
+   * ================================ */
+
+  /* Dark mode color tokens - 预留 */
+  --color-dark-bg-primary: 26 26 26; /* #1a1a1a */
+  --color-dark-bg-secondary: 45 45 45; /* #2d2d2d */
+  --color-dark-text-primary: 255 255 255; /* #ffffff */
+  --color-dark-text-secondary: 160 160 160; /* #a0a0a0 */
+}
+
+/* ================================
+ * Dark Mode Overrides - 暗色模式覆盖
+ * ================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* TODO: 实现完整的暗色模式变量映射 */
+    --color-section-bg: var(--color-dark-bg-primary);
+    --color-header-bg: var(--color-dark-bg-secondary);
+  }
+}
