@@ -12,6 +12,10 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "dompurify": "^3.3.1",
+    "floating-vue": "^5.2.2",
+    "gsap": "^3.14.2",
+    "marked": "^17.0.1",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -19,8 +23,7 @@
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.1",
     "@unocss/preset-icons": "^66.5.10",
-    "@unocss/preset-uno": "^66.5.10",
-    "@unocss/preset-wind": "^66.5.10",
+    "@unocss/preset-wind3": "^66.5.10",
     "@unocss/transformer-directives": "^66.5.10",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/eslint-config-typescript": "^14.3.0",
