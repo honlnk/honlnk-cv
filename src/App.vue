@@ -52,8 +52,8 @@ onMounted(() => {
 @import '@/assets/styles/main.css';
 
 .resume-container {
-  max-width: 660px;
-  margin: 0 auto;
+  /* max-width: 660px; */
+  margin: 0 10rem;
   padding: 2rem;
 }
 

@@ -30,7 +30,7 @@ defineProps<{
         </div>
       </div>
 
-      <ul class="space-y-0">
+      <ul>
         <li
           v-for="(exp, index) in data.experiences"
           :key="index"
