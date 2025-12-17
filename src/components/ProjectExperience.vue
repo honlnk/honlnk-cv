@@ -92,7 +92,23 @@
             </li>
           </ul>
           <div class="tech-stack flex flex-wrap gap-2">
-            <span v-for="tech in project.techStack" :key="tech" class="tech-tag">
+            <span
+              v-for="(tech, index) in project.techStack"
+              :key="`${tech}-${expandedProject === project.title}`"
+              class="tech-tag"
+              v-motion
+              :initial="{ opacity: 0, x: -30 }"
+              :enter="{
+                opacity: 1,
+                x: 0,
+                transition: {
+                  delay: 200 + index * 100,
+                  duration: 600,
+                  type: 'spring',
+                  stiffness: 100
+                }
+              }"
+            >
               {{ tech }}
             </span>
           </div>
