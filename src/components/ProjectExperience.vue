@@ -20,8 +20,11 @@
     <div
       v-for="(project, index) in projects"
       :key="project.title"
-      class="project-card mb-4"
-      :class="{ 'ring-2 ring-secondary/20': expandedProject === project.title }"
+      class="project-card"
+      :class="{
+        'mb-4': index !== projects.length - 1,
+        'ring-2 ring-secondary/20': expandedProject === project.title
+      }"
       v-motion
       :initial="{ opacity: 0, x: -30 }"
       :visible-once="{ opacity: 1, x: 0 }"

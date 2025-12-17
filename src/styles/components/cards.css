@@ -48,8 +48,8 @@
     transition: width var(--duration-normal) var(--ease-out);
   }
 
-  .section-title:hover::after {
-    width: 6rem;
+  .section:hover .section-title::after {
+    width: 10rem;
   }
 
   /* 联系链接 */
@@ -112,9 +112,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg,
+    background: linear-gradient(
+      135deg,
       rgb(var(--card-bg)) 0%,
-      rgb(var(--accent-project) / 0.03) 100%);
+      rgb(var(--accent-project) / 0.03) 100%
+    );
     z-index: -1;
     transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -126,9 +128,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg,
+    background: linear-gradient(
+      135deg,
       rgb(var(--accent-project) / 0.06) 0%,
-      rgb(var(--card-bg-hover, 248 250 252)) 100%);
+      rgb(var(--card-bg-hover, 248 250 252)) 100%
+    );
     z-index: -1;
     opacity: 0;
     transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -151,18 +155,22 @@
   /* 优势卡片 */
   .advantage-card {
     @apply card-base card-hover;
-    background: linear-gradient(135deg,
+    background: linear-gradient(
+      135deg,
       rgb(var(--card-bg)) 0%,
-      rgb(var(--accent-advantage) / 0.05) 100%);
+      rgb(var(--accent-advantage) / 0.05) 100%
+    );
     border-left: 4px solid rgb(var(--accent-advantage, 16 185 129));
   }
 
   /* 教育背景卡片 */
   .education-card {
     @apply card-base;
-    background: linear-gradient(135deg,
+    background: linear-gradient(
+      135deg,
       rgb(var(--card-bg)) 0%,
-      rgb(var(--accent-education) / 0.08) 100%);
+      rgb(var(--accent-education) / 0.08) 100%
+    );
     border-left: 4px solid rgb(var(--accent-education, 245 158 11));
   }
 
@@ -170,9 +178,11 @@
   .value-card {
     @apply card-base;
     padding: var(--spacing-lg);
-    background: linear-gradient(135deg,
+    background: linear-gradient(
+      135deg,
       rgb(var(--card-bg)) 0%,
-      rgb(var(--accent-value) / 0.06) 100%);
+      rgb(var(--accent-value) / 0.06) 100%
+    );
     border-left: 4px solid rgb(var(--accent-value, 139 92 246));
   }
 
@@ -195,9 +205,15 @@
     gap: var(--spacing-lg);
   }
 
-  .cards-grid-1 { grid-template-columns: 1fr; }
-  .cards-grid-2 { grid-template-columns: repeat(2, 1fr); }
-  .cards-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .cards-grid-1 {
+    grid-template-columns: 1fr;
+  }
+  .cards-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cards-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
   /* 玻璃效果 */
   .glass-effect {

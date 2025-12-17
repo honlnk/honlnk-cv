@@ -54,7 +54,7 @@
       <template v-else-if="resumeData">
         <Header :data="resumeData" />
 
-        <main class="content">
+        <main class="content flex flex-col gap-8">
           <CoreAdvantages :advantages="resumeData.coreAdvantages" />
           <ProjectExperience :projects="resumeData.projects" />
           <EducationBackground :data="resumeData.education" />
