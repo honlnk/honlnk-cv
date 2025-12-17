@@ -37,7 +37,7 @@
 </script>
 
 <template>
-  <section class="section">
+  <section class="section work-experience" id="work">
     <h2 class="section-title">💼 工作经历</h2>
 
     <div
@@ -45,6 +45,7 @@
       :key="work.company"
       class="work-card"
       :class="{
+        'mb-4': index !== workExperience.length - 1,
         'before:opacity-0 after:opacity-100': expandedWork.has(work.company),
       }"
       v-motion
@@ -58,25 +59,27 @@
       }"
       @click="toggleDetails(work.company, $event)"
     >
-      <div class="work-card-header">
-        <div class="work-card-header-left">
-          <h3 class="work-card-company">{{ work.company }}</h3>
-          <span class="work-card-duration">{{ work.duration }}</span>
+      <div class="card-header flex justify-between items-center p-6 cursor-pointer">
+        <div class="header-left flex-1">
+          <h3 class="text-xl font-semibold text-primary m-0">{{ work.company }}</h3>
+          <span class="duration text-text-secondary text-sm">{{ work.duration }}</span>
         </div>
-        <span class="position-tag">
+        <span
+          class="role-tag bg-[rgb(var(--accent-work))] text-[rgb(var(--color-gray-50))] px-3 py-1 rounded-full text-sm"
+        >
           {{ work.position }}
         </span>
       </div>
 
       <!-- 抽屉容器 -->
       <div
-        class="work-drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out"
+        class="drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out"
         :style="{
           height: getDrawerHeight(work.company),
           opacity: expandedWork.has(work.company) ? 1 : 0,
         }"
       >
-        <div class="work-drawer-content">
+        <div class="drawer-content work-drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]">
           <!-- 工作职责 -->
           <div
             v-if="work.responsibilities && work.responsibilities.length > 0"
@@ -86,8 +89,11 @@
               <span class="icon">📋</span>
               工作职责
             </h4>
-            <ul class="work-list">
-              <li v-for="(item, index) in work.responsibilities" :key="index">
+            <ul class="highlights-list my-4">
+              <li
+                v-for="(item, index) in work.responsibilities"
+                :key="index"
+              >
                 <span>{{ item }}</span>
               </li>
             </ul>
@@ -99,9 +105,9 @@
               <span class="icon">🏆</span>
               主要成就
             </h4>
-            <ul class="work-list">
-              <li v-for="(achievement, index) in work.achievements" :key="index" class="">
-                <span class="star-icon">⭐</span>
+            <ul class="highlights-list my-4">
+              <li v-for="(achievement, index) in work.achievements" :key="index" class="flex items-start">
+                <span class="star-icon text-warning mr-2">⭐</span>
                 <span>{{ achievement }}</span>
               </li>
             </ul>
@@ -123,24 +129,3 @@
     </div>
   </section>
 </template>
-
-<style scoped>
-  .empty-state {
-    @apply border-2 border-dashed;
-  }
-
-  /* 打印样式 */
-  @media print {
-    .work-card {
-      @apply break-inside-avoid shadow-none border;
-    }
-
-    .work-drawer-wrapper {
-      @apply opacity-100;
-    }
-
-    .work-card-header {
-      @apply cursor-default;
-    }
-  }
-</style>
