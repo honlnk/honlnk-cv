@@ -53,7 +53,11 @@
           :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 800 } }"
         >
           {{ data.basicInfo.position }}
-          <span v-if="data.basicInfo.age" class="ml-2"> | {{ data.basicInfo.age }} </span>
+          <span v-if="data.basicInfo.age">
+            <span class="mx-2"> | </span>
+
+            {{ data.basicInfo.age }}
+          </span>
         </h2>
       </div>
 
