@@ -26,7 +26,7 @@ export interface ProjectData {
   title: string
   duration: string
   role: string
-  highlights: string[]
+  highlights: string  // 改为存储 Markdown 原文
   techStack: string[]
 }
 

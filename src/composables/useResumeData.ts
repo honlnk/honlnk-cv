@@ -143,7 +143,7 @@ export function useResumeData() {
             title,
             role: '',
             duration: '',
-            highlights: [],
+            highlights: '',
             techStack: [],
           }
         } else if (currentSection === '附加价值') {
@@ -177,7 +177,12 @@ export function useResumeData() {
           const techStackText = content.replace('**技术栈**:', '').trim()
           currentProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
         } else {
-          currentProject.highlights.push(content)
+          // 将亮点追加到 Markdown 字符串中
+          if (currentProject.highlights) {
+            currentProject.highlights += '\n- ' + content
+          } else {
+            currentProject.highlights = '- ' + content
+          }
         }
       }
       // 解析单独的技术栈行
