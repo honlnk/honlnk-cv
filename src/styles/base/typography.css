@@ -5,28 +5,64 @@
 
 @layer base {
   /* 字体大小 */
-  .text-xs { font-size: var(--font-size-xs); }
-  .text-sm { font-size: var(--font-size-sm); }
-  .text-base { font-size: var(--font-size-base); }
-  .text-lg { font-size: var(--font-size-lg); }
-  .text-xl { font-size: var(--font-size-xl); }
-  .text-2xl { font-size: var(--font-size-2xl); }
-  .text-3xl { font-size: var(--font-size-3xl); }
-  .text-4xl { font-size: var(--font-size-4xl); }
-  .text-5xl { font-size: var(--font-size-5xl); }
+  .text-xs {
+    font-size: var(--font-size-xs);
+  }
+  .text-sm {
+    font-size: var(--font-size-sm);
+  }
+  .text-base {
+    font-size: var(--font-size-base);
+  }
+  .text-lg {
+    font-size: var(--font-size-lg);
+  }
+  .text-xl {
+    font-size: var(--font-size-xl);
+  }
+  .text-2xl {
+    font-size: var(--font-size-2xl);
+  }
+  .text-3xl {
+    font-size: var(--font-size-3xl);
+  }
+  .text-4xl {
+    font-size: var(--font-size-4xl);
+  }
+  .text-5xl {
+    font-size: var(--font-size-5xl);
+  }
 
   /* 字重 */
-  .font-light { font-weight: var(--font-weight-light); }
-  .font-normal { font-weight: var(--font-weight-normal); }
-  .font-medium { font-weight: var(--font-weight-medium); }
-  .font-semibold { font-weight: var(--font-weight-semibold); }
-  .font-bold { font-weight: var(--font-weight-bold); }
+  .font-light {
+    font-weight: var(--font-weight-light);
+  }
+  .font-normal {
+    font-weight: var(--font-weight-normal);
+  }
+  .font-medium {
+    font-weight: var(--font-weight-medium);
+  }
+  .font-semibold {
+    font-weight: var(--font-weight-semibold);
+  }
+  .font-bold {
+    font-weight: var(--font-weight-bold);
+  }
 
   /* 行高 */
-  .leading-tight { line-height: var(--line-height-tight); }
-  .leading-normal { line-height: var(--line-height-normal); }
-  .leading-relaxed { line-height: var(--line-height-relaxed); }
-  .leading-loose { line-height: var(--line-height-loose); }
+  .leading-tight {
+    line-height: var(--line-height-tight);
+  }
+  .leading-normal {
+    line-height: var(--line-height-normal);
+  }
+  .leading-relaxed {
+    line-height: var(--line-height-relaxed);
+  }
+  .leading-loose {
+    line-height: var(--line-height-loose);
+  }
 
   /* 标题样式 */
   h1 {
@@ -158,20 +194,40 @@
   }
 
   /* 文本对齐 */
-  .text-left { text-align: left; }
-  .text-center { text-align: center; }
-  .text-right { text-align: right; }
-  .text-justify { text-align: justify; }
+  .text-left {
+    text-align: left;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-right {
+    text-align: right;
+  }
+  .text-justify {
+    text-align: justify;
+  }
 
   /* 文本变换 */
-  .uppercase { text-transform: uppercase; }
-  .lowercase { text-transform: lowercase; }
-  .capitalize { text-transform: capitalize; }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .lowercase {
+    text-transform: lowercase;
+  }
+  .capitalize {
+    text-transform: capitalize;
+  }
 
   /* 文本装饰 */
-  .underline { text-decoration: underline; }
-  .line-through { text-decoration: line-through; }
-  .no-underline { text-decoration: none; }
+  .underline {
+    text-decoration: underline;
+  }
+  .line-through {
+    text-decoration: line-through;
+  }
+  .no-underline {
+    text-decoration: none;
+  }
 
   /* 文本溢出处理 */
   .truncate {

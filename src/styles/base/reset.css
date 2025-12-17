@@ -28,7 +28,10 @@
     -webkit-text-size-adjust: 100%;
 
     /* 字体渲染优化 */
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-feature-settings:
+      'kern' 1,
+      'liga' 1,
+      'calt' 1;
   }
 
   /* 通用盒子模型重置 */
@@ -59,9 +62,9 @@
 
   /* 按钮重置 */
   button,
-  [type="button"],
-  [type="reset"],
-  [type="submit"] {
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
     background: none;
     border: none;
     padding: 0;

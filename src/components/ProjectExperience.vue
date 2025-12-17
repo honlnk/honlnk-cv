@@ -23,7 +23,7 @@
       class="project-card"
       :class="{
         'mb-4': index !== projects.length - 1,
-        'ring-2 ring-secondary/20': expandedProject === project.title
+        'ring-2 ring-secondary/20': expandedProject === project.title,
       }"
       v-motion
       :initial="{ opacity: 0, x: -30 }"
@@ -63,7 +63,7 @@
           v-if="expandedProject === project.title"
           class="card-details px-6 pb-6 border-t border-b-[rgb(var(--card-border))]"
         >
-          <ul class="highlights my-4 ">
+          <ul class="highlights my-4">
             <li
               v-for="(item, index) in project.highlights"
               :key="index"
