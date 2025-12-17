@@ -139,8 +139,8 @@
   }
 
   .project-card:hover {
-    border-left-color: rgb(var(--color-secondary));
-    box-shadow: 0 4px 20px rgba(0 0 0 / 0.12);
+    border-left-color: rgb(37 99 235); /* #2563eb - 更深的蓝色 */
+    box-shadow: 0 4px 20px rgba(59 130 246 / 0.25); /* 带项目蓝色主题的阴影 */
     transform: translateY(-1px);
   }
 
@@ -161,6 +161,249 @@
       rgb(var(--accent-advantage) / 0.05) 100%
     );
     border-left: 4px solid rgb(var(--accent-advantage, 16 185 129));
+  }
+
+  /* 项目经历抽屉容器 */
+  .project-drawer-content {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    border-top: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
+  }
+
+  /* 项目亮点列表 */
+  .highlights-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .highlights-list li {
+    color: rgb(var(--color-text-primary));
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .highlights-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .highlights-list li::before {
+    content: '•';
+    color: rgb(var(--color-secondary));
+    margin-right: var(--spacing-xs);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+  }
+
+  /* 工作经历卡片 */
+  .work-card {
+    @apply card-base;
+    position: relative;
+    border-left: 4px solid rgb(var(--accent-work, 236 72 153));
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .work-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .work-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgb(var(--card-bg)) 0%,
+      rgb(var(--accent-work) / 0.03) 100%
+    );
+    z-index: -1;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .work-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgb(var(--accent-work) / 0.06) 0%,
+      rgb(var(--card-bg-hover, 248 250 252)) 100%
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .work-card:hover {
+    border-left-color: rgb(219 39 119); /* #db2777 - 更深的粉红色 */
+    box-shadow: 0 4px 20px rgba(236 72 153 / 0.25); /* 带主题色的阴影 */
+    transform: translateY(-1px);
+  }
+
+  .work-card:hover::before {
+    opacity: 0;
+  }
+
+  .work-card:hover::after {
+    opacity: 1;
+  }
+
+  /* 工作经历头部 */
+  .work-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .work-card-header-left {
+    flex: 1;
+  }
+
+  .work-card-company {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: rgb(var(--color-text-primary));
+    margin: 0 0 var(--spacing-xs) 0;
+  }
+
+  .work-card-duration {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: rgb(var(--color-text-secondary));
+  }
+
+  /* 职位标签 */
+  .position-tag {
+    background-color: rgb(var(--accent-work));
+    color: rgb(var(--color-gray-50));
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* 抽屉容器 */
+  .work-drawer-wrapper {
+    overflow: hidden;
+    transition: all var(--duration-500) var(--ease-in-out);
+  }
+
+  .work-drawer-content {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    border-top: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
+  }
+
+  /* 工作职责和成就部分 */
+  .work-section {
+    margin: var(--spacing-md) 0;
+  }
+
+  .work-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .work-section-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: rgb(var(--color-text-secondary));
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+  }
+
+  .work-section-title .icon {
+    margin-right: var(--spacing-xs);
+  }
+
+  .work-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .work-list li {
+    color: rgb(var(--color-text-primary));
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .work-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .work-list li::before {
+    content: '•';
+    color: rgb(var(--color-secondary));
+    margin-right: var(--spacing-xs);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+  }
+
+  /* 成就项特殊样式 */
+  .work-achievement-item {
+    background-color: rgb(var(--color-surface-secondary, 248 250 252));
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-lg);
+    border-left: 4px solid rgb(var(--accent-work));
+    margin-bottom: var(--spacing-xs);
+    transition: background-color var(--duration-normal) var(--ease-out);
+  }
+
+  .work-achievement-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .work-achievement-item:hover {
+    background-color: rgb(var(--color-surface-tertiary, 241 245 249));
+  }
+
+  .work-achievement-item .star-icon {
+    color: rgb(var(--color-warning, 243 156 18));
+    margin-right: var(--spacing-xs);
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  /* 教育经历列表 */
+  .education-experience-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .education-experience-list li {
+    color: rgb(var(--color-text-primary));
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .education-experience-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .education-experience-list li::before {
+    content: '•';
+    color: rgb(var(--color-secondary));
+    margin-right: var(--spacing-xs);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
   }
 
   /* 教育背景卡片 */
@@ -227,6 +470,26 @@
     .cards-grid-2,
     .cards-grid-3 {
       grid-template-columns: 1fr;
+    }
+
+    .work-card {
+      margin: 0 var(--spacing-md) var(--spacing-md);
+    }
+
+    .work-card-header {
+      padding: var(--spacing-md);
+    }
+
+    .work-drawer-content {
+      padding: 0 var(--spacing-md) var(--spacing-md);
+    }
+
+    .work-card-company {
+      font-size: var(--font-size-lg);
+    }
+
+    .project-drawer-content {
+      padding: 0 var(--spacing-md) var(--spacing-md);
     }
   }
 
