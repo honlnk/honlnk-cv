@@ -10,9 +10,9 @@
 
   const props = withDefaults(defineProps<Props>(), {
     githubUrl: 'https://github.com/honlnk/honlnk-cv',
-    size: 'md',
-    variant: 'primary',
-    showText: true,
+    size: 'sm',
+    variant: 'ghost',
+    showText: false,
   })
 
   const sizeClasses = computed(() => {
@@ -29,26 +29,23 @@
       primary: 'bg-[rgb(var(--color-secondary))] text-white hover:bg-[rgb(var(--color-primary))]',
       secondary:
         'bg-[rgb(var(--color-gray-100))] text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-gray-200))]',
-      ghost:
-        'bg-transparent text-[rgb(var(--color-text-secondary))] hover:bg-[rgb(var(--color-gray-100))]',
+      ghost: 'text-[rgb(var(--color-text-secondary))]',
     } as const
-    return variantMap[props.variant] || variantMap.primary
+    return variantMap[props.variant] || variantMap.ghost
   })
 </script>
 
 <template>
   <a
-    :href="githubUrl"
+    :href="props.githubUrl"
     target="_blank"
     rel="noopener noreferrer"
-    :class="[
-      'inline-flex items-center justify-center font-medium rounded-full border border-[rgb(var(--color-gray-200))] transition-all duration-200 hover:scale-105 hover:shadow-md active:scale-95',
-      sizeClasses,
-      variantClasses,
-    ]"
+    class="github-button inline-flex items-center justify-center font-medium rounded-lg text-sm cursor-pointer transition-all duration-200 backdrop-blur-sm relative overflow-hidden"
+    :class="[sizeClasses, variantClasses]"
     v-motion
     :initial="{ opacity: 0, y: -20 }"
     :enter="{ opacity: 1, y: 0, transition: { delay: 400, duration: 800 } }"
+    title="View on GitHub"
   >
     <!-- GitHub 图标 -->
     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -82,14 +79,94 @@
 </template>
 
 <style scoped>
-  /* 确保按钮在暗色模式下样式正确 */
+  .github-button {
+    background-color: rgb(var(--color-section-bg));
+    border: var(--border-width-1) solid rgb(var(--card-border));
+    color: rgb(var(--color-text-secondary));
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .github-button:hover {
+    background-color: rgb(var(--color-secondary) / 0.1);
+    color: rgb(var(--color-secondary));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .github-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) rgba(var(--color-secondary), 0.5);
+  }
+
+  .github-button:active {
+    transform: translateY(0);
+  }
+
+  /* GitHub 图标悬停动画 */
+  .github-button:hover svg:first-child {
+    transform: scale(1.1);
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  /* 点击波纹效果 */
+  .github-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--color-secondary), 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: all var(--duration-normal) var(--ease-out);
+    pointer-events: none;
+  }
+
+  .github-button:active::before {
+    width: 100px;
+    height: 100px;
+  }
+
+  /* 暗色模式适配 */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) .github-button {
-      border-color: rgb(var(--color-gray-600));
+      background-color: rgb(var(--color-dark-bg-secondary));
+      border-color: rgb(var(--color-gray-200));
+    }
+
+    :root:not([data-theme='light']) .github-button:hover {
+      background-color: rgba(var(--color-secondary), 0.2);
     }
   }
 
   :root[data-theme='dark'] .github-button {
-    border-color: rgb(var(--color-gray-600));
+    background-color: rgb(var(--color-dark-bg-secondary));
+    border-color: rgb(var(--color-gray-200));
+  }
+
+  :root[data-theme='dark'] .github-button:hover {
+    background-color: rgba(var(--color-secondary), 0.2);
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 640px) {
+    .github-button {
+      padding: var(--spacing-sm);
+    }
+
+    .github-button span.whitespace-nowrap {
+      display: none;
+    }
+
+    .github-button svg:first-child {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .github-button svg:last-child {
+      display: none;
+    }
   }
 </style>

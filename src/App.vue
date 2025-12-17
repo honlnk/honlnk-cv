@@ -22,7 +22,7 @@
   <div class="app-container">
     <!-- GitHub 按钮 -->
     <div class="github-button-wrapper">
-      <GitHubButton size="sm" variant="ghost" />
+      <GitHubButton show-text />
     </div>
 
     <!-- 主题切换按钮 -->
