@@ -6,30 +6,30 @@
     projects: ResumeData['projects']
   }>()
 
-  const expandedProject = ref<string | null>(null)
+  const expandedProjects = ref<Set<string>>(new Set())
   const expandingHeight = ref<{ [key: string]: number }>({})
 
   const toggleDetails = (title: string, event: MouseEvent) => {
     const card = (event.currentTarget as HTMLElement).closest('.project-card') as HTMLElement
     const details = card?.querySelector('.drawer-content') as HTMLElement
 
-    if (expandedProject.value === title) {
+    if (expandedProjects.value.has(title)) {
       // 收起时保存当前高度
       if (details) {
         expandingHeight.value[title] = details.scrollHeight
       }
-      expandedProject.value = null
+      expandedProjects.value.delete(title)
     } else {
       // 展开时计算并设置高度
       if (details) {
         expandingHeight.value[title] = details.scrollHeight
       }
-      expandedProject.value = title
+      expandedProjects.value.add(title)
     }
   }
 
   const getDrawerHeight = (title: string) => {
-    if (expandedProject.value === title) {
+    if (expandedProjects.value.has(title)) {
       return expandingHeight.value[title] ? `${expandingHeight.value[title]}px` : 'auto'
     }
     return '0px'
@@ -46,7 +46,7 @@
       class="project-card"
       :class="{
         'mb-4': index !== projects.length - 1,
-        'ring-2 ring-secondary/20': expandedProject === project.title,
+        'before:opacity-0 after:opacity-100': expandedProjects.has(project.title),
       }"
       v-motion
       :initial="{ opacity: 0, x: -30 }"
@@ -76,7 +76,7 @@
         class="drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out"
         :style="{
           height: getDrawerHeight(project.title),
-          opacity: expandedProject === project.title ? 1 : 0,
+          opacity: expandedProjects.has(project.title) ? 1 : 0,
         }"
       >
         <div class="drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]">
@@ -94,7 +94,7 @@
           <div class="tech-stack flex flex-wrap gap-2">
             <span
               v-for="(tech, index) in project.techStack"
-              :key="`${tech}-${expandedProject === project.title}`"
+              :key="`${tech}-${expandedProjects.has(project.title)}`"
               class="tech-tag"
               v-motion
               :initial="{ opacity: 0, x: -30 }"
@@ -105,8 +105,8 @@
                   delay: 200 + index * 100,
                   duration: 600,
                   type: 'spring',
-                  stiffness: 100
-                }
+                  stiffness: 100,
+                },
               }"
             >
               {{ tech }}
