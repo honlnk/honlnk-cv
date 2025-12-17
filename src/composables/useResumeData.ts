@@ -4,6 +4,7 @@ import type {
   EducationData,
   ProjectData,
   ResumeData,
+  WorkExperienceData,
 } from '@/types/types'
 import { parseBasicInfo, validateBasicInfo } from '@/utils/basic-info-parser'
 import { parseTitleWithEmoji } from '@/utils/emoji-parser'
@@ -105,6 +106,7 @@ export function useResumeData() {
     const data = {
       coreAdvantages: [] as AdvantageData[],
       projects: [] as ProjectData[],
+      workExperience: [] as WorkExperienceData[],
       education: {
         school: '',
         major: '',
@@ -117,6 +119,7 @@ export function useResumeData() {
     let currentSection = ''
     let currentAdvantage: AdvantageData | null = null
     let currentProject: ProjectData | null = null
+    let currentWork: WorkExperienceData | null = null
     let currentValue: AdditionalValueData | null = null
 
     for (const line of lines) {
@@ -146,6 +149,17 @@ export function useResumeData() {
             highlights: [],
             techStack: [],
           }
+        } else if (currentSection === '工作经历') {
+          if (currentWork) {
+            data.workExperience.push(currentWork)
+          }
+          currentWork = {
+            company: title,
+            position: '',
+            duration: '',
+            responsibilities: [],
+            achievements: [],
+          }
         } else if (currentSection === '附加价值') {
           if (currentValue) {
             data.additionalValues.push(currentValue)
@@ -169,6 +183,14 @@ export function useResumeData() {
         if (roleMatch) currentProject.role = roleMatch[1]
         if (timeMatch) currentProject.duration = timeMatch[1]
       }
+      // 解析工作职位和时间
+      else if (currentSection === '工作经历' && trimmed.includes('**职位**:') && currentWork) {
+        const positionMatch = trimmed.match(/\*\*职位\*\*:\s*(.+?)(?:\s*\|\s*|$)/)
+        const timeMatch = trimmed.match(/\*\*时间\*\*:\s*(.+)/)
+
+        if (positionMatch) currentWork.position = positionMatch[1]
+        if (timeMatch) currentWork.duration = timeMatch[1]
+      }
       // 解析项目亮点和技术栈
       else if (currentSection === '项目经历' && trimmed.startsWith('- ') && currentProject) {
         const content = trimmed.substring(2)
@@ -184,6 +206,17 @@ export function useResumeData() {
       else if (currentSection === '项目经历' && trimmed.includes('**技术栈**:') && currentProject) {
         const techStackText = trimmed.replace('**技术栈**:', '').trim()
         currentProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
+      }
+      // 解析工作职责和成就
+      else if (currentSection === '工作经历' && trimmed.startsWith('- ') && currentWork) {
+        const content = trimmed.substring(2)
+
+        if (content.includes('**主要成就**:')) {
+          const achievement = content.replace('**主要成就**:', '').trim()
+          currentWork.achievements.push(achievement)
+        } else {
+          currentWork.responsibilities.push(content)
+        }
       }
       // 解析教育背景
       else if (
@@ -216,6 +249,9 @@ export function useResumeData() {
     }
     if (currentProject) {
       data.projects.push(currentProject)
+    }
+    if (currentWork) {
+      data.workExperience.push(currentWork)
     }
     if (currentValue) {
       data.additionalValues.push(currentValue)

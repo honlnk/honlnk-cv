@@ -14,6 +14,7 @@ export interface ResumeData {
 
   coreAdvantages: AdvantageData[]
   projects: ProjectData[]
+  workExperience: WorkExperienceData[]
   education: EducationData
   additionalValues: AdditionalValueData[]
 }
@@ -39,6 +40,14 @@ export interface AdditionalValueData {
   icon: string
   title: string
   content: string[]
+}
+
+export interface WorkExperienceData {
+  company: string
+  position: string
+  duration: string
+  responsibilities: string[]
+  achievements: string[]
 }
 
 export interface EducationData {
