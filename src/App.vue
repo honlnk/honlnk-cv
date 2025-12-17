@@ -63,8 +63,8 @@
 
         <main class="content flex flex-col gap-8">
           <CoreAdvantages :advantages="resumeData.coreAdvantages" />
-          <ProjectExperience :projects="resumeData.projects" />
           <WorkExperience :work-experience="resumeData.workExperience" />
+          <ProjectExperience :projects="resumeData.projects" />
           <EducationBackground :data="resumeData.education" />
           <AdditionalValue :values="resumeData.additionalValues" />
         </main>
