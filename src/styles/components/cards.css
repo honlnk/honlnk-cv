@@ -473,7 +473,7 @@
     }
 
     .work-card {
-      margin: 0 var(--spacing-md) var(--spacing-md);
+      margin: 0 0 var(--spacing-md);
     }
 
     .work-card-header {
