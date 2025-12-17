@@ -60,7 +60,7 @@
           v-if="expandedProject === project.title"
           class="card-details px-6 pb-6 border-t border-b-[rgb(var(--card-border))]"
         >
-          <ul class="highlights my-4 space-y-3">
+          <ul class="highlights my-4 ">
             <li
               v-for="(item, index) in project.highlights"
               :key="index"
