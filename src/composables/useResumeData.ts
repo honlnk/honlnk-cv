@@ -175,7 +175,7 @@ export function useResumeData() {
 
         if (content.includes('**技术栈**:')) {
           const techStackText = content.replace('**技术栈**:', '').trim()
-          currentProject.techStack = techStackText.split(/[+,、，]/).map(t => t.trim())
+          currentProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
         } else {
           currentProject.highlights.push(content)
         }
@@ -183,7 +183,7 @@ export function useResumeData() {
       // 解析单独的技术栈行
       else if (currentSection === '项目经历' && trimmed.includes('**技术栈**:') && currentProject) {
         const techStackText = trimmed.replace('**技术栈**:', '').trim()
-        currentProject.techStack = techStackText.split(/[+,、，]/).map(t => t.trim())
+        currentProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
       }
       // 解析教育背景
       else if (

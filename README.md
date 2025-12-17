@@ -58,7 +58,8 @@
 
 - 集成牛津/百度翻译API实现多维度单词解析，开发AI辅助学习场景（SpringAI+通义百练）
 - 创新应用IndexedDB实现浏览器端数据缓存，响应速度拥有显著提升
-  **技术栈**: Vue3+ElementPlus+SpringBoot3+Mybatis+Redis
+
+**技术栈**: Vue3 | ElementPlus | SpringBoot3 | Mybatis | Redis
 
 ### 逐雁排程系统
 
@@ -66,7 +67,8 @@
 
 - 基于百度OCR实现表格智能识别，自主设计值班表排表算法，值班表生成效率提升90%
 - 设计密钥认证体系替代传统登录，提升用户留存率
-  **技术栈**: Vue3+SpringBoot+Mybatis+Hutool
+
+**技术栈**: Vue3 | SpringBoot | Mybatis | Hutool
 
 ### 高考志愿系统
 
@@ -74,7 +76,8 @@
 
 - 首创霍兰德测试与志愿推荐融合算法
 - 获省级二等奖/国家三等奖
-  **技术栈**: Vue2+Vuex+Axios
+
+**技术栈**: Vue2 | Vuex | Axios
 
 ## 教育背景
 

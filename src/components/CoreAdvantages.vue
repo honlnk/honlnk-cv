@@ -26,11 +26,11 @@
         }"
       >
         <h3 class="text-lg font-semibold text-secondary mb-4">{{ item.title }}</h3>
-        <ul class="space-y-0">
+        <ul>
           <li
             v-for="(point, pIndex) in item.items"
             :key="pIndex"
-            class="relative pl-6 py-3 border-b border-b-[rgb(var(--card-border))] last:border-b-0"
+            class="relative pl-6 py-2 border-b border-b-[rgb(var(--card-border))] last:border-b-0"
           >
             <span class="absolute left-0 text-secondary">▹</span>
             <span>{{ point }}</span>

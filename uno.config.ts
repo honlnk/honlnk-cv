@@ -12,8 +12,8 @@ export default defineConfig({
   ],
   transformers: [transformerDirectives()],
   theme: {
-      // UnoCSS 颜色现在由 CSS 变量管理，不在此处定义
-      // 所有的颜色定义请参考: src/styles/theme/tokens.css
+    // UnoCSS 颜色现在由 CSS 变量管理，不在此处定义
+    // 所有的颜色定义请参考: src/styles/theme/tokens.css
     fontFamily: {
       sans: ['Inter', 'system-ui', 'sans-serif'],
       mono: ['JetBrains Mono', 'monospace'],

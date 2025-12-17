@@ -4,7 +4,6 @@
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
     "antfu.unocss",
-    "esbenp.prettier-vscode",
-    "CoenraadS.bracket-pair-colorizer-2"
+    "esbenp.prettier-vscode"
   ]
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import type { ResumeData } from '@/types/types'
   import { getFieldIcon } from '@/config/basic-info-fields'
+  import type { ResumeData } from '@/types/types'
 
   defineOptions({
     name: 'ResumeHeader',
@@ -39,7 +39,7 @@
     <div class="header-inner card">
       <div class="name-group mb-6 text-center">
         <h1
-          class="name text-4xl font-bold text-primary mb-2"
+          class="name text-4xl header-name mb-2"
           v-motion
           :initial="{ opacity: 0, y: -20 }"
           :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }"
@@ -47,13 +47,17 @@
           {{ data.basicInfo.name }}
         </h1>
         <h2
-          class="position text-xl text-secondary"
+          class="position text-xl header-position"
           v-motion
           :initial="{ opacity: 0, y: -10 }"
           :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 800 } }"
         >
           {{ data.basicInfo.position }}
-          <span v-if="data.basicInfo.age" class="ml-2"> | {{ data.basicInfo.age }} </span>
+          <span v-if="data.basicInfo.age">
+            <span class="mx-2"> | </span>
+
+            {{ data.basicInfo.age }}
+          </span>
         </h2>
       </div>
 
@@ -65,7 +69,11 @@
             class="contact-item flex items-center gap-3 p-3 glass-effect rounded-lg"
             v-motion
             :initial="{ opacity: 0, scale: 0.9 }"
-            :enter="{ opacity: 1, scale: 1, transition: { delay: 800 + index * 100, duration: 600 } }"
+            :enter="{
+              opacity: 1,
+              scale: 1,
+              transition: { delay: 800 + index * 100, duration: 600 },
+            }"
           >
             <span class="icon text-xl">{{ getFieldIcon(String(key)) }}</span>
 
