@@ -9,45 +9,49 @@
    * ================================ */
 
   /* Core Brand Colors - 核心品牌色彩 */
-  --color-primary: 44 62 80; /* #2c3e50 - 深蓝灰，主色调 */
-  --color-secondary: 52 152 219; /* #3498db - 亮蓝色，强调色 */
-  --color-accent: 52 73 94; /* #34495e - 深灰，辅助色 */
+  --color-primary: 44 62 80;      /* #2c3e50 - 深蓝灰，主色调 */
+  --color-secondary: 52 152 219;  /* #3498db - 亮蓝色，强调色 */
+  --color-accent: 52 73 94;       /* #34495e - 深灰，辅助色 */
 
   /* Semantic Colors - 语义化色彩 */
-  --color-success: 39 174 96; /* #27ae60 - 成功绿 */
-  --color-warning: 243 156 18; /* #f39c12 - 警告橙 */
-  --color-error: 231 76 60; /* #e74c3c - 错误红 */
-  --color-info: 52 152 219; /* #3498db - 信息蓝 */
+  --color-success: 39 174 96;     /* #27ae60 - 成功绿 */
+  --color-warning: 243 156 18;    /* #f39c12 - 警告橙 */
+  --color-error: 231 76 60;       /* #e74c3c - 错误红 */
+  --color-info: 52 152 219;       /* #3498db - 信息蓝 */
 
   /* Neutral Colors - 中性色 */
-  --color-gray-50: 248 249 250; /* #f8f9fa */
-  --color-gray-100: 233 236 239; /* #e9ecef */
-  --color-gray-200: 206 212 218; /* #ced4da */
-  --color-gray-300: 173 181 189; /* #adb5bd */
-  --color-gray-400: 108 117 125; /* #6c757d */
-  --color-gray-500: 73 80 87; /* #495057 */
-  --color-gray-600: 52 58 64; /* #343a40 */
-  --color-gray-700: 33 37 41; /* #212529 */
+  --color-gray-50: 248 249 250;   /* #f8f9fa */
+  --color-gray-100: 233 236 239;  /* #e9ecef */
+  --color-gray-200: 206 212 218;  /* #ced4da */
+  --color-gray-300: 173 181 189;  /* #adb5bd */
+  --color-gray-400: 108 117 125;  /* #6c757d */
+  --color-gray-500: 73 80 87;     /* #495057 */
+  --color-gray-600: 52 58 64;     /* #343a40 */
+  --color-gray-700: 33 37 41;     /* #212529 */
 
-  /* Theme Specific Colors - 主题专用色 */
-  --color-section-bg: var(--color-gray-50);
-  --color-text-primary: var(--color-primary);
-  --color-text-secondary: 127 140 141; /* #7f8c8d */
-  --color-header-bg: var(--color-gray-50);
+  /* Theme Specific Colors - 主题专用色（默认亮色模式） */
+  --color-section-bg: 248 249 250;        /* #f8f9fa */
+  --color-header-bg: 248 249 250;          /* #f8f9fa */
+  --color-text-primary: 31 41 55;          /* #1f2937 - 增强对比度的主文字 */
+  --color-text-secondary: 75 85 99;        /* #4b5563 - 增强对比度的次要文字 */
 
   /* Enhanced Card Colors - 高对比度卡片颜色系统 */
-  --card-bg: 255 255 255;              /* #ffffff - pure white for strong contrast */
-  --card-bg-hover: 248 250 252;        /* #f8fafc - subtle hover effect */
-  --card-border: 203 213 225;          /* #cbd5e1 - much more defined border */
-  --card-border-hover: 160 174 192;    /* #a0aec0 - darker border on hover */
+  --card-bg: 255 255 255;                  /* #ffffff - pure white for strong contrast */
+  --card-bg-hover: 248 250 252;            /* #f8fafc - subtle hover effect */
+  --card-border: 203 213 225;              /* #cbd5e1 - much more defined border */
+  --card-border-hover: 160 174 192;        /* #a0aec0 - darker border on hover */
   --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
   --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.20); /* stronger shadow on hover */
 
-  /* Component Accent Colors - 组件强调色 */
-  --accent-project: 59 130 246;        /* #3b82f6 - 项目卡片蓝 */
-  --accent-advantage: 16 185 129;      /* #10b981 - 优势卡片绿 */
-  --accent-education: 245 158 11;      /* #f59e0b - 教育卡片橙 */
-  --accent-value: 139 92 246;          /* #8b5cf6 - 价值卡片紫 */
+  /* Component Accent Colors - 组件强调色（亮色模式） */
+  --accent-project: 59 130 246;      /* #3b82f6 - 项目卡片蓝 */
+  --accent-advantage: 16 185 129;    /* #10b981 - 优势卡片绿 */
+  --accent-education: 245 158 11;    /* #f59e0b - 教育卡片橙 */
+  --accent-value: 139 92 246;        /* #8b5cf6 - 价值卡片紫 */
+
+  /* Header Specific Colors - Header专用颜色 */
+  --header-text-primary: 255 255 255;       /* #ffffff - Header主文字颜色（白色，适配深色背景） */
+  --header-text-secondary: 247 250 252;     /* #f7fafc - Header副文字颜色（浅灰，适配深色背景） */
 
   /* ================================
    * Typography Tokens - 排印系统
@@ -74,6 +78,7 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 
   /* Line Heights - 行高 */
   --line-height-tight: 1.25;
@@ -162,12 +167,11 @@
   --opacity-disabled: 0.5;
 
   /* ================================
-   * Dark Mode Tokens - 暗色模式
+   * Dark Mode Base Tokens - 暗色模式基础变量
    * ================================ */
 
-  /* Dark mode color tokens - 预留 */
-  --color-dark-bg-primary: 26 26 26; /* #1a1a1a */
-  --color-dark-bg-secondary: 45 45 45; /* #2d2d2d */
+  --color-dark-bg-primary: 26 26 26;      /* #1a1a1a */
+  --color-dark-bg-secondary: 45 45 45;    /* #2d2d2d */
   --color-dark-text-primary: 255 255 255; /* #ffffff */
   --color-dark-text-secondary: 160 160 160; /* #a0a0a0 */
 }
@@ -179,15 +183,15 @@
 /* 暗色模式 - 手动设置 */
 :root[data-theme="dark"] {
   /* 背景色系 */
-  --color-section-bg: 26 26 26;     /* #1a1a1a */
-  --color-header-bg: 45 45 45;      /* #2d2d2d */
-  --color-gray-50: 26 26 26;        /* #1a1a1a */
-  --color-gray-100: 45 45 45;       /* #2d2d2d */
+  --color-section-bg: var(--color-dark-bg-primary);
+  --color-header-bg: var(--color-dark-bg-secondary);
+  --color-gray-50: var(--color-dark-bg-primary);
+  --color-gray-100: var(--color-dark-bg-secondary);
   --color-gray-200: 64 64 64;       /* #404040 */
   --color-gray-300: 96 96 96;       /* #606060 */
 
   /* 文字色系 - 增强对比度 */
-  --color-text-primary: 255 255 255;      /* #ffffff */
+  --color-text-primary: var(--color-dark-text-primary);
   --color-text-secondary: 209 213 219;    /* #d1d5db - 更亮的次要文字 */
   --color-gray-400: 209 213 219;          /* #d1d5db - 更亮的灰色文字 */
   --color-gray-500: 229 231 235;          /* #e5e7eb - 更亮的灰色 */
@@ -208,12 +212,16 @@
   --accent-education: 251 191 36;    /* #fbbf24 - 教育卡片亮橙 */
   --accent-value: 167 139 250;        /* #a78bfa - 价值卡片亮紫 */
 
+  /* Header Colors - 暗色模式Header文字保持白色 */
+  --header-text-primary: 255 255 255;  /* #ffffff */
+  --header-text-secondary: 226 232 240; /* #e2e8f0 */
+
   /* Enhanced Header Gradient - 暗色模式更显眼的头部背景 */
   --gradient-header: linear-gradient(135deg, rgb(var(--color-secondary) / 0.12) 0%, rgb(var(--color-primary) / 0.08) 50%, rgb(var(--color-header-bg)) 100%);
   --header-border-color: rgb(var(--color-secondary) / 0.3); /* 暗色模式头部边框颜色 */
 
   /* 状态背景色 */
-  --loading-bg: 45 45 45;         /* #2d2d2d */
+  --loading-bg: var(--color-dark-bg-secondary);
   --error-bg: rgba(231, 76, 60, 0.1);     /* 错误背景 */
   --empty-bg: rgba(108, 117, 125, 0.1);   /* 空状态背景 */
 }
@@ -222,15 +230,15 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     /* 背景色系 */
-    --color-section-bg: 26 26 26;     /* #1a1a1a */
-    --color-header-bg: 45 45 45;      /* #2d2d2d */
-    --color-gray-50: 26 26 26;        /* #1a1a1a */
-    --color-gray-100: 45 45 45;       /* #2d2d2d */
+    --color-section-bg: var(--color-dark-bg-primary);
+    --color-header-bg: var(--color-dark-bg-secondary);
+    --color-gray-50: var(--color-dark-bg-primary);
+    --color-gray-100: var(--color-dark-bg-secondary);
     --color-gray-200: 64 64 64;       /* #404040 */
     --color-gray-300: 96 96 96;       /* #606060 */
 
     /* 文字色系 - 增强对比度 */
-    --color-text-primary: 255 255 255;      /* #ffffff */
+    --color-text-primary: var(--color-dark-text-primary);
     --color-text-secondary: 209 213 219;    /* #d1d5db - 更亮的次要文字 */
     --color-gray-400: 209 213 219;          /* #d1d5db - 更亮的灰色文字 */
     --color-gray-500: 229 231 235;          /* #e5e7eb - 更亮的灰色 */
@@ -251,12 +259,16 @@
     --accent-education: 251 191 36;    /* #fbbf24 - 教育卡片亮橙 */
     --accent-value: 167 139 250;        /* #a78bfa - 价值卡片亮紫 */
 
+    /* Header Colors - 暗色模式Header文字保持白色 */
+    --header-text-primary: 255 255 255;  /* #ffffff */
+    --header-text-secondary: 226 232 240; /* #e2e8f0 */
+
     /* Enhanced Header Gradient - 系统偏好暗色模式更显眼的头部背景 */
     --gradient-header: linear-gradient(135deg, rgb(var(--color-secondary) / 0.12) 0%, rgb(var(--color-primary) / 0.08) 50%, rgb(var(--color-header-bg)) 100%);
     --header-border-color: rgb(var(--color-secondary) / 0.3); /* 系统偏好暗色模式头部边框颜色 */
 
     /* 状态背景色 */
-    --loading-bg: 45 45 45;         /* #2d2d2d */
+    --loading-bg: var(--color-dark-bg-secondary);
     --error-bg: rgba(231, 76, 60, 0.1);     /* 错误背景 */
     --empty-bg: rgba(108, 117, 125, 0.1);   /* 空状态背景 */
   }
@@ -264,12 +276,15 @@
 
 /* 亮色模式 - 手动设置（确保覆盖暗色模式） */
 :root[data-theme="light"] {
-  /* 确保亮色模式变量 */
+  /* 背景色系 */
   --color-section-bg: 248 249 250;      /* #f8f9fa */
   --color-header-bg: 248 249 250;        /* #f8f9fa */
-  --color-text-primary: 44 62 80;        /* #2c3e50 */
-  --color-text-secondary: 127 140 141;   /* #7f8c8d */
-  /* Enhanced Card Colors - 亮色模式高对比度卡片颜色系统 */
+
+  /* 文字色系 - 亮色模式使用深色文字（Header除外） */
+  --color-text-primary: 31 41 55;        /* #1f2937 - 更深的主文字，增强对比度 */
+  --color-text-secondary: 75 85 99;      /* #4b5563 - 更深的次要文字，增强可读性 */
+
+  /* Card Colors - 亮色模式高对比度卡片颜色系统 */
   --card-bg: 255 255 255;              /* #ffffff - pure white for strong contrast */
   --card-bg-hover: 248 250 252;        /* #f8fafc - subtle hover effect */
   --card-border: 203 213 225;          /* #cbd5e1 - much more defined border */
@@ -283,7 +298,11 @@
   --accent-education: 245 158 11;      /* #f59e0b - 教育卡片橙 */
   --accent-value: 139 92 246;          /* #8b5cf6 - 价值卡片紫 */
 
-  /* Enhanced Header Gradient - 亮色模式更显眼的头部背景 */
+  /* Header Colors - 亮色模式Header文字保持白色（适配深色渐变背景） */
+  --header-text-primary: 255 255 255;  /* #ffffff */
+  --header-text-secondary: 247 250 252; /* #f7fafc */
+
+  /* Header Gradient - 亮色模式头部背景 */
   --gradient-header: linear-gradient(135deg, rgb(var(--color-secondary) / 0.08) 0%, rgb(var(--color-primary) / 0.05) 50%, rgb(var(--color-header-bg)) 100%);
   --header-border-color: rgb(var(--color-secondary) / 0.2); /* 头部边框颜色 */
 }

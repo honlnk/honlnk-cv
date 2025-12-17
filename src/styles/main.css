@@ -60,6 +60,21 @@
     color: rgb(var(--color-text-secondary));
   }
 
+  /* Header 文字专用样式 - 使用设计系统变量 */
+  .header-name {
+    color: rgb(var(--header-text-primary)); /* 使用Header主文字颜色变量 */
+    font-weight: var(--font-weight-extrabold); /* 使用字体权重变量 */
+    letter-spacing: -0.025em; /* 轻微的字间距调整 */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 增强阴影确保可读性 */
+  }
+
+  .header-position {
+    color: rgb(var(--header-text-secondary)); /* 使用Header副文字颜色变量 */
+    font-weight: var(--font-weight-semibold); /* 使用字体权重变量 */
+    opacity: 1; /* 移除透明度，确保清晰度 */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* 增强阴影确保可读性 */
+  }
+
   /* 默认文字颜色设置 */
   body {
     color: rgb(var(--color-text-primary));
