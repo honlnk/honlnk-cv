@@ -168,33 +168,12 @@
 
   /* 附加价值卡片 */
   .value-card {
-    @apply card-base card-hover;
+    @apply card-base;
     padding: var(--spacing-lg);
     background: linear-gradient(135deg,
       rgb(var(--card-bg)) 0%,
       rgb(var(--accent-value) / 0.06) 100%);
     border-left: 4px solid rgb(var(--accent-value, 139 92 246));
-    position: relative;
-    overflow: hidden;
-  }
-
-  .value-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg,
-      rgb(var(--accent-value, 139 92 246)),
-      rgb(var(--accent-project, 59 130 246)));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--duration-normal) var(--ease-out);
-  }
-
-  .value-card:hover::before {
-    transform: scaleX(1);
   }
 
   .value-card .title {
