@@ -59,14 +59,14 @@
 
       <!-- 正常内容 -->
       <template v-else-if="resumeData">
-        <!-- <Header :data="resumeData" /> -->
+        <Header :data="resumeData" />
 
         <main class="content flex flex-col gap-8">
-          <!-- <CoreAdvantages :advantages="resumeData.coreAdvantages" /> -->
-          <!-- <WorkExperience :work-experience="resumeData.workExperience" /> -->
+          <CoreAdvantages :advantages="resumeData.coreAdvantages" />
+          <WorkExperience :work-experience="resumeData.workExperience" />
           <ProjectExperience :projects="resumeData.projects" />
-          <!-- <EducationBackground :data="resumeData.education" /> -->
-          <!-- <AdditionalValue :values="resumeData.additionalValues" /> -->
+          <EducationBackground :data="resumeData.education" />
+          <AdditionalValue :values="resumeData.additionalValues" />
         </main>
       </template>
     </div>

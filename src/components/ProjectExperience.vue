@@ -1,72 +1,31 @@
 <script setup lang="ts">
   import type { ResumeData } from '@/types/types'
-  import { ref } from 'vue'
+  import { hideTemplate, initTemplate, showTemplate } from '@/utils/better-typing'
+  import {  ref } from 'vue'
 
   const props = defineProps<{
     projects: ResumeData['projects']
   }>()
 
-  const projectsTemplate = ref<any>([])
-  initTemplate()
-  function initTemplate() {
-    projectsTemplate.value = []
-    props.projects.forEach(project => {
-      projectsTemplate.value.push({
-        title: project.title,
-        highlights: project.highlights.map(() => ''),
-      })
-    })
-  }
+  const compontentsHeight = ref<Record<number, number>>({})
+  const projectsTemplate = ref<string[][]>([])
+  // 模板初始化
+  initTemplate(projectsTemplate.value, props.projects, compontentsHeight.value)
 
   const expandedProjects = ref<Set<string>>(new Set())
   const expandingHeight = ref<{ [key: string]: number }>({})
-  const activeTimers = ref<{ [key: string]: any[] }>({})
-  const removeTimers = ref<{ [key: string]: any[] }>({})
   const toggleDetails = async (title: string, event: MouseEvent, index: number) => {
     const card = (event.currentTarget as HTMLElement).closest('.project-card') as HTMLElement
     const details = card?.querySelector('.drawer-content') as HTMLElement
 
     if (expandedProjects.value.has(title)) {
-      /** 请求输入定时器 */
-      if (activeTimers.value[index] != undefined) {
-        activeTimers.value[index].forEach(timer => clearTimeout(timer))
-      }
-
       if (details) {
         expandingHeight.value[title] = details.scrollHeight
       }
       expandedProjects.value.delete(title)
 
-      console.log(projectsTemplate.value[index])
-      const len = projectsTemplate.value[index].highlights.length
-      removeTimers.value[index] = []
-      setTimeout(() => {
-        if (removeTimers.value[index] != undefined) {
-          removeTimers.value[index].forEach(timer => clearTimeout(timer))
-        }
-      }, 500)
-      for (const [row, word] of projectsTemplate.value[index].highlights.entries()) {
-        const promiseList: Promise<void>[] = []
-        const text = projectsTemplate.value[index].highlights[len - 1 - row]
-        if (text) {
-          text.split('').forEach((char, i) => {
-            promiseList.push(
-              new Promise(resolve => {
-                const timer = setTimeout(() => {
-                  projectsTemplate.value[index].highlights[len - 1 - row] = text.slice(
-                    0,
-                    text.length - 1 - i
-                  )
-                  console.log(projectsTemplate.value[index].highlights[len - 1 - row])
-                  resolve()
-                }, i * 50)
-                removeTimers.value[index].push(timer)
-              })
-            )
-          })
-          await Promise.all(promiseList)
-        }
-      }
+      // 隐藏模板
+      hideTemplate(projectsTemplate.value, props.projects, index, compontentsHeight.value, 500)
     } else {
       // 展开时计算并设置高度
       if (details) {
@@ -74,41 +33,9 @@
       }
       expandedProjects.value.add(title)
 
-      /** ====================    ==================== */
-      // 清空当前项目的高亮模板
-      initTemplate()
-
-      if (removeTimers.value[index] != undefined) {
-        removeTimers.value[index].forEach(timer => clearTimeout(timer))
-      }
-      // 初始化当前项目的定时器数组
-      activeTimers.value[index] = []
-
-      for (const [row, word] of props.projects[index].highlights.entries()) {
-        const promiseList: Promise<void>[] = []
-        word.split('').forEach((char: string, ip: number) => {
-          promiseList.push(
-            new Promise<void>(resolve => {
-              const timer = setTimeout(() => {
-                const text = projectsTemplate.value[index].highlights[row]
-                projectsTemplate.value[index].highlights[row] = text + char
-                console.log(projectsTemplate.value[index].highlights[row])
-                resolve()
-              }, 50 * ip)
-              activeTimers.value[index].push(timer)
-            })
-          )
-        })
-        await Promise.all(promiseList)
-      }
+      // 显示模板
+      showTemplate(projectsTemplate.value, props.projects, index, details, compontentsHeight.value)
     }
-  }
-
-  const getDrawerHeight = (title: string) => {
-    if (expandedProjects.value.has(title)) {
-      return expandingHeight.value[title] ? `${expandingHeight.value[title]}px` : 'auto'
-    }
-    return '0px'
   }
 </script>
 
@@ -146,12 +73,11 @@
           {{ project.role }}
         </span>
       </div>
-
       <!-- 抽屉容器 -->
       <div
         class="drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out"
         :style="{
-          height: getDrawerHeight(project.title),
+          height: compontentsHeight[index] + 'px',
           opacity: expandedProjects.has(project.title) ? 1 : 0,
         }"
       >
@@ -160,7 +86,7 @@
         >
           <!-- 项目亮点 -->
           <ul class="highlights-list my-4">
-            <template v-for="(item, x) in projectsTemplate[index].highlights" :key="x">
+            <template v-for="(item, x) in projectsTemplate[index]" :key="x">
               <li v-if="item.length">
                 <span>{{ item }}</span>
               </li>
