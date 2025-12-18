@@ -46,6 +46,7 @@
   /* Component Accent Colors - 组件强调色（亮色模式） */
   --accent-project: 59 130 246; /* #3b82f6 - 项目卡片蓝 */
   --accent-advantage: 16 185 129; /* #10b981 - 优势卡片绿 */
+  --accent-work: 236 72 153; /* #ec4899 - 工作经历粉红 */
   --accent-education: 245 158 11; /* #f59e0b - 教育卡片橙 */
   --accent-value: 139 92 246; /* #8b5cf6 - 价值卡片紫 */
 
@@ -223,6 +224,7 @@
   /* Component Accent Colors - 暗色模式组件强调色 */
   --accent-project: 96 165 250; /* #60a5fa - 项目卡片亮蓝 */
   --accent-advantage: 52 211 153; /* #34d399 - 优势卡片亮绿 */
+  --accent-work: 244 114 182; /* #f472b6 - 工作经历亮粉红 */
   --accent-education: 251 191 36; /* #fbbf24 - 教育卡片亮橙 */
   --accent-value: 167 139 250; /* #a78bfa - 价值卡片亮紫 */
 
@@ -275,6 +277,7 @@
     /* Component Accent Colors - 系统偏好暗色模式组件强调色 */
     --accent-project: 96 165 250; /* #60a5fa - 项目卡片亮蓝 */
     --accent-advantage: 52 211 153; /* #34d399 - 优势卡片亮绿 */
+    --accent-work: 244 114 182; /* #f472b6 - 工作经历亮粉红 */
     --accent-education: 251 191 36; /* #fbbf24 - 教育卡片亮橙 */
     --accent-value: 167 139 250; /* #a78bfa - 价值卡片亮紫 */
 
@@ -319,6 +322,7 @@
   /* Component Accent Colors - 亮色模式组件强调色 */
   --accent-project: 59 130 246; /* #3b82f6 - 项目卡片蓝 */
   --accent-advantage: 16 185 129; /* #10b981 - 优势卡片绿 */
+  --accent-work: 236 72 153; /* #ec4899 - 工作经历粉红 */
   --accent-education: 245 158 11; /* #f59e0b - 教育卡片橙 */
   --accent-value: 139 92 246; /* #8b5cf6 - 价值卡片紫 */
 

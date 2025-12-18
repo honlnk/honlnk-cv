@@ -79,15 +79,13 @@
           opacity: expandedProjects.has(project.title) ? 1 : 0,
         }"
       >
-        <div class="drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]">
+        <div class="drawer-content project-drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]">
           <!-- 项目亮点 -->
-          <ul class="highlights my-4">
+          <ul class="highlights-list my-4">
             <li
               v-for="(item, index) in project.highlights"
               :key="index"
-              class="text-text-primary flex items-start"
             >
-              <span class="text-secondary mr-2 mt-1">•</span>
               <span>{{ item }}</span>
             </li>
           </ul>

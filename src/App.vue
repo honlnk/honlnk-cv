@@ -6,6 +6,7 @@
   import Header from '@/components/Header.vue'
   import ProjectExperience from '@/components/ProjectExperience.vue'
   import ThemeToggle from '@/components/ThemeToggle.vue'
+  import WorkExperience from '@/components/WorkExperience.vue'
   import { useResumeData } from '@/composables/useResumeData'
   import { onMounted } from 'vue'
 
@@ -62,6 +63,7 @@
 
         <main class="content flex flex-col gap-8">
           <CoreAdvantages :advantages="resumeData.coreAdvantages" />
+          <WorkExperience :work-experience="resumeData.workExperience" />
           <ProjectExperience :projects="resumeData.projects" />
           <EducationBackground :data="resumeData.education" />
           <AdditionalValue :values="resumeData.additionalValues" />
