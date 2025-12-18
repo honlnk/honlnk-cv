@@ -2,29 +2,105 @@
   import type { ResumeData } from '@/types/types'
   import { ref } from 'vue'
 
-  defineProps<{
+  const props = defineProps<{
     projects: ResumeData['projects']
   }>()
 
+  const projectsTemplate = ref<any>([])
+  initTemplate()
+  function initTemplate() {
+    projectsTemplate.value = []
+    props.projects.forEach(project => {
+      projectsTemplate.value.push({
+        title: project.title,
+        highlights: project.highlights.map(() => ''),
+      })
+    })
+  }
+
   const expandedProjects = ref<Set<string>>(new Set())
   const expandingHeight = ref<{ [key: string]: number }>({})
-
-  const toggleDetails = (title: string, event: MouseEvent) => {
+  const activeTimers = ref<{ [key: string]: any[] }>({})
+  const removeTimers = ref<{ [key: string]: any[] }>({})
+  const toggleDetails = async (title: string, event: MouseEvent, index: number) => {
     const card = (event.currentTarget as HTMLElement).closest('.project-card') as HTMLElement
     const details = card?.querySelector('.drawer-content') as HTMLElement
 
     if (expandedProjects.value.has(title)) {
-      // 收起时保存当前高度
+      /** 请求输入定时器 */
+      if (activeTimers.value[index] != undefined) {
+        activeTimers.value[index].forEach(timer => clearTimeout(timer))
+      }
+
       if (details) {
         expandingHeight.value[title] = details.scrollHeight
       }
       expandedProjects.value.delete(title)
+
+      console.log(projectsTemplate.value[index])
+      const len = projectsTemplate.value[index].highlights.length
+      removeTimers.value[index] = []
+      setTimeout(() => {
+        if (removeTimers.value[index] != undefined) {
+          removeTimers.value[index].forEach(timer => clearTimeout(timer))
+        }
+      }, 500)
+      for (const [row, word] of projectsTemplate.value[index].highlights.entries()) {
+        const promiseList: Promise<void>[] = []
+        const text = projectsTemplate.value[index].highlights[len - 1 - row]
+        if (text) {
+          text.split('').forEach((char, i) => {
+            promiseList.push(
+              new Promise(resolve => {
+                const timer = setTimeout(() => {
+                  projectsTemplate.value[index].highlights[len - 1 - row] = text.slice(
+                    0,
+                    text.length - 1 - i
+                  )
+                  console.log(projectsTemplate.value[index].highlights[len - 1 - row])
+                  resolve()
+                }, i * 50)
+                removeTimers.value[index].push(timer)
+              })
+            )
+          })
+          await Promise.all(promiseList)
+        }
+      }
     } else {
       // 展开时计算并设置高度
       if (details) {
         expandingHeight.value[title] = details.scrollHeight
       }
       expandedProjects.value.add(title)
+
+      /** ====================    ==================== */
+      // 清空当前项目的高亮模板
+      initTemplate()
+
+      if (removeTimers.value[index] != undefined) {
+        removeTimers.value[index].forEach(timer => clearTimeout(timer))
+      }
+      // 初始化当前项目的定时器数组
+      activeTimers.value[index] = []
+
+      for (const [row, word] of props.projects[index].highlights.entries()) {
+        const promiseList: Promise<void>[] = []
+        word.split('').forEach((char: string, ip: number) => {
+          promiseList.push(
+            new Promise<void>(resolve => {
+              const timer = setTimeout(() => {
+                const text = projectsTemplate.value[index].highlights[row]
+                projectsTemplate.value[index].highlights[row] = text + char
+                console.log(projectsTemplate.value[index].highlights[row])
+                resolve()
+              }, 50 * ip)
+              activeTimers.value[index].push(timer)
+            })
+          )
+        })
+        await Promise.all(promiseList)
+      }
     }
   }
 
@@ -57,7 +133,7 @@
         type: 'spring',
         stiffness: 80,
       }"
-      @click="toggleDetails(project.title, $event)"
+      @click="toggleDetails(project.title, $event, index)"
     >
       <div class="card-header flex justify-between items-center p-6 cursor-pointer">
         <div class="header-left flex-1">
@@ -79,15 +155,16 @@
           opacity: expandedProjects.has(project.title) ? 1 : 0,
         }"
       >
-        <div class="drawer-content project-drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]">
+        <div
+          class="drawer-content project-drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]"
+        >
           <!-- 项目亮点 -->
           <ul class="highlights-list my-4">
-            <li
-              v-for="(item, index) in project.highlights"
-              :key="index"
-            >
-              <span>{{ item }}</span>
-            </li>
+            <template v-for="(item, x) in projectsTemplate[index].highlights" :key="x">
+              <li v-if="item.length">
+                <span>{{ item }}</span>
+              </li>
+            </template>
           </ul>
           <div class="tech-stack flex flex-wrap gap-2">
             <span
