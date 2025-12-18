@@ -1,38 +1,41 @@
 <script setup lang="ts">
   import type { ResumeData } from '@/types/types'
-  import { ref } from 'vue'
+  import { hideTemplate, initTemplate, showTemplate } from '@/utils/better-typing'
+  import {  ref } from 'vue'
 
-  defineProps<{
+  const props = defineProps<{
     projects: ResumeData['projects']
   }>()
 
+  const compontentsHeight = ref<Record<number, number>>({})
+  const projectsTemplate = ref<string[][]>([])
+  // 模板初始化
+  initTemplate(projectsTemplate.value, props.projects, compontentsHeight.value)
+
   const expandedProjects = ref<Set<string>>(new Set())
   const expandingHeight = ref<{ [key: string]: number }>({})
-
-  const toggleDetails = (title: string, event: MouseEvent) => {
+  const toggleDetails = async (title: string, event: MouseEvent, index: number) => {
     const card = (event.currentTarget as HTMLElement).closest('.project-card') as HTMLElement
     const details = card?.querySelector('.drawer-content') as HTMLElement
 
     if (expandedProjects.value.has(title)) {
-      // 收起时保存当前高度
       if (details) {
         expandingHeight.value[title] = details.scrollHeight
       }
       expandedProjects.value.delete(title)
+
+      // 隐藏模板
+      hideTemplate(projectsTemplate.value, props.projects, index, compontentsHeight.value, 500)
     } else {
       // 展开时计算并设置高度
       if (details) {
         expandingHeight.value[title] = details.scrollHeight
       }
       expandedProjects.value.add(title)
-    }
-  }
 
-  const getDrawerHeight = (title: string) => {
-    if (expandedProjects.value.has(title)) {
-      return expandingHeight.value[title] ? `${expandingHeight.value[title]}px` : 'auto'
+      // 显示模板
+      showTemplate(projectsTemplate.value, props.projects, index, details, compontentsHeight.value)
     }
-    return '0px'
   }
 </script>
 
@@ -57,7 +60,7 @@
         type: 'spring',
         stiffness: 80,
       }"
-      @click="toggleDetails(project.title, $event)"
+      @click="toggleDetails(project.title, $event, index)"
     >
       <div class="card-header flex justify-between items-center p-6 cursor-pointer">
         <div class="header-left flex-1">
@@ -70,24 +73,24 @@
           {{ project.role }}
         </span>
       </div>
-
       <!-- 抽屉容器 -->
       <div
         class="drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out"
         :style="{
-          height: getDrawerHeight(project.title),
+          height: compontentsHeight[index] + 'px',
           opacity: expandedProjects.has(project.title) ? 1 : 0,
         }"
       >
-        <div class="drawer-content project-drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]">
+        <div
+          class="drawer-content project-drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]"
+        >
           <!-- 项目亮点 -->
           <ul class="highlights-list my-4">
-            <li
-              v-for="(item, index) in project.highlights"
-              :key="index"
-            >
-              <span>{{ item }}</span>
-            </li>
+            <template v-for="(item, x) in projectsTemplate[index]" :key="x">
+              <li v-if="item.length">
+                <span>{{ item }}</span>
+              </li>
+            </template>
           </ul>
           <div class="tech-stack flex flex-wrap gap-2">
             <span
