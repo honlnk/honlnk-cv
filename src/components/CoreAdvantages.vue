@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import type { ResumeData } from '@/types/types'
+  import { renderInlineMarkdown } from '@/utils/markdown-renderer'
 
   defineProps<{
     advantages: ResumeData['coreAdvantages']
@@ -33,7 +34,7 @@
             class="relative pl-6 py-2 border-b border-b-[rgb(var(--card-border))] last:border-b-0"
           >
             <span class="absolute left-0 text-secondary">▹</span>
-            <span>{{ point }}</span>
+            <span v-html="renderInlineMarkdown(point)"></span>
           </li>
         </ul>
       </div>

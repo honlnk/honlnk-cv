@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import type { ResumeData } from '@/types/types'
   import { hideTemplate, initTemplate, showTemplate } from '@/utils/better-typing'
+  import { renderInlineMarkdown } from '@/utils/markdown-renderer'
   import {  ref } from 'vue'
 
   const props = defineProps<{
@@ -88,7 +89,7 @@
           <ul class="highlights-list my-4">
             <template v-for="(item, x) in projectsTemplate[index]" :key="x">
               <li v-if="item.length">
-                <span>{{ item }}</span>
+                <span v-html="renderInlineMarkdown(item)"></span>
               </li>
             </template>
           </ul>
