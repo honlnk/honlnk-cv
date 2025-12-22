@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import type { ResumeData } from '@/types/types'
   import { getSafeEmoji } from '@/utils/emoji-parser'
+  import { renderInlineMarkdown } from '@/utils/markdown-renderer'
 
   defineProps<{
     values: ResumeData['additionalValues']
@@ -29,8 +30,7 @@
         <div class="text-4xl mb-4">{{ getSafeEmoji(item.icon) }}</div>
         <h3 class="card-title text-lg font-semibold text-secondary mb-2">{{ item.title }}</h3>
         <div class="card-content text-text-secondary leading-relaxed space-y-2">
-          <p v-for="(line, lIndex) in item.content" :key="lIndex" class="m-0">
-            {{ line }}
+          <p v-for="(line, lIndex) in item.content" :key="lIndex" class="m-0" v-html="renderInlineMarkdown(line)">
           </p>
         </div>
       </div>

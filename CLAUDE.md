@@ -44,10 +44,11 @@ pnpm preview
 
 ### 数据驱动架构
 
-**数据源**: README.md 文件作为简历数据的单一来源
+**数据源**: README.md 文件作为简历数据的单一来源，支持工作经历、项目经历、教育背景等模块
 **数据流**: README.md → `useResumeData` composable → Vue 组件
 **类型定义**: `src/types/types.ts` 提供完整的 TypeScript 类型系统
 **字段配置**: `src/config/basic-info-fields.ts` 支持动态字段配置
+**组件特性**: 支持多项目同时展开、抽屉式工作经历展示、动画过渡效果
 
 ### 目录结构
 
@@ -57,9 +58,11 @@ src/
 │   ├── Header.vue          # 个人信息展示
 │   ├── CoreAdvantages.vue  # 核心优势
 │   ├── ProjectExperience.vue # 项目经历
+│   ├── WorkExperience.vue  # 工作经历
 │   ├── EducationBackground.vue # 教育背景
 │   ├── AdditionalValue.vue  # 附加价值
-│   └── ThemeToggle.vue     # 主题切换组件
+│   ├── ThemeToggle.vue     # 主题切换组件
+│   └── GitHubButton.vue    # GitHub 按钮组件
 ├── composables/         # 组合式函数
 │   ├── useResumeData.ts   # 简历数据解析和管理
 │   └── useTheme.ts        # 主题状态管理
@@ -112,6 +115,21 @@ src/
 5. **代码规范**: 提交前运行 `pnpm lint` 和 `pnpm type-check`
 6. **字段配置**: 新增字段需在 `src/config/basic-info-fields.ts` 中配置
 
+## 组件特性
+
+### 交互体验
+
+- **工作经历**: 抽屉式展开/收起动画，支持多个工作经历同时展开
+- **项目经历**: 可展开卡片设计，支持高度自适应和平滑过渡动画
+- **主题切换**: 亮色/暗色模式无缝切换，使用 CSS 变量系统
+- **响应式设计**: 移动端适配，断点系统和弹性布局
+
+### 动画系统
+
+- **@vueuse/motion**: 提供滚动触发动画，支持延迟和弹性效果
+- **CSS Transitions**: 组件状态切换的平滑过渡
+- **GSAP 集成**: 复杂动画序列的支持
+
 ## 技术特点
 
 - 现代化的 Vue 3 + Vite + TypeScript + UnoCSS 技术栈
@@ -120,3 +138,4 @@ src/
 - 高度模块化的组件架构和组合式函数
 - 完善的工程化配置（ESLint、Prettier、Vitest）
 - 动态字段配置和数据验证机制
+- 丰富的交互动画和用户体验优化

@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import type { ResumeData } from '@/types/types'
+  import { renderInlineMarkdown } from '@/utils/markdown-renderer'
 
   defineProps<{
     data: ResumeData['education']
@@ -35,7 +36,7 @@
           v-for="(exp, index) in data.experiences"
           :key="index"
         >
-          <span>{{ exp }}</span>
+          <span v-html="renderInlineMarkdown(exp)"></span>
         </li>
       </ul>
     </div>

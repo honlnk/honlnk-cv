@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import type { WorkExperienceData } from '@/types/types'
+  import { renderInlineMarkdown } from '@/utils/markdown-renderer'
   import { ref } from 'vue'
 
   defineProps<{
@@ -94,7 +95,7 @@
                 v-for="(item, index) in work.responsibilities"
                 :key="index"
               >
-                <span>{{ item }}</span>
+                <span v-html="renderInlineMarkdown(item)"></span>
               </li>
             </ul>
           </div>
@@ -108,7 +109,7 @@
             <ul class="highlights-list my-4">
               <li v-for="(achievement, index) in work.achievements" :key="index" class="flex items-start">
                 <span class="star-icon text-warning mr-2">⭐</span>
-                <span>{{ achievement }}</span>
+                <span v-html="renderInlineMarkdown(achievement)"></span>
               </li>
             </ul>
           </div>
