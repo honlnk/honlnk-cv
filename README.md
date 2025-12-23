@@ -44,7 +44,7 @@
 
 - **`Spring AI Alibaba`**: 深入理解企业级AI应用开发框架
 - **智能体系统**: 深度学习*Lynxe（原JManus）*，掌握多智能体协作和动态配置、掌握*ReAct智能体模式*
-- **大模型集成**: 集成`通义百问`、`火山引擎`、`Coze`、`Lynxe` 等AI服务API
+- **大模型集成**: 集成`阿里云百炼`、`火山引擎`、`Coze`、`Lynxe` 等AI服务API
 - **AI聊天功能**: 负责企业级**ChatView聊天模块**、**UniNoteAgent智能笔记模块**开发，具备完整AIAgent对话功能实现经验
 
 ### AI辅助开发
