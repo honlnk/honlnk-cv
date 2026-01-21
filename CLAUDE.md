@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-这是一个个人简历网站项目，使用 Vue 3 + TypeScript + Vite + UnoCSS 技术栈开发。项目采用组件化架构，以 Markdown 驱动的设计模式，支持动态字段配置和主题切换。
+这是一个个人简历在线展示系统，采用 Vue 3 + TypeScript + Vite + UnoCSS 技术栈开发。项目核心特色是 **Markdown 驱动** 的内容管理方式，以 README.md 作为简历数据的单一来源，支持实时更新和 CI/CD 自动化部署。
 
 ## 常用开发命令
 
@@ -33,109 +33,228 @@ pnpm preview
 
 ## 项目架构
 
-### 核心技术栈
+### 核心设计模式：Markdown 驱动的数据流
 
-- **前端框架**: Vue 3 + Composition API + `<script setup>`
-- **构建工具**: Vite 6.0.11
-- **语言**: TypeScript 5.7.3
-- **样式系统**: UnoCSS + 自定义 CSS 设计令牌
-- **动画库**: GSAP + @vueuse/motion
-- **包管理器**: pnpm
+**数据源**: README.md → **解析层**: `useResumeData.ts` → **组件层**: Vue 组件
 
-### 数据驱动架构
+1. **README.md 作为单一数据源**: 所有简历内容（工作经历、项目经验、教育背景等）都在根目录 README.md 中维护
+2. **静态导入 + Vite 处理**: 使用 `import readmeContent from '../../README.md?raw'` 在构建时静态导入，无需运行时请求
+3. **解析器链**: `basic-info-parser.ts` → `emoji-parser.ts` → `markdown-renderer.ts` 组成解析管道
+4. **类型安全**: 完整的 TypeScript 类型定义（`src/types/types.ts`）确保数据结构的类型安全
 
-**数据源**: README.md 文件作为简历数据的单一来源，支持工作经历、项目经历、教育背景等模块
-**数据流**: README.md → `useResumeData` composable → Vue 组件
-**类型定义**: `src/types/types.ts` 提供完整的 TypeScript 类型系统
-**字段配置**: `src/config/basic-info-fields.ts` 支持动态字段配置
-**组件特性**: 支持多项目同时展开、抽屉式工作经历展示、动画过渡效果
+### 技术栈特点
 
-### 目录结构
-
-```
-src/
-├── components/           # Vue 组件
-│   ├── Header.vue          # 个人信息展示
-│   ├── CoreAdvantages.vue  # 核心优势
-│   ├── ProjectExperience.vue # 项目经历
-│   ├── WorkExperience.vue  # 工作经历
-│   ├── EducationBackground.vue # 教育背景
-│   ├── AdditionalValue.vue  # 附加价值
-│   ├── ThemeToggle.vue     # 主题切换组件
-│   └── GitHubButton.vue    # GitHub 按钮组件
-├── composables/         # 组合式函数
-│   ├── useResumeData.ts   # 简历数据解析和管理
-│   └── useTheme.ts        # 主题状态管理
-├── types/               # TypeScript 类型定义
-│   └── types.ts           # 完整的简历数据类型
-├── config/             # 配置文件
-│   └── basic-info-fields.ts # 基本信息字段配置
-├── utils/              # 工具函数
-│   ├── basic-info-parser.ts # 基本信息解析
-│   └── emoji-parser.ts    # emoji 解析工具
-├── styles/             # 样式系统
-│   ├── main.css          # 主样式文件
-│   ├── theme/
-│   │   └── tokens.css     # CSS 设计令牌（色彩、间距、圆角等）
-│   └── base/              # 基础样式
-├── App.vue             # 根组件
-└── main.ts             # 应用入口
-```
-
-### 样式系统架构
-
-1. **设计令牌**: `src/styles/theme/tokens.css` 定义完整的设计变量系统
-2. **UnoCSS**: 原子化 CSS，使用 Wind3 预设和自定义快捷方式
-3. **组件样式**: 模块化 CSS 文件组织，支持主题切换
-4. **响应式设计**: 移动端适配和断点系统
-
-### 架构模式
-
-1. **Markdown 驱动**: README.md 作为数据源，支持实时更新
-2. **组合式函数**: 使用 composables 实现逻辑复用和状态管理
-3. **组件化**: 高度模块化的 Vue 组件，Props 传递数据
-4. **类型安全**: 完整的 TypeScript 接口定义和验证
-5. **主题系统**: 支持亮色/暗色模式切换
+- **前端框架**: Vue 3.5.13 + Composition API + `<script setup>` 语法
+- **构建工具**: Vite 6.0.11，支持 HMR 和快速冷启动
+- **样式系统**:
+  - **UnoCSS**: 原子化 CSS，使用 Wind3 预设和自定义快捷方式
+  - **CSS Design Tokens**: `src/styles/theme/tokens.css` 定义完整的设计变量系统
+  - **主题切换**: 支持亮色/暗色模式，使用 CSS 变量和 `data-theme` 属性
+- **动画系统**: GSAP + @vueuse/motion 提供滚动触发动画和过渡效果
+- **类型系统**: TypeScript 5.7.3，采用项目引用分离配置（app/node）
 
 ### 关键配置文件
 
-- `vite.config.ts`: Vite 构建配置，UnoCSS 插件，路径别名
-- `tsconfig.json`: TypeScript 项目引用分离配置（app/node）
+- `vite.config.ts`: UnoCSS 插件、Vue 插件、路径别名（`@` → `./src`）
+- `uno.config.ts`: Wind3 预设 + Icons 预设 + 自定义规则和快捷方式
+- `tsconfig.json`: 项目引用分离（`tsconfig.app.json` + `tsconfig.node.json`）
 - `eslint.config.ts`: Vue + TypeScript 扁平配置
-- `uno.config.ts`: UnoCSS 配置，Wind3 预设 + 自定义规则
 - `vitest.config.ts`: 测试配置，JSDOM 环境
-- `.vscode/extensions.json`: VS Code 插件推荐
+- `.github/workflows/deploy.yml`: CI/CD 自动化部署到 GitHub Pages
 
-## 开发注意事项
+## 数据流架构
 
-1. **数据修改**: 简历内容应在项目根目录的 README.md 中修改
-2. **组件开发**: 使用 Composition API 和 `<script setup>` 语法
-3. **样式开发**: 优先使用 UnoCSS 类和 CSS 设计令牌
-4. **类型安全**: 严格遵循 TypeScript 类型定义
-5. **代码规范**: 提交前运行 `pnpm lint` 和 `pnpm type-check`
-6. **字段配置**: 新增字段需在 `src/config/basic-info-fields.ts` 中配置
+### 1. 基本信息字段配置系统
 
-## 组件特性
+**配置文件**: `src/config/basic-info-fields.ts`
 
-### 交互体验
+- 定义了支持的所有个人信息字段（姓名、职位、联系方式等）
+- 每个字段包含：`key`（标识符）、`label`（显示名）、`icon`（图标）、`group`（分组）、`validation`（验证规则）
+- 支持动态字段扩展，新增字段只需在此配置文件中添加
+
+**解析器**: `src/utils/basic-info-parser.ts`
+
+- 从 README.md 的"基本信息"章节提取字段
+- 支持格式：`- **字段名**: 内容`
+- 自动验证字段值的合法性（如手机号格式、邮箱格式）
+- 返回类型安全的 `ParsedBasicInfo` 对象
+
+### 2. Markdown 渲染引擎
+
+**核心文件**: `src/utils/markdown-renderer.ts`
+
+- 使用 `marked` 库解析 Markdown 语法
+- 集成 `dompurify` 进行 XSS 防护
+- 支持粗体、斜体、代码、链接等常见语法
+- 自定义渲染规则以适配简历展示需求
+
+### 3. 组合式函数（Composables）
+
+**`useResumeData.ts`**: 简历数据管理
+
+- `loadResumeData()`: 加载并解析 README.md
+- `parseResumeFromMarkdown()`: 核心解析函数，处理所有章节
+- 提供响应式状态：`resumeData`、`isLoading`、`error`、`hasError`、`isEmpty`
+
+**`useTheme.ts`**: 主题状态管理
+
+- 支持三种模式：`light`、`dark`、`auto`（跟随系统）
+- 自动检测系统主题偏好（`prefers-color-scheme`）
+- LocalStorage 持久化用户偏好
+- 提供 `toggleTheme()`、`setTheme()`、`getThemeIcon()` 等工具函数
+
+## 组件架构
+
+### 组件树结构
+
+```
+App.vue (根组件)
+├── GitHubButton.vue (GitHub 仓库链接)
+├── ThemeToggle.vue (主题切换)
+├── Header.vue (个人信息展示)
+│   └── 使用 basic-info-fields.ts 配置动态渲染字段
+├── CoreAdvantages.vue (核心优势)
+│   └── 展示多组优势类别和项目列表
+├── WorkExperience.vue (工作经历)
+│   └── 抽屉式展开/收起，支持多个同时展开
+├── ProjectExperience.vue (项目经历)
+│   └── 可展开卡片，高度自适应和平滑过渡
+├── EducationBackground.vue (教育背景)
+│   └── 学校信息 + 校园经历列表
+└── AdditionalValue.vue (附加价值)
+    └── 图标 + 标题 + 内容列表
+```
+
+### 组件特性
 
 - **工作经历**: 抽屉式展开/收起动画，支持多个工作经历同时展开
 - **项目经历**: 可展开卡片设计，支持高度自适应和平滑过渡动画
 - **主题切换**: 亮色/暗色模式无缝切换，使用 CSS 变量系统
-- **响应式设计**: 移动端适配，断点系统和弹性布局
+- **响应式设计**: 移动端适配，断点系统（480px, 768px）
+- **动画效果**: @vueuse/motion 提供滚动触发动画，支持延迟和弹性效果
 
-### 动画系统
+## 样式系统
 
-- **@vueuse/motion**: 提供滚动触发动画，支持延迟和弹性效果
-- **CSS Transitions**: 组件状态切换的平滑过渡
-- **GSAP 集成**: 复杂动画序列的支持
+### CSS 设计令牌（Design Tokens）
 
-## 技术特点
+**文件**: `src/styles/theme/tokens.css`
 
-- 现代化的 Vue 3 + Vite + TypeScript + UnoCSS 技术栈
-- Markdown 驱动的内容管理，支持实时更新
-- 完整的设计令牌系统和主题切换
-- 高度模块化的组件架构和组合式函数
-- 完善的工程化配置（ESLint、Prettier、Vitest）
-- 动态字段配置和数据验证机制
-- 丰富的交互动画和用户体验优化
+定义了完整的设计变量系统：
+
+- **色彩系统**: 主色、辅助色、语义色（成功/警告/错误）、中性色
+- **主题色**: 每个章节的专属强调色（项目蓝、优势绿、工作粉、教育橙、价值紫）
+- **排印系统**: 字体族、字号、字重、行高
+- **间距系统**: `--spacing-xs` 到 `--spacing-3xl`（4px - 64px）
+- **动画系统**: 时长、缓动函数
+- **阴影系统**: 卡片阴影、悬浮阴影
+- **边框系统**: 宽度、圆角
+- **效果系统**: 渐变、背景模糊、透明度
+
+### 主题切换实现
+
+- **亮色模式**: `data-theme="light"`
+- **暗色模式**: `data-theme="dark"`
+- **自动模式**: 不设置 `data-theme`，使用 `@media (prefers-color-scheme: dark)`
+- 所有颜色通过 CSS 变量定义，切换主题时只需改变变量值
+
+### UnoCSS 快捷方式
+
+定义在 `uno.config.ts` 中：
+
+- `card-base`: 卡片基础样式
+- `card-hover`: 卡片悬浮效果
+- `section-title`: 章节标题样式
+- `btn-primary`: 主按钮样式
+- `text-gradient`: 渐变文本
+- `glass-effect`: 毛玻璃效果
+- `hover-lift`: 悬浮提升效果
+
+## CI/CD 部署
+
+**GitHub Actions 工作流**: `.github/workflows/deploy.yml`
+
+### 触发条件
+
+- 推送到 `master` 分支 → 构建并部署到 GitHub Pages
+- Pull Request → 仅构建预览，不部署
+- 手动触发 → 构建并部署
+
+### 部署流程
+
+1. 检出代码
+2. 设置 pnpm 和 Node.js 20
+3. 安装依赖（`pnpm install --frozen-lockfile`）
+4. 类型检查（`pnpm run type-check`）
+5. 构建项目（`pnpm run build`）
+6. 上传构建产物（`./dist` 目录）
+7. 部署到 GitHub Pages
+
+### 特点
+
+- 并发控制：同一分支的多次推送仅保留最新部署
+- 权限管理：自动配置 GITHUB_TOKEN 权限
+- PR 预览：为 Pull Request 提供构建预览，但不部署
+
+## 开发注意事项
+
+### 修改简历内容
+
+**重要**: 简历内容应在项目根目录的 `README.md` 中修改，而不是在 Vue 组件中。
+
+**基本信息格式**:
+```markdown
+## 基本信息
+
+- **姓名**: 张三
+- **职位**: 前端开发工程师
+- **手机**: 13800138000
+- **邮箱**: example@email.com
+```
+
+**其他章节格式**: 参考 README.md 中的现有格式，遵循 Markdown 语法规范。
+
+### 新增字段
+
+1. 在 `src/config/basic-info-fields.ts` 中添加字段配置
+2. 在 README.md 的"基本信息"章节添加对应内容
+3. 解析器会自动识别并渲染新字段
+
+### 组件开发规范
+
+- 使用 `<script setup>` 语法
+- 使用 Composition API 和 `defineProps`、`defineEmits`
+- 优先使用 UnoCSS 类和 CSS 设计令牌
+- 遵循 TypeScript 类型定义
+- 使用 @vueuse/motion 添加动画效果
+
+### 样式开发规范
+
+- 优先使用 UnoCSS 原子化类
+- 复杂样式使用 CSS 设计令牌（`var(--color-primary)` 等）
+- 新增设计令牌在 `src/styles/theme/tokens.css` 中定义
+- 确保样式在亮色和暗色模式下都可读
+
+### 类型安全
+
+- 所有数据结构都在 `src/types/types.ts` 中定义
+- 组件 Props 必须指定类型
+- 避免使用 `any` 类型
+- 运行 `pnpm type-check` 进行类型检查
+
+### 代码质量
+
+- 提交前运行 `pnpm lint` 检查代码规范
+- 运行 `pnpm format` 格式化代码
+- 确保类型检查通过（`pnpm type-check`）
+- 构建成功（`pnpm build`）后再提交
+
+## 项目特色
+
+1. **Markdown 驱动**: README.md 作为数据源，支持实时更新，无需修改组件代码
+2. **动态字段配置**: 灵活的基本信息字段系统，支持扩展和验证
+3. **完整的主题系统**: 亮色/暗色/自动模式，完整的设计令牌系统
+4. **高度模块化**: 组件化架构，组合式函数，逻辑复用性强
+5. **类型安全**: 完整的 TypeScript 类型定义和验证
+6. **CI/CD 自动化**: GitHub Actions 自动构建和部署
+7. **动画丰富**: @vueuse/motion + GSAP 提供流畅的交互体验
+8. **响应式设计**: 移动端适配，多断点支持
