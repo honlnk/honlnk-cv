@@ -2,7 +2,9 @@ import type {
   AdditionalValueData,
   AdvantageData,
   EducationData,
+  ListItem,
   ProjectData,
+  ProjectDetail,
   ResumeData,
   WorkExperienceData,
 } from '@/types/types'
@@ -122,6 +124,10 @@ export function useResumeData() {
     let currentWork: WorkExperienceData | null = null
     let currentValue: AdditionalValueData | null = null
 
+    // 工作经历的新状态
+    let currentProjectDetail: ProjectDetail | null = null
+    let workContentMode: 'project' | 'achievement' = 'project' // 当前内容模式
+
     for (const line of lines) {
       const trimmed = line.trim()
 
@@ -150,16 +156,24 @@ export function useResumeData() {
             techStack: [],
           }
         } else if (currentSection === '工作经历') {
+          // 保存前一个工作经历
           if (currentWork) {
+            // 保存最后一个项目
+            if (currentProjectDetail) {
+              currentWork.projects.push(currentProjectDetail)
+              currentProjectDetail = null
+            }
             data.workExperience.push(currentWork)
           }
+          // 创建新的工作经历
           currentWork = {
             company: title,
             position: '',
             duration: '',
-            responsibilities: [],
-            achievements: [],
+            projects: [],
           }
+          // 重置工作经历状态
+          workContentMode = 'project'
         } else if (currentSection === '附加价值') {
           if (currentValue) {
             data.additionalValues.push(currentValue)
@@ -169,6 +183,28 @@ export function useResumeData() {
           currentValue = { icon: emoji, title: cleanTitle, content: [] }
         } else if (currentSection === '教育背景' && trimmed.startsWith('### 校园经历')) {
           // 校园经历的开始
+        }
+      }
+      // 解析四级标题（工作经历中的项目或成就）
+      else if (trimmed.startsWith('#### ') && currentSection === '工作经历' && currentWork) {
+        const title = trimmed.substring(5).trim()
+
+        // 保存前一个项目
+        if (currentProjectDetail) {
+          currentWork.projects.push(currentProjectDetail)
+        }
+
+        // 检查是否是成就标题
+        if (title.includes('主要成就') || title.includes('成就')) {
+          workContentMode = 'achievement'
+          currentProjectDetail = null // 成就不属于特定项目
+        } else {
+          // 新项目
+          workContentMode = 'project'
+          currentProjectDetail = {
+            title,
+            responsibilities: [],
+          }
         }
       }
       // 解析核心优势内容
@@ -207,16 +243,37 @@ export function useResumeData() {
         const techStackText = trimmed.replace('**技术栈**:', '').trim()
         currentProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
       }
-      // 解析工作职责和成就
-      else if (currentSection === '工作经历' && trimmed.startsWith('- ') && currentWork) {
-        const content = trimmed.substring(2)
+      // 解析工作经历列表项（支持嵌套）
+      else if (currentSection === '工作经历' && currentWork && trimmed.startsWith('- ')) {
+        const content = trimmed.substring(2).trim()
+        const indent = getIndentLevel(line)
 
-        if (content.includes('**主要成就**:')) {
-          const achievement = content.replace('**主要成就**:', '').trim()
-          currentWork.achievements.push(achievement)
-        } else {
-          currentWork.responsibilities.push(content)
+        const listItem: ListItem = { content }
+
+        if (workContentMode === 'achievement') {
+          // 添加到公司级成就
+          if (!currentWork.companyAchievements) {
+            currentWork.companyAchievements = []
+          }
+          currentWork.companyAchievements.push(content)
+        } else if (workContentMode === 'project' && currentProjectDetail) {
+          // 添加到项目职责（支持嵌套）
+          addNestedListItem(currentProjectDetail.responsibilities, listItem, indent)
         }
+      }
+      // 处理嵌套的列表项（没有 - 前缀，但有缩进）
+      else if (
+        currentSection === '工作经历' &&
+        currentWork &&
+        workContentMode === 'project' &&
+        currentProjectDetail &&
+        trimmed.length > 0 &&
+        !trimmed.startsWith('#') &&
+        getIndentLevel(line) > 0
+      ) {
+        const indent = getIndentLevel(line)
+        const listItem: ListItem = { content: trimmed }
+        addNestedListItem(currentProjectDetail.responsibilities, listItem, indent)
       }
       // 解析教育背景
       else if (
@@ -251,6 +308,10 @@ export function useResumeData() {
       data.projects.push(currentProject)
     }
     if (currentWork) {
+      // 保存最后一个项目
+      if (currentProjectDetail) {
+        currentWork.projects.push(currentProjectDetail)
+      }
       data.workExperience.push(currentWork)
     }
     if (currentValue) {
@@ -258,6 +319,48 @@ export function useResumeData() {
     }
 
     return data
+  }
+
+  /**
+   * 计算行的缩进级别（每2个空格为一级）
+   */
+  function getIndentLevel(line: string): number {
+    const match = line.match(/^(\s*)/)
+    return match ? Math.floor(match[1].length / 2) : 0
+  }
+
+  /**
+   * 将列表项添加到嵌套列表结构中
+   */
+  function addNestedListItem(list: ListItem[], item: ListItem, indent: number): void {
+    if (indent === 0) {
+      // 顶级项
+      list.push(item)
+    } else {
+      // 查找父级项
+      const parentIndex = list.length - 1
+      if (parentIndex >= 0) {
+        let parent = list[parentIndex]
+        // 向上查找合适的父级
+        let currentIndent = indent - 1
+        while (currentIndent > 0 && parent.children && parent.children.length > 0) {
+          const nextParent = parent.children[parent.children.length - 1]
+          if (nextParent) {
+            parent = nextParent
+            currentIndent--
+          } else {
+            break
+          }
+        }
+        if (!parent.children) {
+          parent.children = []
+        }
+        parent.children.push(item)
+      } else {
+        // 没有父级，作为顶级项
+        list.push(item)
+      }
+    }
   }
 
   const hasError = computed(() => !!error.value)

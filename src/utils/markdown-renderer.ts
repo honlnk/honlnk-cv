@@ -1,5 +1,6 @@
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
+import type { ListItem } from '@/types/types'
 
 /**
  * 配置 marked 实例
@@ -48,6 +49,41 @@ export function renderInlineMarkdown(content: string): string {
     // 渲染失败时返回原始文本（转义 HTML）
     return content.replace(/</g, '&lt;').replace(/>/g, '&gt;')
   }
+}
+
+/**
+ * 渲染嵌套列表结构（支持 ListItem 类型）
+ * @param items - ListItem 数组
+ * @returns 渲染后的 HTML 字符串（已净化）
+ */
+export function renderNestedList(items: ListItem[]): string {
+  if (!items || items.length === 0) return ''
+
+  let html = '<ul class="nested-list">'
+
+  for (const item of items) {
+    html += '<li class="nested-list-item">'
+
+    // 渲染当前项的内容（使用 renderInlineMarkdown 进行净化）
+    const sanitizedContent = renderInlineMarkdown(item.content)
+    html += `<span class="list-content">${sanitizedContent}</span>`
+
+    // 递归渲染子列表
+    if (item.children && item.children.length > 0) {
+      html += renderNestedList(item.children)
+    }
+
+    html += '</li>'
+  }
+
+  html += '</ul>'
+
+  // 最终净化整个 HTML 结构
+  return DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ['ul', 'li', 'span', 'strong', 'b', 'em', 'i', 'code', 'a'],
+    ALLOWED_ATTR: ['class', 'href', 'title', 'target'],
+    ALLOW_DATA_ATTR: false
+  })
 }
 
 /**

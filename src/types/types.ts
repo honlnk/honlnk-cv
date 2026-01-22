@@ -42,12 +42,38 @@ export interface AdditionalValueData {
   content: string[]
 }
 
+export interface ProjectDetail {
+  /** 项目名称 */
+  title: string
+  /** 项目职责列表（支持嵌套结构） */
+  responsibilities: ListItem[]
+}
+
+export interface ListItem {
+  /** 列表项内容（纯文本或 Markdown） */
+  content: string
+  /** 子列表项（支持多层嵌套） */
+  children?: ListItem[]
+}
+
 export interface WorkExperienceData {
   company: string
   position: string
   duration: string
-  responsibilities: string[]
-  achievements: string[]
+  /** 项目列表（新的层级结构） */
+  projects: ProjectDetail[]
+  /** 公司级主要成就（可选） */
+  companyAchievements?: string[]
+  /**
+   * @deprecated 使用 projects 替代
+   * 保留旧字段以兼容
+   */
+  responsibilities?: string[]
+  /**
+   * @deprecated 使用 companyAchievements 或 projects[].achievements 替代
+   * 保留旧字段以兼容
+   */
+  achievements?: string[]
 }
 
 export interface EducationData {
