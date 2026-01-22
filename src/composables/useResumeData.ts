@@ -4,7 +4,6 @@ import type {
   EducationData,
   ListItem,
   ProjectData,
-  ProjectDetail,
   ResumeData,
   WorkExperienceData,
 } from '@/types/types'
@@ -125,7 +124,7 @@ export function useResumeData() {
     let currentValue: AdditionalValueData | null = null
 
     // 工作经历的新状态
-    let currentProjectDetail: ProjectDetail | null = null
+    let currentWorkProject: ProjectData | null = null
     let workContentMode: 'project' | 'achievement' = 'project' // 当前内容模式
 
     for (const line of lines) {
@@ -159,9 +158,9 @@ export function useResumeData() {
           // 保存前一个工作经历
           if (currentWork) {
             // 保存最后一个项目
-            if (currentProjectDetail) {
-              currentWork.projects.push(currentProjectDetail)
-              currentProjectDetail = null
+            if (currentWorkProject) {
+              currentWork.projects.push(currentWorkProject)
+              currentWorkProject = null
             }
             data.workExperience.push(currentWork)
           }
@@ -190,20 +189,23 @@ export function useResumeData() {
         const title = trimmed.substring(5).trim()
 
         // 保存前一个项目
-        if (currentProjectDetail) {
-          currentWork.projects.push(currentProjectDetail)
+        if (currentWorkProject) {
+          currentWork.projects.push(currentWorkProject)
         }
 
         // 检查是否是成就标题
         if (title.includes('主要成就') || title.includes('成就')) {
           workContentMode = 'achievement'
-          currentProjectDetail = null // 成就不属于特定项目
+          currentWorkProject = null // 成就不属于特定项目
         } else {
-          // 新项目
+          // 新项目 - 初始化完整字段
           workContentMode = 'project'
-          currentProjectDetail = {
+          currentWorkProject = {
             title,
-            responsibilities: [],
+            role: '',
+            duration: '',
+            highlights: [],
+            techStack: [],
           }
         }
       }
@@ -227,6 +229,32 @@ export function useResumeData() {
         if (positionMatch) currentWork.position = positionMatch[1]
         if (timeMatch) currentWork.duration = timeMatch[1]
       }
+      // 解析工作经历中嵌套项目的角色和时间（不以 - 开头的行）
+      else if (
+        currentSection === '工作经历' &&
+        currentWork &&
+        workContentMode === 'project' &&
+        currentWorkProject &&
+        trimmed.includes('**角色**:')
+      ) {
+        const roleMatch = trimmed.match(/\*\*角色\*\*:\s*(.+?)(?:\s*\|\s*|$)/)
+        const timeMatch = trimmed.match(/\*\*时间\*\*:\s*(.+)/)
+
+        if (roleMatch) currentWorkProject.role = roleMatch[1]
+        if (timeMatch) currentWorkProject.duration = timeMatch[1]
+      }
+      // 解析工作经历中嵌套项目的技术栈（不以 - 开头的行）
+      else if (
+        currentSection === '工作经历' &&
+        currentWork &&
+        workContentMode === 'project' &&
+        currentWorkProject &&
+        trimmed.includes('**技术栈**:') &&
+        !trimmed.startsWith('- ')
+      ) {
+        const techStackText = trimmed.replace('**技术栈**:', '').trim()
+        currentWorkProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
+      }
       // 解析项目亮点和技术栈
       else if (currentSection === '项目经历' && trimmed.startsWith('- ') && currentProject) {
         const content = trimmed.substring(2)
@@ -235,7 +263,7 @@ export function useResumeData() {
           const techStackText = content.replace('**技术栈**:', '').trim()
           currentProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
         } else {
-          currentProject.highlights.push(content)
+          currentProject.highlights.push({ content })
         }
       }
       // 解析单独的技术栈行
@@ -256,9 +284,20 @@ export function useResumeData() {
             currentWork.companyAchievements = []
           }
           currentWork.companyAchievements.push(content)
-        } else if (workContentMode === 'project' && currentProjectDetail) {
-          // 添加到项目职责（支持嵌套）
-          addNestedListItem(currentProjectDetail.responsibilities, listItem, indent)
+        } else if (workContentMode === 'project' && currentWorkProject) {
+          // 检查是否包含特殊字段（角色、时间、技术栈）
+          if (content.includes('**角色**:') && currentWorkProject) {
+            const roleMatch = content.match(/\*\*角色\*\*:\s*(.+?)(?:\s*\|\s*|$)/)
+            const timeMatch = content.match(/\*\*时间\*\*:\s*(.+)/)
+            if (roleMatch) currentWorkProject.role = roleMatch[1].trim()
+            if (timeMatch) currentWorkProject.duration = timeMatch[1].trim()
+          } else if (content.includes('**技术栈**:') && currentWorkProject) {
+            const techStackText = content.replace('**技术栈**:', '').trim()
+            currentWorkProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
+          } else {
+            // 添加到项目职责（支持嵌套）
+            addNestedListItem(currentWorkProject.highlights, listItem, indent)
+          }
         }
       }
       // 处理嵌套的列表项（没有 - 前缀，但有缩进）
@@ -266,14 +305,14 @@ export function useResumeData() {
         currentSection === '工作经历' &&
         currentWork &&
         workContentMode === 'project' &&
-        currentProjectDetail &&
+        currentWorkProject &&
         trimmed.length > 0 &&
         !trimmed.startsWith('#') &&
         getIndentLevel(line) > 0
       ) {
         const indent = getIndentLevel(line)
         const listItem: ListItem = { content: trimmed }
-        addNestedListItem(currentProjectDetail.responsibilities, listItem, indent)
+        addNestedListItem(currentWorkProject.highlights, listItem, indent)
       }
       // 解析教育背景
       else if (
@@ -309,8 +348,8 @@ export function useResumeData() {
     }
     if (currentWork) {
       // 保存最后一个项目
-      if (currentProjectDetail) {
-        currentWork.projects.push(currentProjectDetail)
+      if (currentWorkProject) {
+        currentWork.projects.push(currentWorkProject)
       }
       data.workExperience.push(currentWork)
     }

@@ -316,10 +316,11 @@
   }
 
   .work-section-title {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: rgb(var(--color-text-secondary));
-    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: rgb(var(--color-text-primary));
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
     display: flex;
     align-items: center;
   }

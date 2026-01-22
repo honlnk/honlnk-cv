@@ -25,10 +25,10 @@ export interface ResumeData {
 
 export interface ProjectData {
   title: string
-  duration: string
-  role: string
-  highlights: string[]
-  techStack: string[]
+  role?: string
+  duration?: string
+  highlights: ListItem[]
+  techStack?: string[]
 }
 
 export interface AdvantageData {
@@ -42,13 +42,6 @@ export interface AdditionalValueData {
   content: string[]
 }
 
-export interface ProjectDetail {
-  /** 项目名称 */
-  title: string
-  /** 项目职责列表（支持嵌套结构） */
-  responsibilities: ListItem[]
-}
-
 export interface ListItem {
   /** 列表项内容（纯文本或 Markdown） */
   content: string
@@ -60,8 +53,8 @@ export interface WorkExperienceData {
   company: string
   position: string
   duration: string
-  /** 项目列表（新的层级结构） */
-  projects: ProjectDetail[]
+  /** 项目列表 */
+  projects: ProjectData[]
   /** 公司级主要成就（可选） */
   companyAchievements?: string[]
 }

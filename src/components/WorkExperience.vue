@@ -1,19 +1,16 @@
 <script setup lang="ts">
   import type { WorkExperienceData } from '@/types/types'
-  import { renderInlineMarkdown, renderNestedList } from '@/utils/markdown-renderer'
+  import { renderInlineMarkdown } from '@/utils/markdown-renderer'
   import { ref } from 'vue'
+  import BaseProjectCard from './BaseProjectCard.vue'
 
-  defineProps<{
+  const props = defineProps<{
     workExperience: WorkExperienceData[]
   }>()
 
   // 工作经历展开状态
   const expandedWork = ref<Set<string>>(new Set())
   const expandingHeight = ref<{ [key: string]: number }>({})
-
-  // 项目展开状态
-  const expandedProjects = ref<Set<string>>(new Set())
-  const projectHeight = ref<{ [key: string]: number }>({})
 
   const toggleWorkDetails = (company: string, event: MouseEvent) => {
     const card = (event.currentTarget as HTMLElement).closest('.work-card') as HTMLElement
@@ -32,24 +29,6 @@
     }
   }
 
-  const toggleProjectDetails = (projectKey: string, event: MouseEvent) => {
-    event.stopPropagation() // 防止触发工作经历的点击
-    const projectCard = (event.currentTarget as HTMLElement).closest('.project-card') as HTMLElement
-    const content = projectCard?.querySelector('.project-content') as HTMLElement
-
-    if (expandedProjects.value.has(projectKey)) {
-      if (content) {
-        projectHeight.value[projectKey] = content.scrollHeight
-      }
-      expandedProjects.value.delete(projectKey)
-    } else {
-      if (content) {
-        projectHeight.value[projectKey] = content.scrollHeight
-      }
-      expandedProjects.value.add(projectKey)
-    }
-  }
-
   const getDrawerHeight = (company: string) => {
     if (expandedWork.value.has(company)) {
       return expandingHeight.value[company] ? `${expandingHeight.value[company]}px` : 'auto'
@@ -57,11 +36,13 @@
     return '0px'
   }
 
-  const getProjectHeight = (projectKey: string) => {
-    if (expandedProjects.value.has(projectKey)) {
-      return projectHeight.value[projectKey] ? `${projectHeight.value[projectKey]}px` : 'auto'
+  // 计算项目的全局索引（用于动画延迟）
+  const getProjectIndex = (workIndex: number, projectIndex: number) => {
+    let previousProjects = 0
+    for (let i = 0; i < workIndex; i++) {
+      previousProjects += props.workExperience[i].projects.length
     }
-    return '0px'
+    return previousProjects + projectIndex
   }
 </script>
 
@@ -104,14 +85,21 @@
 
       <!-- 工作经历详情抽屉 -->
       <div
-        class="drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out"
+        class="drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out relative"
         :style="{
           height: getDrawerHeight(work.company),
           opacity: expandedWork.has(work.company) ? 1 : 0,
         }"
       >
+        <!-- 固定的顶部边框 -->
+        <div class="absolute top-0 left-0 right-0 h-px z-1 bg-[rgb(var(--card-border))]"></div>
+
         <div
-          class="drawer-content work-drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]"
+          class="drawer-content work-drawer-content px-6 overflow-y-auto"
+          :style="{
+            maxHeight: '100%',
+            boxSizing: 'border-box',
+          }"
         >
           <!-- 项目列表 -->
           <div v-if="work.projects && work.projects.length > 0" class="projects-section">
@@ -120,58 +108,13 @@
               项目经验
             </h4>
 
-            <div
-              v-for="(project, projIndex) in work.projects"
-              :key="`${work.company}-${project.title}`"
-              class="project-card"
-              :class="{ 'mt-4': projIndex > 0 }"
-              v-motion
-              :initial="{ opacity: 0, y: 20 }"
-              :visible-once="{ opacity: 1, y: 0 }"
-              :transition="{
-                delay: projIndex * 100,
-                duration: 400,
-              }"
-            >
-              <!-- 项目头部 -->
-              <div
-                class="project-header flex justify-between items-center p-4 cursor-pointer hover:bg-[rgb(var(--color-gray-50))] rounded-lg transition-colors"
-                @click="toggleProjectDetails(`${work.company}-${project.title}`, $event)"
-              >
-                <h5 class="project-title m-0 font-semibold text-lg">{{ project.title }}</h5>
-                <span
-                  class="expand-icon text-text-secondary transition-transform"
-                  :class="{
-                    'rotate-180': expandedProjects.has(`${work.company}-${project.title}`),
-                  }"
-                >
-                  ▼
-                </span>
-              </div>
-
-              <!-- 项目内容（可展开/收起） -->
-              <div
-                class="project-wrapper overflow-hidden transition-all duration-300 ease-in-out"
-                :style="{
-                  height: getProjectHeight(`${work.company}-${project.title}`),
-                  opacity: expandedProjects.has(`${work.company}-${project.title}`) ? 1 : 0,
-                }"
-              >
-                <div class="project-content px-4 pb-4">
-                  <!-- 项目职责（嵌套列表） -->
-                  <div
-                    v-if="project.responsibilities && project.responsibilities.length > 0"
-                    class="responsibilities-section"
-                  >
-                    <h6 class="subsection-title">📋 职责描述</h6>
-                    <div
-                      v-html="renderNestedList(project.responsibilities)"
-                      class="nested-list-container my-3"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <BaseProjectCard
+              v-for="(project, projectIndex) in work.projects"
+              :key="project.title"
+              :project="project"
+              :index="getProjectIndex(workIndex, projectIndex)"
+              variant="work-nested"
+            />
           </div>
 
           <!-- 公司级主要成就 -->
@@ -183,7 +126,7 @@
               <span class="icon">🏆</span>
               主要成就
             </h4>
-            <ul class="achievements-list my-4">
+            <ul class="achievements-list mb-0">
               <li
                 v-for="(achievement, achIndex) in work.companyAchievements"
                 :key="achIndex"
@@ -213,76 +156,43 @@
 </template>
 
 <style scoped>
-  .nested-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
+  /* 覆盖全局的 border-top，使用固定的顶部边框元素 */
+  .work-drawer-content {
+    border-top: none !important;
   }
 
-  .nested-list-item {
-    margin-bottom: 0.5rem;
-    position: relative;
+  /* 自定义滚动条 - Webkit 浏览器 (Chrome, Safari, Edge) */
+  .work-drawer-content::-webkit-scrollbar {
+    width: 6px;
   }
 
-  .nested-list-item .nested-list {
-    padding-left: 1.5rem;
-    margin-top: 0.5rem;
+  .work-drawer-content::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
   }
 
-  .nested-list-item::before {
-    content: '•';
-    color: rgb(var(--color-primary));
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
-    position: absolute;
-    left: 0.5em;
+  .work-drawer-content::-webkit-scrollbar-thumb {
+    background: rgb(var(--accent-work));
+    border-radius: 10px;
+    transition: background 0.3s ease;
   }
 
-  .nested-list .nested-list-item::before {
-    content: '◦';
-    color: rgb(var(--color-text-secondary));
+  .work-drawer-content::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-primary));
   }
 
-  .list-content {
-    display: inline;
-    margin-left: 1em;
+  /* Firefox 浏览器滚动条样式 */
+  .work-drawer-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--accent-work)) transparent;
   }
 
-  .subsection-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: rgb(var(--color-text-primary));
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  /* 暗色模式适配 */
+  [data-theme='dark'] .work-drawer-content::-webkit-scrollbar-thumb {
+    opacity: 0.6;
   }
 
-  .project-title {
-    color: rgb(var(--color-primary));
-    flex: 1;
-  }
-
-  .expand-icon {
-    font-size: 0.75rem;
-    transition: transform 0.3s ease;
-  }
-
-  .achievements-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .achievements-list li {
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
-  }
-
-  .star-icon {
-    flex-shrink: 0;
-    margin-top: 0.125rem;
+  [data-theme='dark'] .work-drawer-content::-webkit-scrollbar-thumb:hover {
+    opacity: 1;
   }
 </style>
