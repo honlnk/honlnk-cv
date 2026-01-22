@@ -64,16 +64,6 @@ export interface WorkExperienceData {
   projects: ProjectDetail[]
   /** 公司级主要成就（可选） */
   companyAchievements?: string[]
-  /**
-   * @deprecated 使用 projects 替代
-   * 保留旧字段以兼容
-   */
-  responsibilities?: string[]
-  /**
-   * @deprecated 使用 companyAchievements 或 projects[].achievements 替代
-   * 保留旧字段以兼容
-   */
-  achievements?: string[]
 }
 
 export interface EducationData {

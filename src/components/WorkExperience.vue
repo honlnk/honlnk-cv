@@ -194,50 +194,6 @@
               </li>
             </ul>
           </div>
-
-          <!-- 兼容旧格式（responsibilities 和 achievements） -->
-          <div
-            v-if="
-              (!work.projects || work.projects.length === 0) &&
-              work.responsibilities &&
-              work.responsibilities.length > 0
-            "
-            class="legacy-section"
-          >
-            <h4 class="work-section-title">
-              <span class="icon">📋</span>
-              工作职责
-            </h4>
-            <ul class="highlights-list my-4">
-              <li v-for="(item, index) in work.responsibilities" :key="index">
-                <span v-html="renderInlineMarkdown(item)"></span>
-              </li>
-            </ul>
-          </div>
-
-          <div
-            v-if="
-              (!work.projects || work.projects.length === 0) &&
-              work.achievements &&
-              work.achievements.length > 0
-            "
-            class="legacy-section"
-          >
-            <h4 class="work-section-title">
-              <span class="icon">🏆</span>
-              主要成就
-            </h4>
-            <ul class="highlights-list my-4">
-              <li
-                v-for="(achievement, index) in work.achievements"
-                :key="index"
-                class="flex items-start"
-              >
-                <span class="star-icon text-warning mr-2">⭐</span>
-                <span v-html="renderInlineMarkdown(achievement)"></span>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
