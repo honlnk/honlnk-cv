@@ -2,26 +2,26 @@
   import type { WorkExperienceData } from '@/types/types'
   import { renderInlineMarkdown } from '@/utils/markdown-renderer'
   import { ref } from 'vue'
+  import BaseProjectCard from './BaseProjectCard.vue'
 
-  defineProps<{
+  const props = defineProps<{
     workExperience: WorkExperienceData[]
   }>()
 
+  // 工作经历展开状态
   const expandedWork = ref<Set<string>>(new Set())
   const expandingHeight = ref<{ [key: string]: number }>({})
 
-  const toggleDetails = (company: string, event: MouseEvent) => {
+  const toggleWorkDetails = (company: string, event: MouseEvent) => {
     const card = (event.currentTarget as HTMLElement).closest('.work-card') as HTMLElement
     const details = card?.querySelector('.work-drawer-content') as HTMLElement
 
     if (expandedWork.value.has(company)) {
-      // 收起时保存当前高度
       if (details) {
         expandingHeight.value[company] = details.scrollHeight
       }
       expandedWork.value.delete(company)
     } else {
-      // 展开时计算并设置高度
       if (details) {
         expandingHeight.value[company] = details.scrollHeight
       }
@@ -35,6 +35,15 @@
     }
     return '0px'
   }
+
+  // 计算项目的全局索引（用于动画延迟）
+  const getProjectIndex = (workIndex: number, projectIndex: number) => {
+    let previousProjects = 0
+    for (let i = 0; i < workIndex; i++) {
+      previousProjects += props.workExperience[i].projects.length
+    }
+    return previousProjects + projectIndex
+  }
 </script>
 
 <template>
@@ -42,25 +51,27 @@
     <h2 class="section-title">💼 工作经历</h2>
 
     <div
-      v-for="(work, index) in workExperience"
+      v-for="(work, workIndex) in workExperience"
       :key="work.company"
       class="work-card"
       :class="{
-        'mb-4': index !== workExperience.length - 1,
-        'before:opacity-0 after:opacity-100': expandedWork.has(work.company),
+        'mb-4': workIndex !== workExperience.length - 1,
       }"
       v-motion
       :initial="{ opacity: 0, x: -30 }"
       :visible-once="{ opacity: 1, x: 0 }"
       :transition="{
-        delay: index * 200,
+        delay: workIndex * 200,
         duration: 600,
         type: 'spring',
         stiffness: 80,
       }"
-      @click="toggleDetails(work.company, $event)"
     >
-      <div class="card-header flex justify-between items-center p-6 cursor-pointer">
+      <!-- 工作经历头部（始终可见） -->
+      <div
+        class="card-header flex justify-between items-center p-6 cursor-pointer"
+        @click="toggleWorkDetails(work.company, $event)"
+      >
         <div class="header-left flex-1">
           <h3 class="text-xl font-semibold text-primary m-0">{{ work.company }}</h3>
           <span class="duration text-text-secondary text-sm">{{ work.duration }}</span>
@@ -72,42 +83,55 @@
         </span>
       </div>
 
-      <!-- 抽屉容器 -->
+      <!-- 工作经历详情抽屉 -->
       <div
-        class="drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out"
+        class="drawer-wrapper overflow-hidden transition-all duration-500 ease-in-out relative"
         :style="{
           height: getDrawerHeight(work.company),
           opacity: expandedWork.has(work.company) ? 1 : 0,
         }"
       >
-        <div class="drawer-content work-drawer-content px-6 pb-6 border-t border-b-[rgb(var(--card-border))]">
-          <!-- 工作职责 -->
-          <div
-            v-if="work.responsibilities && work.responsibilities.length > 0"
-            class="work-section"
-          >
+        <!-- 固定的顶部边框 -->
+        <div class="absolute top-0 left-0 right-0 h-px z-1 bg-[rgb(var(--card-border))]"></div>
+
+        <div
+          class="drawer-content work-drawer-content px-6 overflow-y-auto"
+          :style="{
+            maxHeight: '100%',
+            boxSizing: 'border-box',
+          }"
+        >
+          <!-- 项目列表 -->
+          <div v-if="work.projects && work.projects.length > 0" class="projects-section">
             <h4 class="work-section-title">
-              <span class="icon">📋</span>
-              工作职责
+              <span class="icon">📁</span>
+              项目经验
             </h4>
-            <ul class="highlights-list my-4">
-              <li
-                v-for="(item, index) in work.responsibilities"
-                :key="index"
-              >
-                <span v-html="renderInlineMarkdown(item)"></span>
-              </li>
-            </ul>
+
+            <BaseProjectCard
+              v-for="(project, projectIndex) in work.projects"
+              :key="project.title"
+              :project="project"
+              :index="getProjectIndex(workIndex, projectIndex)"
+              variant="work-nested"
+            />
           </div>
 
-          <!-- 主要成就 -->
-          <div v-if="work.achievements && work.achievements.length > 0" class="work-section">
+          <!-- 公司级主要成就 -->
+          <div
+            v-if="work.companyAchievements && work.companyAchievements.length > 0"
+            class="company-achievements-section mt-6"
+          >
             <h4 class="work-section-title">
               <span class="icon">🏆</span>
               主要成就
             </h4>
-            <ul class="highlights-list my-4">
-              <li v-for="(achievement, index) in work.achievements" :key="index" class="flex items-start">
+            <ul class="achievements-list mb-0">
+              <li
+                v-for="(achievement, achIndex) in work.companyAchievements"
+                :key="achIndex"
+                class="flex items-start"
+              >
                 <span class="star-icon text-warning mr-2">⭐</span>
                 <span v-html="renderInlineMarkdown(achievement)"></span>
               </li>
@@ -130,3 +154,45 @@
     </div>
   </section>
 </template>
+
+<style scoped>
+  /* 覆盖全局的 border-top，使用固定的顶部边框元素 */
+  .work-drawer-content {
+    border-top: none !important;
+  }
+
+  /* 自定义滚动条 - Webkit 浏览器 (Chrome, Safari, Edge) */
+  .work-drawer-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .work-drawer-content::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+
+  .work-drawer-content::-webkit-scrollbar-thumb {
+    background: rgb(var(--accent-work));
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .work-drawer-content::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-primary));
+  }
+
+  /* Firefox 浏览器滚动条样式 */
+  .work-drawer-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--accent-work)) transparent;
+  }
+
+  /* 暗色模式适配 */
+  [data-theme='dark'] .work-drawer-content::-webkit-scrollbar-thumb {
+    opacity: 0.6;
+  }
+
+  [data-theme='dark'] .work-drawer-content::-webkit-scrollbar-thumb:hover {
+    opacity: 1;
+  }
+</style>

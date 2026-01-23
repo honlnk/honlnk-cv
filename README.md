@@ -78,9 +78,11 @@
 
 **职位**: 前端开发工程师 | **时间**: 2024.03-至今
 
-- **_SDTR教学资源管理系统_** 前端核心开发：
+#### SDTR教学资源管理系统
+
+**角色**: 前端核心开发 | **时间**: 2025年3月 - 2026年2月
+
 - **项目架构**：基于 Soybean Admin 框架定制化开发，采用 pnpm workspace monorepo 架构管理 8 个子应用和 7 个工具包
-- **技术栈**：Vue 3.5 + TypeScript 5.4 + Vite + Naive UI + UnoCSS + Pinia，集成 markdown-it、highlight.js、katex、ECharts 等专业库
 - **ChatView 聊天系统**（核心贡献）：
   - 开发完整的 AI 对话界面，支持智能体管理、对话历史、实时消息推送（SSE）、快捷问题、搜索功能
   - 实现对话列表懒加载、智能体增删改查、时间分组展示、头像显示、折叠功能等交互细节
@@ -98,9 +100,13 @@
   - 重构登录页面 UI，优化按钮边框、文本样式
   - 优化首页布局、课程列表卡片、课程详情页、课时详情页、面包屑导航、走马灯横向滚动等交互细节，提升整体视觉效果
 
-- **_UniNoteAgent智能笔记系统_** 前端核心开发（独立的AI智能笔记系统）：
+**技术栈**: Vue 3.5 | TypeScript 5.4 | Vite 6 | SoybeanAdmin | Naive UI | UnoCSS | Pinia | markdown-it | highlight.js | KaTeX | ECharts | ...
+
+#### UniNoteAgent智能笔记系统
+
+**角色**: 前端核心开发 | **时间**: 2025年9月 - 2026年2月
+
 - **项目定位**：作为SDTR项目的 AI 智能笔记子模块，基于 VbenAdmin 5.5.9（Element Plus 技术栈），区别于 SDTR 的 Soybean Admin（Naive UI）
-- **技术栈**：Vue 3 + TypeScript 5.7 + Vite 6 + VbenAdmin + Element Plus + Pinia，集成 @vue-flow、ELK 布局算法、KaTeX、markdown-it 等专业库
 - **常驻聊天抽屉系统**（核心特色）：
   - 开发双模式聊天布局（标准页面 + 常驻抽屉），支持一键切换、拖拽调整高度（330px-90vh）
   - 实现平滑展开/收起动画（贝塞尔曲线缓动）、延迟内容显示防止抖动、侧边栏联动显示
@@ -116,9 +122,13 @@
   - 实现icon-hover-text交互模式、动态颜色编码、鼠标悬停动画等UI/UX细节
   - 集成AI分析强提醒弹窗、操作记忆功能、进度状态刷新
 
-- **_FCD文件管理与3D预览系统_** 前端核心开发（10个月持续开发，250次提交）：
+**技术栈**: Vue3 | TypeScript 5.7 | Vite 6 | VbenAdmin | Element Plus | Pinia | @vue-flow | ELK 布局算法 | KaTeX | markdown-it | ...
+
+#### FCD文件管理与3D预览系统
+
+**角色**: 前端核心开发 | **时间**: 2025年3月 - 2026年2月
+
 - **项目架构**：基于 VbenAdmin 5.5.5 开发企业级文件管理系统，采用 Monorepo + 微前端（Qiankun）架构
-- **技术栈**：Vue 3 + TypeScript 5.7 + Vite 6 + Element Plus + UnoCSS + Pinia，集成 Qiankun 2.10.16、@astral3d/viewer-component、@vue-office 等专业库
 - **人员权限管理系统**（早期核心功能）：
   - 开发完整的人员管理模块（添加、详情、修改、搜索防抖、头像优化）
   - 实现部门与角色管理（部门角色级联选择器、删除提示框、级联显示）
@@ -136,11 +146,15 @@
   - 实现完整的3D编辑器组件，移除Astral3D默认依赖的后端架构，实现本地化改造
   - 优化路由和性能（外部化编辑器路由、SDK扩展加载机制、资源清理逻辑、ResizeObserver优化）
 
-- **主要成就**: SDTR系统主导前端架构设计，核心开发ChatView聊天系统、独立Markdown渲染器子应用、视频播放器和字幕系统
-- **主要成就**: UniNoteAgent智能笔记系统独立开发实现常驻聊天抽屉（双模式布局、拖拽调整、平滑动画）、SSE流式响应系统
-- **主要成就**: 完整实现企业级文件管理系统，创新性集成Three.js实现3D模型预览和离屏渲染，使用Qiankun微前端架构整合Astral3D编辑器
-- **主要成就**: 建立完整的组件开发规范和主题系统，创建多个可复用UI组件库，代码整洁可读性高，具备独立完成复杂功能模块开发的能力
-- **主要成就**: 深度掌握Monorepo（pnpm workspace）、微前端（Qiankun）、组件化三种主流架构模式，熟练运用SSE流式响应、状态管理重构、性能优化等前端高级技术
+**技术栈**: Vue 3 | TypeScript 5.7 | Vite 6 | VbenAdmin | Element Plus | TWCss | Pinia | Qiankun 2.10.16 | astral3d
+
+#### 主要成就
+
+- SDTR系统主导前端架构设计，核心开发ChatView聊天系统、独立Markdown渲染器子应用、视频播放器和字幕系统
+- UniNoteAgent智能笔记系统独立开发实现常驻聊天抽屉（双模式布局、拖拽调整、平滑动画）、SSE流式响应系统
+- 完整实现企业级文件管理系统，创新性集成Three.js实现3D模型预览和离屏渲染，使用Qiankun微前端架构整合Astral3D编辑器
+- 建立完整的组件开发规范和主题系统，创建多个可复用UI组件库，代码整洁可读性高，具备独立完成复杂功能模块开发的能力
+- 深度掌握Monorepo（pnpm workspace）、微前端（Qiankun）、组件化三种主流架构模式，熟练运用SSE流式响应、状态管理重构、性能优化等前端高级技术
 
 ## 项目经历
 
