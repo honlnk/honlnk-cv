@@ -54,6 +54,11 @@
   --header-text-primary: 255 255 255; /* #ffffff - Header主文字颜色（白色，适配深色背景） */
   --header-text-secondary: 247 250 252; /* #f7fafc - Header副文字颜色（浅灰，适配深色背景） */
 
+  /* Code Colors - 代码块颜色（亮色模式） */
+  --code-bg: 229 231 235; /* #e5e7eb - 浅灰背景 */
+  --code-text: 59 130 246; /* #3b82f6 - 亮蓝色，醒目 */
+  --code-text-alt: 245 158 11; /* #f59e0b - 橙色，用于代码强调 */
+
   /* ================================
    * Typography Tokens - 排印系统
    * ================================ */
@@ -241,6 +246,16 @@
   );
   --header-border-color: rgb(var(--color-secondary) / 0.3); /* 暗色模式头部边框颜色 */
 
+  /* Code Colors - 暗色模式代码块颜色 */
+  --code-bg: 75 85 99; /* #4b5563 - 中灰背景，与深色背景有对比 */
+  --code-text: 96 165 250; /* #60a5fa - 亮蓝色，醒目 */
+  --code-text-alt: 251 191 36; /* #fbbf24 - 橙色，用于代码强调 */
+
+  /* Text Emphasis Colors - 文本强调颜色（暗色模式） */
+  --text-bold-color: 244 114 182; /* #f472b6 - 亮粉红色，用于加粗文本 */
+  --text-italic-color: 167 139 250; /* #a78bfa - 亮紫色，用于斜体文本 */
+  --text-bold-italic-color: 244 114 182; /* #f472b6 - 亮粉红色，用于加粗斜体 */
+
   /* 状态背景色 */
   --loading-bg: var(--color-dark-bg-secondary);
   --error-bg: rgba(231, 76, 60, 0.1); /* 错误背景 */
@@ -294,6 +309,16 @@
     );
     --header-border-color: rgb(var(--color-secondary) / 0.3); /* 系统偏好暗色模式头部边框颜色 */
 
+    /* Code Colors - 系统偏好暗色模式代码块颜色 */
+    --code-bg: 75 85 99; /* #4b5563 - 中灰背景，与深色背景有对比 */
+    --code-text: 96 165 250; /* #60a5fa - 亮蓝色，醒目 */
+    --code-text-alt: 251 191 36; /* #fbbf24 - 橙色，用于代码强调 */
+
+    /* Text Emphasis Colors - 系统偏好暗色模式文本强调颜色 */
+    --text-bold-color: 244 114 182; /* #f472b6 - 亮粉红色，用于加粗文本 */
+    --text-italic-color: 167 139 250; /* #a78bfa - 亮紫色，用于斜体文本 */
+    --text-bold-italic-color: 244 114 182; /* #f472b6 - 亮粉红色，用于加粗斜体 */
+
     /* 状态背景色 */
     --loading-bg: var(--color-dark-bg-secondary);
     --error-bg: rgba(231, 76, 60, 0.1); /* 错误背景 */
@@ -338,4 +363,14 @@
     rgb(var(--color-header-bg)) 100%
   );
   --header-border-color: rgb(var(--color-secondary) / 0.2); /* 头部边框颜色 */
+
+  /* Code Colors - 亮色模式代码块颜色 */
+  --code-bg: 229 231 235; /* #e5e7eb - 浅灰背景 */
+  --code-text: 59 130 246; /* #3b82f6 - 亮蓝色，醒目 */
+  --code-text-alt: 245 158 11; /* #f59e0b - 橙色，用于代码强调 */
+
+  /* Text Emphasis Colors - 文本强调颜色（亮色模式） */
+  --text-bold-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗文本 */
+  --text-italic-color: 139 92 246; /* #8b5cf6 - 紫色，用于斜体文本 */
+  --text-bold-italic-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗斜体 */
 }
