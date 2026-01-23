@@ -83,7 +83,6 @@
 **角色**: 前端核心开发 | **时间**: 2025年3月 - 2026年2月
 
 - **项目架构**：基于 Soybean Admin 框架定制化开发，采用 pnpm workspace monorepo 架构管理 8 个子应用和 7 个工具包
-- **技术栈**：Vue 3.5 + TypeScript 5.4 + Vite + Naive UI + UnoCSS + Pinia，集成 markdown-it、highlight.js、katex、ECharts 等专业库
 - **ChatView 聊天系统**（核心贡献）：
   - 开发完整的 AI 对话界面，支持智能体管理、对话历史、实时消息推送（SSE）、快捷问题、搜索功能
   - 实现对话列表懒加载、智能体增删改查、时间分组展示、头像显示、折叠功能等交互细节
@@ -100,6 +99,8 @@
 - **项目UI全量重构**：
   - 重构登录页面 UI，优化按钮边框、文本样式
   - 优化首页布局、课程列表卡片、课程详情页、课时详情页、面包屑导航、走马灯横向滚动等交互细节，提升整体视觉效果
+
+**技术栈**: Vue 3.5 | TypeScript 5.4 | Vite 6 | SoybeanAdmin | Naive UI | UnoCSS | Pinia | markdown-it | highlight.js | KaTeX | ECharts | ...
 
 #### UniNoteAgent智能笔记系统
 
@@ -128,7 +129,6 @@
 **角色**: 前端核心开发 | **时间**: 2025年3月 - 2026年2月
 
 - **项目架构**：基于 VbenAdmin 5.5.5 开发企业级文件管理系统，采用 Monorepo + 微前端（Qiankun）架构
-- **技术栈**：Vue 3 + TypeScript 5.7 + Vite 6 + Element Plus + UnoCSS + Pinia，集成 Qiankun 2.10.16、@astral3d/viewer-component、@vue-office 等专业库
 - **人员权限管理系统**（早期核心功能）：
   - 开发完整的人员管理模块（添加、详情、修改、搜索防抖、头像优化）
   - 实现部门与角色管理（部门角色级联选择器、删除提示框、级联显示）
@@ -145,6 +145,8 @@
   - 使用 Qiankun 微前端架构，集成 Astral3D Editor 作为微前端子应用
   - 实现完整的3D编辑器组件，移除Astral3D默认依赖的后端架构，实现本地化改造
   - 优化路由和性能（外部化编辑器路由、SDK扩展加载机制、资源清理逻辑、ResizeObserver优化）
+
+**技术栈**: Vue 3 | TypeScript 5.7 | Vite 6 | VbenAdmin | Element Plus | TWCss | Pinia | Qiankun 2.10.16 | astral3d
 
 #### 主要成就
 
