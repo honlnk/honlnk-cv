@@ -196,6 +196,19 @@
     flex-shrink: 0;
   }
 
+  /* 层级颜色区分 - 通过内联样式控制层级，这里定义奇偶层颜色 */
+  .highlights-list li[data-level="0"]::before,
+  .highlights-list li[data-level="2"]::before,
+  .highlights-list li[data-level="4"]::before {
+    color: rgb(var(--color-secondary)); /* 偶数层级使用主强调色（蓝色） */
+  }
+
+  .highlights-list li[data-level="1"]::before,
+  .highlights-list li[data-level="3"]::before,
+  .highlights-list li[data-level="5"]::before {
+    color: rgb(var(--accent-work)); /* 奇数层级使用工作强调色（粉红色） */
+  }
+
   /* 工作经历卡片 */
   .work-card {
     @apply card-base;

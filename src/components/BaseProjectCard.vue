@@ -20,13 +20,15 @@
   const componentsHeight = ref<Record<number, number>>({})
   const projectsTemplate = ref<string[][]>([])
 
-  // 将嵌套的 ListItem[] 转换为扁平的 string[] 用于 better-typing
-  const flattenHighlights = (items: ListItem[]): string[] => {
-    const result: string[] = []
+  // 扁平化列表项，保留层级信息
+  const flattenHighlights = (items: ListItem[]): Array<{ content: string; level: number }> => {
+    const result: Array<{ content: string; level: number }> = []
     const flatten = (items: ListItem[], level = 0) => {
       for (const item of items) {
-        const prefix = '  '.repeat(level)
-        result.push(prefix + item.content)
+        result.push({
+          content: item.content,
+          level,  // 保留层级信息，不再拼接空格
+        })
         if (item.children && item.children.length > 0) {
           flatten(item.children, level + 1)
         }
@@ -37,9 +39,10 @@
   }
 
   // 转换 highlights 格式以适配 better-typing
+  const flattenedHighlights = flattenHighlights(props.project.highlights)
   const adaptedProject = {
     title: props.project.title,
-    highlights: flattenHighlights(props.project.highlights),
+    highlights: flattenedHighlights.map(item => item.content),  // 提取纯文本用于打字机
   }
 
   // 初始化模板
@@ -130,7 +133,12 @@
         <!-- 项目亮点 -->
         <ul class="highlights-list my-[16px]">
           <template v-for="(item, x) in projectsTemplate[0]" :key="x">
-            <li v-if="item.length">
+            <li
+              v-if="item.length"
+              :data-level="flattenedHighlights[x].level"
+              :style="{ paddingLeft: `${flattenedHighlights[x].level * 1.5}em` }"
+              class="highlight-item"
+            >
               <span v-html="renderInlineMarkdown(item)"></span>
             </li>
           </template>
