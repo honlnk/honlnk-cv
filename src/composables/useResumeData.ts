@@ -255,7 +255,7 @@ export function useResumeData() {
         const techStackText = trimmed.replace('**技术栈**:', '').trim()
         currentWorkProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
       }
-      // 解析项目亮点和技术栈
+      // 解析项目亮点和技术栈（支持嵌套）
       else if (currentSection === '项目经历' && trimmed.startsWith('- ') && currentProject) {
         const content = trimmed.substring(2)
 
@@ -263,8 +263,23 @@ export function useResumeData() {
           const techStackText = content.replace('**技术栈**:', '').trim()
           currentProject.techStack = techStackText.split(/[|,，、]/).map(t => t.trim())
         } else {
-          currentProject.highlights.push({ content })
+          const listItem: ListItem = { content }
+          const indent = getIndentLevel(line)
+          // 使用嵌套列表处理
+          addNestedListItem(currentProject.highlights, listItem, indent)
         }
+      }
+      // 处理嵌套的列表项（没有 - 前缀，但有缩进）
+      else if (
+        currentSection === '项目经历' &&
+        currentProject &&
+        trimmed.length > 0 &&
+        !trimmed.startsWith('#') &&
+        getIndentLevel(line) > 0
+      ) {
+        const indent = getIndentLevel(line)
+        const listItem: ListItem = { content: trimmed }
+        addNestedListItem(currentProject.highlights, listItem, indent)
       }
       // 解析单独的技术栈行
       else if (currentSection === '项目经历' && trimmed.includes('**技术栈**:') && currentProject) {
