@@ -170,7 +170,8 @@
 - 开发*主题切换* 功能，支持亮色/暗色模式，使用`CSS变量`和`UnoCSS`实现
 - 构建*模块化组件架构* ，包含*6个核心组件*，实现高代码复用率和高度组件化
 - 集成*动画系统* (`GSAP` + `@vueuse/motion`)，提升用户体验，实现优秀的页面加载性能
-  **技术栈**: Vue3 | TypeScript | Vite | UnoCSS | Element Plus | GSAP | Markdown-it
+
+**技术栈**: Vue3 | TypeScript | Vite | UnoCSS | Element Plus | GSAP | Markdown-it
 
 ### 词砖·智能单词系统
 
@@ -216,7 +217,8 @@
 - 创新性增加**修改操作**统计和详细修改信息，突破主流`diff-match-patch`库仅支持新增/删除的限制，提供更精准的对比结果
 - 支持*HTML导出功能*，保持与在线查看一致的*视觉效果*，实现结果持久化存储和便捷分享
 - _字符级精确差异识别_，对比传统行级工具精细化程度极大提升
-  **技术栈**: Vue3 | UnoCSS | TypeScript | Element Plus | Levenshtein
+
+**技术栈**: Vue3 | UnoCSS | TypeScript | Element Plus | Levenshtein
 
 ### 逐雁排程系统·智能排班系统
 
