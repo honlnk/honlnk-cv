@@ -12,21 +12,33 @@
   const expandedWork = ref<Set<string>>(new Set())
   const expandingHeight = ref<{ [key: string]: number }>({})
 
+  // 防抖定时器存储：为每个公司维护独立的定时器
+  const toggleTimers = ref<{ [key: string]: ReturnType<typeof setTimeout> | null }>({})
+
   const toggleWorkDetails = (company: string, event: MouseEvent) => {
+    // 清除该公司的之前定时器
+    if (toggleTimers.value[company]) {
+      clearTimeout(toggleTimers.value[company]!)
+      toggleTimers.value[company] = null
+    }
+
     const card = (event.currentTarget as HTMLElement).closest('.work-card') as HTMLElement
     const details = card?.querySelector('.work-drawer-content') as HTMLElement
 
-    if (expandedWork.value.has(company)) {
-      if (details) {
-        expandingHeight.value[company] = details.scrollHeight
+    // 延迟执行，等待双击检测
+    toggleTimers.value[company] = setTimeout(() => {
+      if (expandedWork.value.has(company)) {
+        if (details) {
+          expandingHeight.value[company] = details.scrollHeight
+        }
+        expandedWork.value.delete(company)
+      } else {
+        if (details) {
+          expandingHeight.value[company] = details.scrollHeight
+        }
+        expandedWork.value.add(company)
       }
-      expandedWork.value.delete(company)
-    } else {
-      if (details) {
-        expandingHeight.value[company] = details.scrollHeight
-      }
-      expandedWork.value.add(company)
-    }
+    }, 250) // 250ms 延迟，足够检测是否为双击
   }
 
   const getDrawerHeight = (company: string) => {
@@ -66,11 +78,12 @@
         type: 'spring',
         stiffness: 80,
       }"
+      @dblclick="toggleWorkDetails(work.company, $event)"
     >
       <!-- 工作经历头部（始终可见） -->
       <div
         class="card-header flex justify-between items-center p-6 cursor-pointer"
-        @click="toggleWorkDetails(work.company, $event)"
+        @click.stop="toggleWorkDetails(work.company, $event)"
       >
         <div class="header-left flex-1">
           <h3 class="text-xl font-semibold text-primary m-0">{{ work.company }}</h3>
