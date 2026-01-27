@@ -12,33 +12,21 @@
   const expandedWork = ref<Set<string>>(new Set())
   const expandingHeight = ref<{ [key: string]: number }>({})
 
-  // 防抖定时器存储：为每个公司维护独立的定时器
-  const toggleTimers = ref<{ [key: string]: ReturnType<typeof setTimeout> | null }>({})
-
   const toggleWorkDetails = (company: string, event: MouseEvent) => {
-    // 清除该公司的之前定时器
-    if (toggleTimers.value[company]) {
-      clearTimeout(toggleTimers.value[company]!)
-      toggleTimers.value[company] = null
-    }
-
     const card = (event.currentTarget as HTMLElement).closest('.work-card') as HTMLElement
     const details = card?.querySelector('.work-drawer-content') as HTMLElement
 
-    // 延迟执行，等待双击检测
-    toggleTimers.value[company] = setTimeout(() => {
-      if (expandedWork.value.has(company)) {
-        if (details) {
-          expandingHeight.value[company] = details.scrollHeight
-        }
-        expandedWork.value.delete(company)
-      } else {
-        if (details) {
-          expandingHeight.value[company] = details.scrollHeight
-        }
-        expandedWork.value.add(company)
+    if (expandedWork.value.has(company)) {
+      if (details) {
+        expandingHeight.value[company] = details.scrollHeight
       }
-    }, 250) // 250ms 延迟，足够检测是否为双击
+      expandedWork.value.delete(company)
+    } else {
+      if (details) {
+        expandingHeight.value[company] = details.scrollHeight
+      }
+      expandedWork.value.add(company)
+    }
   }
 
   const getDrawerHeight = (company: string) => {

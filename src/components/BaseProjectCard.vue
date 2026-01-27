@@ -20,9 +20,6 @@
   const componentsHeight = ref<Record<number, number>>({})
   const projectsTemplate = ref<string[][]>([])
 
-  // 防抖：防止双击时多次触发
-  let toggleTimer: ReturnType<typeof setTimeout> | null = null
-
   // 扁平化列表项，保留层级信息
   const flattenHighlights = (items: ListItem[]): Array<{ content: string; level: number }> => {
     const result: Array<{ content: string; level: number }> = []
@@ -52,34 +49,25 @@
   initTemplate(projectsTemplate.value, [adaptedProject], componentsHeight.value)
 
   const toggleDetails = async (event: MouseEvent) => {
-    // 清除之前的定时器
-    if (toggleTimer) {
-      clearTimeout(toggleTimer)
-      toggleTimer = null
-    }
-
     const card = (event.currentTarget as HTMLElement).closest(`.${cardClass}`) as HTMLElement
     const details = card?.querySelector('.drawer-content') as HTMLElement
 
-    // 延迟执行，等待双击检测
-    toggleTimer = setTimeout(() => {
-      if (expanded.value) {
-        if (details) {
-          componentsHeight.value[0] = details.scrollHeight
-        }
-        expanded.value = false
-        // 隐藏模板
-        hideTemplate(projectsTemplate.value, [adaptedProject], 0, componentsHeight.value, 500)
-      } else {
-        // 展开时计算并设置高度
-        if (details) {
-          componentsHeight.value[0] = details.scrollHeight
-        }
-        expanded.value = true
-        // 显示模板
-        showTemplate(projectsTemplate.value, [adaptedProject], 0, details, componentsHeight.value)
+    if (expanded.value) {
+      if (details) {
+        componentsHeight.value[0] = details.scrollHeight
       }
-    }, 250) // 250ms 延迟，足够检测是否为双击
+      expanded.value = false
+      // 隐藏模板
+      hideTemplate(projectsTemplate.value, [adaptedProject], 0, componentsHeight.value, 500)
+    } else {
+      // 展开时计算并设置高度
+      if (details) {
+        componentsHeight.value[0] = details.scrollHeight
+      }
+      expanded.value = true
+      // 显示模板
+      showTemplate(projectsTemplate.value, [adaptedProject], 0, details, componentsHeight.value)
+    }
   }
 
   const getDrawerHeight = () => {
@@ -111,7 +99,7 @@
       type: 'spring',
       stiffness: 80,
     }"
-    @dblclick="toggleDetails"
+    @dblclick.stop="toggleDetails"
   >
     <!-- 卡片头部 -->
     <div
