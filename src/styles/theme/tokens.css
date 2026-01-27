@@ -59,6 +59,19 @@
   --code-text: 59 130 246; /* #3b82f6 - 亮蓝色，醒目 */
   --code-text-alt: 245 158 11; /* #f59e0b - 橙色，用于代码强调 */
 
+  /* Text Emphasis Colors - 文本强调颜色（默认亮色模式） */
+  --text-bold-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗文本 */
+  --text-italic-color: 139 92 246; /* #8b5cf6 - 紫色，用于斜体文本 */
+  --text-bold-italic-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗斜体 */
+
+  /* Header Border Color - Header边框颜色（默认亮色模式） */
+  --header-border-color: rgb(var(--color-secondary) / 0.2); /* 头部边框颜色 */
+
+  /* State Background Colors - 状态背景色（默认亮色模式） */
+  --loading-bg: 248 249 250; /* #f8f9fa - 加载状态背景 */
+  --error-bg: rgba(231, 76, 60, 0.1); /* 错误背景 */
+  --empty-bg: rgba(108, 117, 125, 0.1); /* 空状态背景 */
+
   /* ================================
    * Typography Tokens - 排印系统
    * ================================ */
@@ -373,4 +386,9 @@
   --text-bold-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗文本 */
   --text-italic-color: 139 92 246; /* #8b5cf6 - 紫色，用于斜体文本 */
   --text-bold-italic-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗斜体 */
+
+  /* State Background Colors - 状态背景色（亮色模式） */
+  --loading-bg: 248 249 250; /* #f8f9fa - 加载状态背景 */
+  --error-bg: rgba(231, 76, 60, 0.1); /* 错误背景 */
+  --empty-bg: rgba(108, 117, 125, 0.1); /* 空状态背景 */
 }
