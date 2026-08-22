@@ -1,0 +1,66 @@
+/**
+ * Header Components
+ * 头部组件样式（Header 专用，从原 main.css 工具类迁移）
+ */
+
+@use '../mixins' as *;
+
+@layer utilities {
+  /* 通用卡片工具类（Header 内容卡片使用） */
+  .card {
+    @include card-base;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Header 文字专用样式 - 使用设计系统变量 */
+  .header-name {
+    color: rgb(var(--header-text-primary));
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: -0.025em; /* 轻微的字间距调整 */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 增强阴影确保可读性 */
+  }
+
+  .header-position {
+    color: rgb(var(--header-text-secondary));
+    font-weight: var(--font-weight-semibold);
+    opacity: 1; /* 移除透明度，确保清晰 */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* 增强阴影确保可读性 */
+  }
+
+  /* Header 渐变边框样式 - 大盒子套小盒子实现 */
+  .header-container {
+    padding: 4px; /* 边框厚度 */
+    background: linear-gradient(135deg, rgb(var(--color-secondary)), rgb(var(--color-primary)));
+    border-radius: calc(var(--border-radius-card) + 4px);
+    position: relative;
+
+    /* 为暗色模式调整边框透明度（系统偏好） */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme='light']) & {
+        background: linear-gradient(
+          135deg,
+          rgb(var(--color-secondary) / 0.8),
+          rgb(var(--color-primary) / 0.7)
+        );
+      }
+    }
+  }
+
+  .header-inner {
+    background: var(--gradient-header);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-card);
+  }
+}
+
+/* 手动暗色模式 */
+@layer utilities {
+  :root[data-theme='dark'] .header-container {
+    background: linear-gradient(
+      135deg,
+      rgb(var(--color-secondary) / 0.8),
+      rgb(var(--color-primary) / 0.7)
+    );
+  }
+}

@@ -27,7 +27,7 @@
       for (const item of items) {
         result.push({
           content: item.content,
-          level,  // 保留层级信息，不再拼接空格
+          level, // 保留层级信息，不再拼接空格
         })
         if (item.children && item.children.length > 0) {
           flatten(item.children, level + 1)
@@ -42,7 +42,7 @@
   const flattenedHighlights = flattenHighlights(props.project.highlights)
   const adaptedProject = {
     title: props.project.title,
-    highlights: flattenedHighlights.map(item => item.content),  // 提取纯文本用于打字机
+    highlights: flattenedHighlights.map(item => item.content), // 提取纯文本用于打字机
   }
 
   // 初始化模板
@@ -172,7 +172,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   /* 仅保留工作经历嵌套项目的特殊样式 */
   .work-nested-project-card {
     background-color: rgb(var(--card-bg));
@@ -180,9 +180,9 @@
     border: var(--border-width-1) solid rgb(var(--card-border));
     overflow: hidden;
     transition: all var(--duration-normal) var(--ease-out);
-  }
 
-  .work-nested-project-card:hover {
-    background-color: rgb(var(--color-gray-50));
+    &:hover {
+      background-color: rgb(var(--color-gray-50));
+    }
   }
 </style>

@@ -4,20 +4,18 @@
  */
 
 @layer base {
-  /* HTML基础设置 */
   html {
-    /* 平滑滚动 */
     scroll-behavior: smooth;
-    /* 字体渲染优化 */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Body基础样式 */
   body {
-    /* UnoCSS @apply directives */
-    @apply font-sans leading-relaxed text-text-primary bg-section-bg;
+    /* 排印（对应原 @apply font-sans leading-relaxed 的展开结果） */
+    font-family: var(--font-family-sans);
+    line-height: var(--line-height-relaxed);
+    color: rgb(var(--color-text-primary));
 
     /* 基础重置 */
     margin: 0;
@@ -101,31 +99,5 @@
   /* 段落重置 */
   p {
     margin: 0;
-  }
-
-  /* 防止选择 */
-  .no-select {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  /* 焦点管理 */
-  .focus-outline {
-    @apply focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:ring-offset-2;
-  }
-
-  /* 无障碍访问 */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
   }
 }

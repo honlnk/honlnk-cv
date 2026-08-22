@@ -17,44 +17,38 @@
     margin: 0 auto;
     padding: var(--spacing-2xl) var(--spacing-xl);
     box-sizing: border-box;
-  }
 
-  /* 主要内容区域 */
-  .content {
-    margin-top: var(--spacing-2xl);
-  }
-
-  /* 响应式布局 */
-  @media (max-width: 768px) {
-    .resume-container {
+    /* 响应式布局 */
+    @media (max-width: 768px) {
       padding: var(--spacing-lg) var(--spacing-md);
     }
 
-    .content {
-      margin-top: var(--spacing-xl);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .resume-container {
+    @media (max-width: 480px) {
       padding: var(--spacing-md) var(--spacing-sm);
     }
 
-    .content {
-      margin-top: var(--spacing-lg);
-    }
-  }
-
-  /* 打印样式 */
-  @media print {
-    .resume-container {
+    /* 打印样式 */
+    @media print {
       max-width: none;
       margin: 0;
       padding: 1rem;
       background-color: rgb(var(--color-section-bg));
     }
+  }
 
-    .content {
+  /* 主要内容区域 */
+  .content {
+    margin-top: var(--spacing-2xl);
+
+    @media (max-width: 768px) {
+      margin-top: var(--spacing-xl);
+    }
+
+    @media (max-width: 480px) {
+      margin-top: var(--spacing-lg);
+    }
+
+    @media print {
       margin-top: 1rem;
     }
   }

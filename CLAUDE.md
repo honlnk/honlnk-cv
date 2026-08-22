@@ -47,10 +47,11 @@ pnpm preview
 - **前端框架**: Vue 3.5.13 + Composition API + `<script setup>` 语法
 - **构建工具**: Vite 6.0.11，支持 HMR 和快速冷启动
 - **样式系统**:
-  - **UnoCSS**: 原子化 CSS，使用 Wind3 预设和自定义快捷方式
-  - **CSS Design Tokens**: `src/styles/theme/tokens.css` 定义完整的设计变量系统
+  - **UnoCSS（twcss 工具类）**: 原子化 CSS，Wind3 预设，负责模板内的简单样式（布局、间距、定位等），主题色映射到 CSS 设计令牌
+  - **SCSS**: 负责复杂样式，`src/styles/` 目录分层组织（设计令牌 + mixins + 基础样式 + 组件样式）
+  - **CSS Design Tokens**: `src/styles/theme/_tokens.scss` 定义完整的设计变量系统，暗色模式变量通过 SCSS mixin 复用
   - **主题切换**: 支持亮色/暗色模式，使用 CSS 变量和 `data-theme` 属性
-- **动画系统**: GSAP + @vueuse/motion 提供滚动触发动画和过渡效果
+- **动画系统**: @vueuse/motion 提供滚动触发动画，配合 CSS Transitions 过渡效果
 - **类型系统**: TypeScript 5.7.3，采用项目引用分离配置（app/node）
 
 ### 关键配置文件
@@ -137,7 +138,7 @@ App.vue (根组件)
 
 ### CSS 设计令牌（Design Tokens）
 
-**文件**: `src/styles/theme/tokens.css`
+**文件**: `src/styles/theme/_tokens.scss`
 
 定义了完整的设计变量系统：
 
@@ -157,17 +158,15 @@ App.vue (根组件)
 - **自动模式**: 不设置 `data-theme`，使用 `@media (prefers-color-scheme: dark)`
 - 所有颜色通过 CSS 变量定义，切换主题时只需改变变量值
 
-### UnoCSS 快捷方式
+### UnoCSS 快捷方式与主题色
 
 定义在 `uno.config.ts` 中：
 
-- `card-base`: 卡片基础样式
-- `card-hover`: 卡片悬浮效果
-- `section-title`: 章节标题样式
-- `btn-primary`: 主按钮样式
-- `text-gradient`: 渐变文本
-- `glass-effect`: 毛玻璃效果
-- `hover-lift`: 悬浮提升效果
+- `section-title`: 章节标题基础排版（完整样式在 `_cards.scss` 的 `.section-title`）
+- `glass-effect`: 毛玻璃效果（完整样式在 `_cards.scss` 的 `.glass-effect`）
+- 主题色（primary/secondary/warning 等）映射到 CSS 设计令牌变量，`text-primary` 等颜色工具类由 UnoCSS 生成
+
+卡片基础样式等复杂公共样式抽取为 SCSS mixins（`src/styles/_mixins.scss`），供卡片体系 `@include` 使用。
 
 ## CI/CD 部署
 
@@ -229,9 +228,13 @@ App.vue (根组件)
 
 ### 样式开发规范
 
-- 优先使用 UnoCSS 原子化类
-- 复杂样式使用 CSS 设计令牌（`var(--color-primary)` 等）
-- 新增设计令牌在 `src/styles/theme/tokens.css` 中定义
+样式分工约定：**简单样式用 twcss 工具类，复杂样式用 SCSS**。
+
+- 简单样式（布局、间距、定位、字号等）直接在模板中使用 UnoCSS 工具类
+- 复杂样式（卡片体系、状态组件、设计令牌驱动的多状态样式）写入 `src/styles/` 对应 SCSS 模块
+- 组件私有复杂样式使用 `<style scoped lang="scss">`，善用嵌套和 `&`
+- 公共复杂样式抽取为 mixin 放入 `src/styles/_mixins.scss`
+- 新增设计令牌在 `src/styles/theme/_tokens.scss` 中定义，暗色模式变量加入 `theme-dark` mixin
 - 确保样式在亮色和暗色模式下都可读
 
 ### 类型安全
@@ -256,5 +259,5 @@ App.vue (根组件)
 4. **高度模块化**: 组件化架构，组合式函数，逻辑复用性强
 5. **类型安全**: 完整的 TypeScript 类型定义和验证
 6. **CI/CD 自动化**: GitHub Actions 自动构建和部署
-7. **动画丰富**: @vueuse/motion + GSAP 提供流畅的交互体验
+7. **动画丰富**: @vueuse/motion + CSS Transitions 提供流畅的交互体验
 8. **响应式设计**: 移动端适配，多断点支持

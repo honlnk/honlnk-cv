@@ -21,13 +21,17 @@
 <template>
   <!-- 应用根容器 -->
   <div class="app-container">
-    <!-- GitHub 按钮 -->
-    <div class="github-button-wrapper">
+    <!-- GitHub 按钮（fixed 定位 + 响应式 + 打印隐藏，均为简单样式，直接用工具类） -->
+    <div
+      class="fixed top-6 left-6 z-[1000] flex items-center justify-start max-[768px]:top-4 max-[768px]:left-4 max-[480px]:top-2 max-[480px]:left-2 print:hidden"
+    >
       <GitHubButton show-text />
     </div>
 
     <!-- 主题切换按钮 -->
-    <div class="theme-toggle-wrapper">
+    <div
+      class="fixed top-6 right-6 z-[1000] flex items-center justify-end max-[768px]:top-4 max-[768px]:right-4 max-[480px]:top-2 max-[480px]:right-2 print:hidden"
+    >
       <ThemeToggle />
     </div>
 
@@ -73,64 +77,6 @@
   </div>
 </template>
 
-<style>
-  @import '@/styles/main.css';
-
-  /* GitHub 按钮定位 */
-  .github-button-wrapper {
-    position: fixed;
-    top: var(--spacing-lg);
-    left: var(--spacing-lg);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  /* 主题切换按钮定位 */
-  .theme-toggle-wrapper {
-    position: fixed;
-    top: var(--spacing-lg);
-    right: var(--spacing-lg);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  /* 响应式调整 */
-  @media (max-width: 768px) {
-    .github-button-wrapper {
-      top: var(--spacing-md);
-      left: var(--spacing-md);
-    }
-
-    .theme-toggle-wrapper {
-      top: var(--spacing-md);
-      right: var(--spacing-md);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .github-button-wrapper {
-      top: var(--spacing-sm);
-      left: var(--spacing-sm);
-    }
-
-    .theme-toggle-wrapper {
-      top: var(--spacing-sm);
-      right: var(--spacing-sm);
-    }
-  }
-
-  /* 打印时隐藏装饰性按钮 */
-  @media print {
-    .github-button-wrapper {
-      display: none;
-    }
-
-    .theme-toggle-wrapper {
-      display: none;
-    }
-  }
+<style lang="scss">
+  @import '@/styles/main.scss';
 </style>

@@ -1,0 +1,20 @@
+/**
+ * Main Stylesheet
+ * 主样式文件 - 统一导入所有模块
+ * 分工约定：
+ *   - 简单样式：模板内 UnoCSS(twcss) 工具类
+ *   - 复杂样式：本目录 SCSS（设计令牌 + 卡片体系 + 元素排印）
+ */
+
+/* Design System Tokens - 设计系统令牌 */
+@use 'theme/tokens';
+
+/* Base Styles - 基础样式 */
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/layout';
+
+/* Component Styles - 组件样式 */
+@use 'components/cards';
+@use 'components/states';
+@use 'components/header';

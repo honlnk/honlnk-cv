@@ -1,0 +1,352 @@
+/**
+ * Card Components
+ * 卡片组件样式
+ * 复杂卡片体系：公共部分抽取为 SCSS mixins（见 styles/_mixins.scss）
+ */
+
+@use '../mixins' as *;
+
+@layer components {
+  /* 基础卡片 */
+  .card-base {
+    @include card-base;
+    background-color: rgb(var(--card-bg, 255 255 255));
+    box-shadow: var(--card-shadow, var(--shadow-card));
+    border: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  /* 章节标题 */
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: rgb(var(--color-text-primary));
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 4rem;
+      height: 0.25rem;
+      background-color: rgb(var(--color-secondary));
+      border-radius: var(--border-radius-full);
+      transition: width var(--duration-normal) var(--ease-out);
+    }
+  }
+
+  .section:hover .section-title::after {
+    width: 10rem;
+  }
+
+  /* 联系链接 */
+  .contact-link {
+    color: rgb(var(--color-secondary));
+    transition: color var(--duration-normal) var(--ease-out);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+
+    &:hover {
+      color: rgb(var(--color-secondary) / var(--opacity-hover));
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgb(var(--color-secondary) / 0.5);
+      border-radius: var(--border-radius-sm);
+    }
+  }
+
+  /* 技术标签 */
+  .tech-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgb(var(--color-secondary) / 0.1);
+    color: rgb(var(--color-secondary));
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    margin-right: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    transition: all var(--duration-normal) var(--ease-out);
+    border: var(--border-width-1) solid transparent;
+
+    &:hover {
+      background-color: rgb(var(--color-secondary) / 0.2);
+      transform: translateY(-1px);
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  /* 项目卡片 */
+  .project-card {
+    @include card-base;
+    position: relative;
+    border-left: 4px solid rgb(var(--accent-project, 59 130 246));
+    cursor: pointer;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgb(var(--card-bg)) 0%,
+        rgb(var(--accent-project) / 0.03) 100%
+      );
+      z-index: -1;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgb(var(--accent-project) / 0.06) 0%,
+        rgb(var(--card-bg-hover, 248 250 252)) 100%
+      );
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover {
+      border-left-color: rgb(37 99 235); /* #2563eb - 更深的蓝色 */
+      box-shadow: 0 4px 20px rgba(59 130 246 / 0.25); /* 带项目蓝色主题的阴影 */
+      transform: translateY(-1px);
+
+      &::before {
+        opacity: 0;
+      }
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  /* 优势卡片 */
+  .advantage-card {
+    @include card-base;
+    @include card-hover;
+    background: linear-gradient(
+      135deg,
+      rgb(var(--card-bg)) 0%,
+      rgb(var(--accent-advantage) / 0.05) 100%
+    );
+    border-left: 4px solid rgb(var(--accent-advantage, 16 185 129));
+  }
+
+  /* 项目经历抽屉容器 */
+  .project-drawer-content {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    border-top: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
+
+    @media (max-width: 768px) {
+      padding: 0 var(--spacing-md) var(--spacing-md);
+    }
+  }
+
+  /* 项目亮点列表 */
+  .highlights-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      color: rgb(var(--color-text-primary));
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--spacing-xs);
+      display: flex;
+      align-items: flex-start;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::before {
+        content: '•';
+        color: rgb(var(--color-secondary));
+        margin-right: var(--spacing-xs);
+        font-weight: var(--font-weight-bold);
+        flex-shrink: 0;
+      }
+    }
+
+    /* 层级颜色区分 - 通过内联样式控制层级，这里定义奇偶层颜色 */
+    li[data-level='0']::before,
+    li[data-level='2']::before,
+    li[data-level='4']::before {
+      color: rgb(var(--color-secondary)); /* 偶数层级使用主强调色（蓝色） */
+    }
+
+    li[data-level='1']::before,
+    li[data-level='3']::before,
+    li[data-level='5']::before {
+      color: rgb(var(--accent-work)); /* 奇数层级使用工作强调色（粉红色） */
+    }
+  }
+
+  /* 工作经历卡片 */
+  .work-card {
+    @include card-base;
+    position: relative;
+    border-left: 4px solid rgb(var(--accent-work, 236 72 153));
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgb(var(--card-bg)) 0%,
+        rgb(var(--accent-work) / 0.03) 100%
+      );
+      z-index: -1;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgb(var(--accent-work) / 0.06) 0%,
+        rgb(var(--card-bg-hover, 248 250 252)) 100%
+      );
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover {
+      border-left-color: rgb(219 39 119); /* #db2777 - 更深的粉红色 */
+      box-shadow: 0 4px 20px rgba(236 72 153 / 0.25); /* 带主题色的阴影 */
+      transform: translateY(-1px);
+
+      &::before {
+        opacity: 0;
+      }
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      margin: 0 0 var(--spacing-md);
+    }
+  }
+
+  /* 工作经历小节标题 */
+  .work-section-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: rgb(var(--color-text-primary));
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+
+    .icon {
+      margin-right: var(--spacing-xs);
+    }
+  }
+
+  /* 工作经历抽屉容器 */
+  .work-drawer-content {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    border-top: var(--border-width-1) solid rgb(var(--card-border, 233 236 239));
+
+    @media (max-width: 768px) {
+      padding: 0 var(--spacing-md) var(--spacing-md);
+    }
+  }
+
+  /* 教育经历列表 */
+  .education-experience-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      color: rgb(var(--color-text-primary));
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--spacing-xs);
+      display: flex;
+      align-items: flex-start;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::before {
+        content: '•';
+        color: rgb(var(--color-secondary));
+        margin-right: var(--spacing-xs);
+        font-weight: var(--font-weight-bold);
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  /* 教育背景卡片 */
+  .education-card {
+    @include card-base;
+    background: linear-gradient(
+      135deg,
+      rgb(var(--card-bg)) 0%,
+      rgb(var(--accent-education) / 0.08) 100%
+    );
+    border-left: 4px solid rgb(var(--accent-education, 245 158 11));
+  }
+
+  /* 附加价值卡片 */
+  .value-card {
+    @include card-base;
+    background: linear-gradient(
+      135deg,
+      rgb(var(--card-bg)) 0%,
+      rgb(var(--accent-value) / 0.06) 100%
+    );
+    border-left: 4px solid rgb(var(--accent-value, 139 92 246));
+  }
+
+  /* 玻璃效果 */
+  .glass-effect {
+    backdrop-filter: var(--backdrop-blur-md);
+    background-color: rgb(var(--card-bg) / 0.8);
+    border: var(--border-width-1) solid rgb(var(--card-border) / 0.3);
+  }
+}

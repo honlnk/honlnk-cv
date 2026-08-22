@@ -156,44 +156,44 @@
   </section>
 </template>
 
-<style scoped>
-  /* 覆盖全局的 border-top，使用固定的顶部边框元素 */
+<style scoped lang="scss">
   .work-drawer-content {
+    /* 覆盖全局的 border-top，使用固定的顶部边框元素 */
     border-top: none !important;
-  }
 
-  /* 自定义滚动条 - Webkit 浏览器 (Chrome, Safari, Edge) */
-  .work-drawer-content::-webkit-scrollbar {
-    width: 6px;
-  }
+    /* 自定义滚动条 - Webkit 浏览器 (Chrome, Safari, Edge) */
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
 
-  .work-drawer-content::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 10px;
-  }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 10px;
+    }
 
-  .work-drawer-content::-webkit-scrollbar-thumb {
-    background: rgb(var(--accent-work));
-    border-radius: 10px;
-    transition: background 0.3s ease;
-  }
+    &::-webkit-scrollbar-thumb {
+      background: rgb(var(--accent-work));
+      border-radius: 10px;
+      transition: background 0.3s ease;
 
-  .work-drawer-content::-webkit-scrollbar-thumb:hover {
-    background: rgb(var(--color-primary));
-  }
+      &:hover {
+        background: rgb(var(--color-primary));
+      }
+    }
 
-  /* Firefox 浏览器滚动条样式 */
-  .work-drawer-content {
+    /* Firefox 浏览器滚动条样式 */
     scrollbar-width: thin;
     scrollbar-color: rgb(var(--accent-work)) transparent;
-  }
 
-  /* 暗色模式适配 */
-  [data-theme='dark'] .work-drawer-content::-webkit-scrollbar-thumb {
-    opacity: 0.6;
-  }
+    /* 暗色模式适配 */
+    :root[data-theme='dark'] & {
+      &::-webkit-scrollbar-thumb {
+        opacity: 0.6;
 
-  [data-theme='dark'] .work-drawer-content::-webkit-scrollbar-thumb:hover {
-    opacity: 1;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
   }
 </style>

@@ -1,69 +1,10 @@
 /**
  * Typography System
- * 排印系统
+ * 排印系统 - 元素级排印规则
+ * 工具类（text-* / font-* / leading-* / text-center 等）由 UnoCSS 生成，此处不再重复定义
  */
 
 @layer base {
-  /* 字体大小 */
-  .text-xs {
-    font-size: var(--font-size-xs);
-  }
-  .text-sm {
-    font-size: var(--font-size-sm);
-  }
-  .text-base {
-    font-size: var(--font-size-base);
-  }
-  .text-lg {
-    font-size: var(--font-size-lg);
-  }
-  .text-xl {
-    font-size: var(--font-size-xl);
-  }
-  .text-2xl {
-    font-size: var(--font-size-2xl);
-  }
-  .text-3xl {
-    font-size: var(--font-size-3xl);
-  }
-  .text-4xl {
-    font-size: var(--font-size-4xl);
-  }
-  .text-5xl {
-    font-size: var(--font-size-5xl);
-  }
-
-  /* 字重 */
-  .font-light {
-    font-weight: var(--font-weight-light);
-  }
-  .font-normal {
-    font-weight: var(--font-weight-normal);
-  }
-  .font-medium {
-    font-weight: var(--font-weight-medium);
-  }
-  .font-semibold {
-    font-weight: var(--font-weight-semibold);
-  }
-  .font-bold {
-    font-weight: var(--font-weight-bold);
-  }
-
-  /* 行高 */
-  .leading-tight {
-    line-height: var(--line-height-tight);
-  }
-  .leading-normal {
-    line-height: var(--line-height-normal);
-  }
-  .leading-relaxed {
-    line-height: var(--line-height-relaxed);
-  }
-  .leading-loose {
-    line-height: var(--line-height-loose);
-  }
-
   /* 标题样式 */
   h1 {
     font-size: var(--font-size-4xl);
@@ -111,16 +52,16 @@
     text-decoration: none;
     transition: color var(--duration-normal) var(--ease-out);
     cursor: pointer;
-  }
 
-  a:hover {
-    color: rgb(var(--color-secondary) / var(--opacity-hover));
-  }
+    &:hover {
+      color: rgb(var(--color-secondary) / var(--opacity-hover));
+    }
 
-  a:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgb(var(--color-secondary) / 0.5);
-    border-radius: var(--border-radius-sm);
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgb(var(--color-secondary) / 0.5);
+      border-radius: var(--border-radius-sm);
+    }
   }
 
   /* 列表样式 */
@@ -172,13 +113,13 @@
   /* 代码样式 */
   code {
     font-family: var(--font-family-mono);
-    font-size: 0.8125em; /* 从 0.875em 减小到 0.8125em (13px) */
+    font-size: 0.8125em;
     background-color: rgb(var(--code-bg));
     color: rgb(var(--code-text));
     padding: 0.125rem 0.375rem;
     border-radius: var(--border-radius-sm);
-    font-weight: 500; /* 稍微加粗，提升可读性 */
-    letter-spacing: 0.025em; /* 轻微增加字间距，提升可读性 */
+    font-weight: 500;
+    letter-spacing: 0.025em;
   }
 
   pre {
@@ -191,12 +132,12 @@
     overflow-x: auto;
     margin: var(--spacing-lg) 0;
     line-height: var(--line-height-normal);
-  }
 
-  pre code {
-    background: none;
-    padding: 0;
-    color: inherit;
+    code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
   }
 
   /* 分隔线 */
@@ -204,56 +145,5 @@
     border: none;
     border-top: var(--border-width-1) solid rgb(var(--color-gray-200));
     margin: var(--spacing-xl) 0;
-  }
-
-  /* 文本对齐 */
-  .text-left {
-    text-align: left;
-  }
-  .text-center {
-    text-align: center;
-  }
-  .text-right {
-    text-align: right;
-  }
-  .text-justify {
-    text-align: justify;
-  }
-
-  /* 文本变换 */
-  .uppercase {
-    text-transform: uppercase;
-  }
-  .lowercase {
-    text-transform: lowercase;
-  }
-  .capitalize {
-    text-transform: capitalize;
-  }
-
-  /* 文本装饰 */
-  .underline {
-    text-decoration: underline;
-  }
-  .line-through {
-    text-decoration: line-through;
-  }
-  .no-underline {
-    text-decoration: none;
-  }
-
-  /* 文本溢出处理 */
-  .truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
   }
 }

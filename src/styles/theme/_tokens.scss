@@ -1,6 +1,7 @@
 /**
  * CSS Design Tokens
  * 设计系统核心变量定义
+ * 暗色模式变量通过 mixin 复用，消除「手动设置」与「系统偏好」两份重复声明
  */
 
 :root {
@@ -209,12 +210,8 @@
   --color-dark-text-secondary: 160 160 160; /* #a0a0a0 */
 }
 
-/* ================================
- * Dark Mode Overrides - 暗色模式覆盖
- * ================================ */
-
-/* 暗色模式 - 手动设置 */
-:root[data-theme='dark'] {
+/* 暗色模式变量集：手动设置与系统偏好共用 */
+@mixin theme-dark {
   /* 背景色系 */
   --color-section-bg: var(--color-dark-bg-primary);
   --color-header-bg: var(--color-dark-bg-secondary);
@@ -275,67 +272,15 @@
   --empty-bg: rgba(108, 117, 125, 0.1); /* 空状态背景 */
 }
 
+/* 暗色模式 - 手动设置 */
+:root[data-theme='dark'] {
+  @include theme-dark;
+}
+
 /* 暗色模式 - 系统偏好（仅在未手动设置时生效） */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    /* 背景色系 */
-    --color-section-bg: var(--color-dark-bg-primary);
-    --color-header-bg: var(--color-dark-bg-secondary);
-    --color-gray-50: var(--color-dark-bg-primary);
-    --color-gray-100: var(--color-dark-bg-secondary);
-    --color-gray-200: 64 64 64; /* #404040 */
-    --color-gray-300: 96 96 96; /* #606060 */
-
-    /* 文字色系 - 增强对比度 */
-    --color-text-primary: var(--color-dark-text-primary);
-    --color-text-secondary: 209 213 219; /* #d1d5db - 更亮的次要文字 */
-    --color-gray-400: 209 213 219; /* #d1d5db - 更亮的灰色文字 */
-    --color-gray-500: 229 231 235; /* #e5e7eb - 更亮的灰色 */
-    --color-gray-600: 243 244 246; /* #f3f4f6 - 接近白色 */
-    --color-gray-700: 249 250 251; /* #f9fafb - 非常接近白色 */
-
-    /* Enhanced Card Colors - 系统偏好暗色模式高对比度卡片颜色系统 */
-    --card-bg: 51 55 64; /* #333740 - much lighter than background for contrast */
-    --card-bg-hover: 63 67 78; /* #3f434e - hover effect */
-    --card-border: 107 114 128; /* #6b7280 - much more defined border */
-    --card-border-hover: 156 163 175; /* #9ca3af - darker border on hover */
-    --card-shadow: 0 4px 25px rgba(0 0 0 / 0.4); /* enhanced shadow */
-    --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.5); /* stronger shadow on hover */
-
-    /* Component Accent Colors - 系统偏好暗色模式组件强调色 */
-    --accent-project: 96 165 250; /* #60a5fa - 项目卡片亮蓝 */
-    --accent-advantage: 52 211 153; /* #34d399 - 优势卡片亮绿 */
-    --accent-work: 244 114 182; /* #f472b6 - 工作经历亮粉红 */
-    --accent-education: 251 191 36; /* #fbbf24 - 教育卡片亮橙 */
-    --accent-value: 167 139 250; /* #a78bfa - 价值卡片亮紫 */
-
-    /* Header Colors - 暗色模式Header文字保持白色 */
-    --header-text-primary: 255 255 255; /* #ffffff */
-    --header-text-secondary: 226 232 240; /* #e2e8f0 */
-
-    /* Enhanced Header Gradient - 系统偏好暗色模式更显眼的头部背景 */
-    --gradient-header: linear-gradient(
-      135deg,
-      rgb(var(--color-secondary) / 0.12) 0%,
-      rgb(var(--color-primary) / 0.08) 50%,
-      rgb(var(--color-header-bg)) 100%
-    );
-    --header-border-color: rgb(var(--color-secondary) / 0.3); /* 系统偏好暗色模式头部边框颜色 */
-
-    /* Code Colors - 系统偏好暗色模式代码块颜色 */
-    --code-bg: 75 85 99; /* #4b5563 - 中灰背景，与深色背景有对比 */
-    --code-text: 96 165 250; /* #60a5fa - 亮蓝色，醒目 */
-    --code-text-alt: 251 191 36; /* #fbbf24 - 橙色，用于代码强调 */
-
-    /* Text Emphasis Colors - 系统偏好暗色模式文本强调颜色 */
-    --text-bold-color: 244 114 182; /* #f472b6 - 亮粉红色，用于加粗文本 */
-    --text-italic-color: 167 139 250; /* #a78bfa - 亮紫色，用于斜体文本 */
-    --text-bold-italic-color: 244 114 182; /* #f472b6 - 亮粉红色，用于加粗斜体 */
-
-    /* 状态背景色 */
-    --loading-bg: var(--color-dark-bg-secondary);
-    --error-bg: rgba(231, 76, 60, 0.1); /* 错误背景 */
-    --empty-bg: rgba(108, 117, 125, 0.1); /* 空状态背景 */
+    @include theme-dark;
   }
 }
 

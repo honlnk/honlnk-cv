@@ -78,95 +78,93 @@
   </a>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   .github-button {
     background-color: rgb(var(--color-section-bg));
     border: var(--border-width-1) solid rgb(var(--card-border));
     color: rgb(var(--color-text-secondary));
     padding: var(--spacing-sm) var(--spacing-md);
     gap: var(--spacing-sm);
-  }
 
-  .github-button:hover {
-    background-color: rgb(var(--color-secondary) / 0.1);
-    color: rgb(var(--color-secondary));
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
+    &:hover {
+      background-color: rgb(var(--color-secondary) / 0.1);
+      color: rgb(var(--color-secondary));
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
 
-  .github-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 var(--border-width-2) rgba(var(--color-secondary), 0.5);
-  }
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 var(--border-width-2) rgba(var(--color-secondary), 0.5);
+    }
 
-  .github-button:active {
-    transform: translateY(0);
-  }
+    &:active {
+      transform: translateY(0);
+    }
 
-  /* GitHub 图标悬停动画 */
-  .github-button:hover svg:first-child {
-    transform: scale(1.1);
-    transition: transform var(--duration-normal) var(--ease-out);
-  }
+    /* GitHub 图标悬停动画 */
+    &:hover svg:first-child {
+      transform: scale(1.1);
+      transition: transform var(--duration-normal) var(--ease-out);
+    }
 
-  /* 点击波纹效果 */
-  .github-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--color-secondary), 0.3) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    transition: all var(--duration-normal) var(--ease-out);
-    pointer-events: none;
-  }
+    /* 点击波纹效果 */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--color-secondary), 0.3) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: all var(--duration-normal) var(--ease-out);
+      pointer-events: none;
+    }
 
-  .github-button:active::before {
-    width: 100px;
-    height: 100px;
-  }
+    &:active::before {
+      width: 100px;
+      height: 100px;
+    }
 
-  /* 暗色模式适配 */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .github-button {
+    /* 暗色模式适配（系统偏好 + 手动） */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme='light']) & {
+        background-color: rgb(var(--color-dark-bg-secondary));
+        border-color: rgb(var(--color-gray-200));
+
+        &:hover {
+          background-color: rgba(var(--color-secondary), 0.2);
+        }
+      }
+    }
+
+    :root[data-theme='dark'] & {
       background-color: rgb(var(--color-dark-bg-secondary));
       border-color: rgb(var(--color-gray-200));
+
+      &:hover {
+        background-color: rgba(var(--color-secondary), 0.2);
+      }
     }
 
-    :root:not([data-theme='light']) .github-button:hover {
-      background-color: rgba(var(--color-secondary), 0.2);
-    }
-  }
-
-  :root[data-theme='dark'] .github-button {
-    background-color: rgb(var(--color-dark-bg-secondary));
-    border-color: rgb(var(--color-gray-200));
-  }
-
-  :root[data-theme='dark'] .github-button:hover {
-    background-color: rgba(var(--color-secondary), 0.2);
-  }
-
-  /* 响应式调整 */
-  @media (max-width: 640px) {
-    .github-button {
+    /* 响应式调整 */
+    @media (max-width: 640px) {
       padding: var(--spacing-sm);
-    }
 
-    .github-button span.whitespace-nowrap {
-      display: none;
-    }
+      span.whitespace-nowrap {
+        display: none;
+      }
 
-    .github-button svg:first-child {
-      width: 1.25rem;
-      height: 1.25rem;
-    }
+      svg:first-child {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
 
-    .github-button svg:last-child {
-      display: none;
+      svg:last-child {
+        display: none;
+      }
     }
   }
 </style>
