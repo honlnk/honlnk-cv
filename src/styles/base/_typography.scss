@@ -1,7 +1,8 @@
 /**
  * Typography System
  * 排印系统 - 元素级排印规则
- * 工具类（text-* / font-* / leading-* / text-center 等）由 UnoCSS 生成，此处不再重复定义
+ * 配色纪律：强调文本只靠前景色明度与字重区分，不使用彩色；
+ * 唯一的彩色文本是行内代码（技术名词），使用全站统一强调色。
  */
 
 @layer base {
@@ -78,27 +79,17 @@
     margin-bottom: var(--spacing-sm);
   }
 
-  /* 强调文本 */
+  /* 强调文本：只加粗，不变色 */
   strong,
   b {
     font-weight: var(--font-weight-semibold);
-    color: rgb(var(--text-bold-color));
+    color: rgb(var(--color-text-primary));
   }
 
   em,
   i {
     font-style: italic;
-    color: rgb(var(--text-italic-color));
-  }
-
-  /* 加粗 + 斜体组合 */
-  strong em,
-  em strong,
-  b i,
-  i b {
-    font-weight: var(--font-weight-semibold);
-    font-style: italic;
-    color: rgb(var(--text-bold-italic-color));
+    color: rgb(var(--color-text-primary));
   }
 
   /* 引用块 */
@@ -110,16 +101,16 @@
     margin: var(--spacing-lg) 0;
   }
 
-  /* 代码样式 */
+  /* 行内代码：唯一使用强调色的文本（技术名词） */
   code {
     font-family: var(--font-family-mono);
     font-size: 0.8125em;
-    background-color: rgb(var(--code-bg));
-    color: rgb(var(--code-text));
+    background-color: rgb(var(--color-secondary) / 0.08);
+    color: rgb(var(--color-secondary));
     padding: 0.125rem 0.375rem;
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius-md);
     font-weight: 500;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.01em;
   }
 
   pre {
@@ -143,7 +134,7 @@
   /* 分隔线 */
   hr {
     border: none;
-    border-top: var(--border-width-1) solid rgb(var(--color-gray-200));
+    border-top: var(--border-width-1) solid var(--color-hairline);
     margin: var(--spacing-xl) 0;
   }
 }

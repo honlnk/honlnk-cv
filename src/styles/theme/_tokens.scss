@@ -1,6 +1,7 @@
 /**
  * CSS Design Tokens
  * 设计系统核心变量定义
+ * 配色纪律：中性灰阶 + 单一强调色（青绿）。链接、hover、章节编号使用强调色，正文永远灰阶。
  * 暗色模式变量通过 mixin 复用，消除「手动设置」与「系统偏好」两份重复声明
  */
 
@@ -9,78 +10,64 @@
    * Color Tokens - 色彩系统
    * ================================ */
 
-  /* Core Brand Colors - 核心品牌色彩 */
-  --color-primary: 44 62 80; /* #2c3e50 - 深蓝灰，主色调 */
-  --color-secondary: 52 152 219; /* #3498db - 亮蓝色，强调色 */
-  --color-accent: 52 73 94; /* #34495e - 深灰，辅助色 */
+  /* Accent - 全站唯一强调色 */
+  --color-secondary: 13 148 136; /* #0d9488 - teal-600，链接/强调 */
+  --color-primary: 15 118 110; /* #0f766e - teal-700，强调色 hover 深化 */
 
-  /* Semantic Colors - 语义化色彩 */
-  --color-success: 39 174 96; /* #27ae60 - 成功绿 */
-  --color-warning: 243 156 18; /* #f39c12 - 警告橙 */
-  --color-error: 231 76 60; /* #e74c3c - 错误红 */
-  --color-info: 52 152 219; /* #3498db - 信息蓝 */
+  /* Semantic Colors - 语义化色彩（仅状态提示使用，不参与正文配色） */
+  --color-success: 22 163 74; /* #16a34a */
+  --color-warning: 217 119 6; /* #d97706 */
+  --color-error: 220 38 38; /* #dc2626 */
+  --color-info: 13 148 136; /* 与强调色一致 */
 
   /* Neutral Colors - 中性色 */
-  --color-gray-50: 248 249 250; /* #f8f9fa */
-  --color-gray-100: 233 236 239; /* #e9ecef */
-  --color-gray-200: 206 212 218; /* #ced4da */
-  --color-gray-300: 173 181 189; /* #adb5bd */
-  --color-gray-400: 108 117 125; /* #6c757d */
-  --color-gray-500: 73 80 87; /* #495057 */
-  --color-gray-600: 52 58 64; /* #343a40 */
-  --color-gray-700: 33 37 41; /* #212529 */
+  --color-gray-50: 250 250 250; /* #fafafa */
+  --color-gray-100: 244 244 245; /* #f4f4f5 */
+  --color-gray-200: 228 228 231; /* #e4e4e7 */
+  --color-gray-300: 212 212 216; /* #d4d4d8 */
+  --color-gray-400: 161 161 170; /* #a1a1aa */
+  --color-gray-500: 113 113 122; /* #71717a */
+  --color-gray-600: 82 82 91; /* #52525b */
+  --color-gray-700: 39 39 42; /* #27272a */
 
   /* Theme Specific Colors - 主题专用色（默认亮色模式） */
-  --color-section-bg: 248 249 250; /* #f8f9fa */
-  --color-header-bg: 248 249 250; /* #f8f9fa */
-  --color-text-primary: 31 41 55; /* #1f2937 - 增强对比度的主文字 */
-  --color-text-secondary: 75 85 99; /* #4b5563 - 增强对比度的次要文字 */
+  --color-section-bg: 250 250 250; /* #fafafa */
+  --color-text-primary: 24 24 27; /* #18181b - zinc-900 */
+  --color-text-secondary: 82 82 91; /* #52525b - zinc-600 */
 
-  /* Enhanced Card Colors - 高对比度卡片颜色系统 */
-  --card-bg: 255 255 255; /* #ffffff - pure white for strong contrast */
-  --card-bg-hover: 248 250 252; /* #f8fafc - subtle hover effect */
-  --card-border: 203 213 225; /* #cbd5e1 - much more defined border */
-  --card-border-hover: 160 174 192; /* #a0aec0 - darker border on hover */
-  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
-  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.2); /* stronger shadow on hover */
+  /* Surface Colors - 表面颜色（状态框等少量容器） */
+  --card-bg: 255 255 255; /* #ffffff */
+  --card-bg-hover: 250 250 250; /* #fafafa */
+  --card-border: 228 228 231; /* #e4e4e7 */
+  --card-border-hover: 212 212 216; /* #d4d4d8 */
+  --card-shadow: 0 1px 3px rgba(0 0 0 / 0.06);
+  --card-shadow-hover: 0 4px 12px rgba(0 0 0 / 0.08);
 
-  /* Component Accent Colors - 组件强调色（亮色模式） */
-  --accent-project: 59 130 246; /* #3b82f6 - 项目卡片蓝 */
-  --accent-advantage: 16 185 129; /* #10b981 - 优势卡片绿 */
-  --accent-work: 236 72 153; /* #ec4899 - 工作经历粉红 */
-  --accent-education: 245 158 11; /* #f59e0b - 教育卡片橙 */
-  --accent-value: 139 92 246; /* #8b5cf6 - 价值卡片紫 */
+  /* Hairline - 编辑式排版的细分割线 */
+  --color-hairline: rgb(var(--color-text-primary) / 0.08);
 
-  /* Header Specific Colors - Header专用颜色 */
-  --header-text-primary: 255 255 255; /* #ffffff - Header主文字颜色（白色，适配深色背景） */
-  --header-text-secondary: 247 250 252; /* #f7fafc - Header副文字颜色（浅灰，适配深色背景） */
-
-  /* Code Colors - 代码块颜色（亮色模式） */
-  --code-bg: 229 231 235; /* #e5e7eb - 浅灰背景 */
-  --code-text: 59 130 246; /* #3b82f6 - 亮蓝色，醒目 */
-  --code-text-alt: 245 158 11; /* #f59e0b - 橙色，用于代码强调 */
-
-  /* Text Emphasis Colors - 文本强调颜色（默认亮色模式） */
-  --text-bold-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗文本 */
-  --text-italic-color: 139 92 246; /* #8b5cf6 - 紫色，用于斜体文本 */
-  --text-bold-italic-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗斜体 */
-
-  /* Header Border Color - Header边框颜色（默认亮色模式） */
-  --header-border-color: rgb(var(--color-secondary) / 0.2); /* 头部边框颜色 */
+  /* Background Glow - 背景环境光晕 */
+  --gradient-glow: radial-gradient(
+    ellipse 55% 40% at 75% 0%,
+    rgb(var(--color-secondary) / 0.05),
+    transparent 70%
+  );
 
   /* State Background Colors - 状态背景色（默认亮色模式） */
-  --loading-bg: 248 249 250; /* #f8f9fa - 加载状态背景 */
-  --error-bg: rgba(231, 76, 60, 0.1); /* 错误背景 */
-  --empty-bg: rgba(108, 117, 125, 0.1); /* 空状态背景 */
+  --loading-bg: 250 250 250;
+  --error-bg: rgb(var(--color-error) / 0.06);
+  --empty-bg: rgb(var(--color-gray-500) / 0.06);
 
   /* ================================
    * Typography Tokens - 排印系统
    * ================================ */
 
-  /* Font Families - 字体族 */
+  /* Font Families - 字体族（显式声明中文回退，避免落到衬线中文字体） */
   --font-family-sans:
-    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', Monaco, monospace;
+    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-family-mono:
+    'JetBrains Mono', 'SFMono-Regular', 'Fira Code', 'Consolas', Monaco, monospace;
 
   /* Font Sizes - 字体大小 */
   --font-size-xs: 0.75rem; /* 12px */
@@ -104,7 +91,7 @@
   /* Line Heights - 行高 */
   --line-height-tight: 1.25;
   --line-height-normal: 1.5;
-  --line-height-relaxed: 1.625;
+  --line-height-relaxed: 1.75; /* 中文正文需要更松的行高 */
   --line-height-loose: 2;
 
   /* ================================
@@ -123,10 +110,10 @@
    * Animation Tokens - 动画系统
    * ================================ */
 
-  /* Durations - 动画时长 */
+  /* Durations - 动画时长（克制的反馈动效） */
   --duration-fast: 150ms;
-  --duration-normal: 300ms;
-  --duration-slow: 500ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
 
   /* Easing Functions - 缓动函数 */
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
@@ -141,11 +128,6 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-
-  /* Component Specific Shadows - 组件专用阴影 */
-  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
 
   /* ================================
    * Border Tokens - 边框系统
@@ -165,30 +147,9 @@
   --border-radius-2xl: 1rem; /* 16px */
   --border-radius-full: 9999px;
 
-  /* Component Specific Radius - 组件专用圆角 */
-  --border-radius-card: var(--border-radius-xl);
-
   /* ================================
    * Effect Tokens - 效果系统
    * ================================ */
-
-  /* Gradients - 渐变 */
-  --gradient-header: linear-gradient(
-    135deg,
-    rgb(var(--color-secondary) / 0.08) 0%,
-    rgb(var(--color-primary) / 0.05) 50%,
-    rgb(var(--color-header-bg)) 100%
-  );
-  --gradient-primary: linear-gradient(
-    135deg,
-    rgb(var(--color-secondary)) 0%,
-    rgb(var(--color-primary)) 100%
-  );
-  --gradient-text: linear-gradient(
-    90deg,
-    rgb(var(--color-secondary)) 0%,
-    rgb(var(--color-accent)) 100%
-  );
 
   /* Backdrops - 背景效果 */
   --backdrop-blur-sm: blur(4px);
@@ -196,80 +157,68 @@
   --backdrop-blur-lg: blur(16px);
 
   /* Opacity - 透明度 */
-  --opacity-backdrop: 0.8;
-  --opacity-hover: 0.8;
+  --opacity-hover: 0.75;
   --opacity-disabled: 0.5;
 
   /* ================================
    * Dark Mode Base Tokens - 暗色模式基础变量
    * ================================ */
 
-  --color-dark-bg-primary: 26 26 26; /* #1a1a1a */
-  --color-dark-bg-secondary: 45 45 45; /* #2d2d2d */
-  --color-dark-text-primary: 255 255 255; /* #ffffff */
-  --color-dark-text-secondary: 160 160 160; /* #a0a0a0 */
+  --color-dark-bg-primary: 13 17 23; /* #0d1117 - 深蓝灰，非纯黑 */
+  --color-dark-bg-secondary: 22 27 34; /* #161b22 */
+  --color-dark-text-primary: 230 237 243; /* #e6edf3 */
+  --color-dark-text-secondary: 139 148 158; /* #8b949e */
 }
 
 /* 暗色模式变量集：手动设置与系统偏好共用 */
 @mixin theme-dark {
+  /* 强调色 - 暗色下提亮 */
+  --color-secondary: 94 234 212; /* #5eead4 - teal-300 */
+  --color-primary: 45 212 191; /* #2dd4bf - teal-400 */
+
+  /* 语义色提亮 */
+  --color-success: 74 222 128; /* #4ade80 */
+  --color-warning: 251 191 36; /* #fbbf24 */
+  --color-error: 248 113 113; /* #f87171 */
+  --color-info: 94 234 212;
+
   /* 背景色系 */
   --color-section-bg: var(--color-dark-bg-primary);
-  --color-header-bg: var(--color-dark-bg-secondary);
   --color-gray-50: var(--color-dark-bg-primary);
   --color-gray-100: var(--color-dark-bg-secondary);
-  --color-gray-200: 64 64 64; /* #404040 */
-  --color-gray-300: 96 96 96; /* #606060 */
+  --color-gray-200: 48 54 61; /* #30363d */
+  --color-gray-300: 75 85 99; /* #4b5563 */
 
-  /* 文字色系 - 增强对比度 */
+  /* 文字色系 */
   --color-text-primary: var(--color-dark-text-primary);
-  --color-text-secondary: 209 213 219; /* #d1d5db - 更亮的次要文字 */
-  --color-gray-400: 209 213 219; /* #d1d5db - 更亮的灰色文字 */
-  --color-gray-500: 229 231 235; /* #e5e7eb - 更亮的灰色 */
-  --color-gray-600: 243 244 246; /* #f3f4f6 - 接近白色 */
-  --color-gray-700: 249 250 251; /* #f9fafb - 非常接近白色 */
+  --color-text-secondary: var(--color-dark-text-secondary);
+  --color-gray-400: 139 148 158;
+  --color-gray-500: 177 186 196;
+  --color-gray-600: 209 213 219;
+  --color-gray-700: 243 244 246;
 
-  /* Enhanced Card Colors - 暗色模式高对比度卡片颜色系统 */
-  --card-bg: 51 55 64; /* #333740 - much lighter than background for contrast */
-  --card-bg-hover: 63 67 78; /* #3f434e - hover effect */
-  --card-border: 107 114 128; /* #6b7280 - much more defined border */
-  --card-border-hover: 156 163 175; /* #9ca3af - darker border on hover */
-  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.4); /* enhanced shadow */
-  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.5); /* stronger shadow on hover */
+  /* Surface Colors - 暗色表面 */
+  --card-bg: 22 27 34; /* #161b22 */
+  --card-bg-hover: 33 38 45; /* #21262d */
+  --card-border: 48 54 61; /* #30363d */
+  --card-border-hover: 75 85 99; /* #4b5563 */
+  --card-shadow: 0 1px 3px rgba(0 0 0 / 0.3);
+  --card-shadow-hover: 0 4px 12px rgba(0 0 0 / 0.4);
 
-  /* Component Accent Colors - 暗色模式组件强调色 */
-  --accent-project: 96 165 250; /* #60a5fa - 项目卡片亮蓝 */
-  --accent-advantage: 52 211 153; /* #34d399 - 优势卡片亮绿 */
-  --accent-work: 244 114 182; /* #f472b6 - 工作经历亮粉红 */
-  --accent-education: 251 191 36; /* #fbbf24 - 教育卡片亮橙 */
-  --accent-value: 167 139 250; /* #a78bfa - 价值卡片亮紫 */
+  /* Hairline - 暗色细分割线 */
+  --color-hairline: rgb(var(--color-text-primary) / 0.1);
 
-  /* Header Colors - 暗色模式Header文字保持白色 */
-  --header-text-primary: 255 255 255; /* #ffffff */
-  --header-text-secondary: 226 232 240; /* #e2e8f0 */
-
-  /* Enhanced Header Gradient - 暗色模式更显眼的头部背景 */
-  --gradient-header: linear-gradient(
-    135deg,
-    rgb(var(--color-secondary) / 0.12) 0%,
-    rgb(var(--color-primary) / 0.08) 50%,
-    rgb(var(--color-header-bg)) 100%
+  /* 背景光晕 - 暗色下稍强 */
+  --gradient-glow: radial-gradient(
+    ellipse 55% 40% at 75% 0%,
+    rgb(var(--color-secondary) / 0.08),
+    transparent 70%
   );
-  --header-border-color: rgb(var(--color-secondary) / 0.3); /* 暗色模式头部边框颜色 */
-
-  /* Code Colors - 暗色模式代码块颜色 */
-  --code-bg: 75 85 99; /* #4b5563 - 中灰背景，与深色背景有对比 */
-  --code-text: 96 165 250; /* #60a5fa - 亮蓝色，醒目 */
-  --code-text-alt: 251 191 36; /* #fbbf24 - 橙色，用于代码强调 */
-
-  /* Text Emphasis Colors - 文本强调颜色（暗色模式） */
-  --text-bold-color: 244 114 182; /* #f472b6 - 亮粉红色，用于加粗文本 */
-  --text-italic-color: 167 139 250; /* #a78bfa - 亮紫色，用于斜体文本 */
-  --text-bold-italic-color: 244 114 182; /* #f472b6 - 亮粉红色，用于加粗斜体 */
 
   /* 状态背景色 */
   --loading-bg: var(--color-dark-bg-secondary);
-  --error-bg: rgba(231, 76, 60, 0.1); /* 错误背景 */
-  --empty-bg: rgba(108, 117, 125, 0.1); /* 空状态背景 */
+  --error-bg: rgb(var(--color-error) / 0.1);
+  --empty-bg: rgb(var(--color-gray-500) / 0.1);
 }
 
 /* 暗色模式 - 手动设置 */
@@ -284,56 +233,44 @@
   }
 }
 
-/* 亮色模式 - 手动设置（确保覆盖暗色模式） */
+/* 亮色模式 - 手动设置（确保覆盖系统暗色偏好） */
 :root[data-theme='light'] {
-  /* 背景色系 */
-  --color-section-bg: 248 249 250; /* #f8f9fa */
-  --color-header-bg: 248 249 250; /* #f8f9fa */
+  --color-secondary: 13 148 136;
+  --color-primary: 15 118 110;
+  --color-success: 22 163 74;
+  --color-warning: 217 119 6;
+  --color-error: 220 38 38;
+  --color-info: 13 148 136;
 
-  /* 文字色系 - 亮色模式使用深色文字（Header除外） */
-  --color-text-primary: 31 41 55; /* #1f2937 - 更深的主文字，增强对比度 */
-  --color-text-secondary: 75 85 99; /* #4b5563 - 更深的次要文字，增强可读性 */
+  --color-section-bg: 250 250 250;
+  --color-gray-50: 250 250 250;
+  --color-gray-100: 244 244 245;
+  --color-gray-200: 228 228 231;
+  --color-gray-300: 212 212 216;
+  --color-gray-400: 161 161 170;
+  --color-gray-500: 113 113 122;
+  --color-gray-600: 82 82 91;
+  --color-gray-700: 39 39 42;
 
-  /* Card Colors - 亮色模式高对比度卡片颜色系统 */
-  --card-bg: 255 255 255; /* #ffffff - pure white for strong contrast */
-  --card-bg-hover: 248 250 252; /* #f8fafc - subtle hover effect */
-  --card-border: 203 213 225; /* #cbd5e1 - much more defined border */
-  --card-border-hover: 160 174 192; /* #a0aec0 - darker border on hover */
-  --card-shadow: 0 4px 25px rgba(0 0 0 / 0.15); /* enhanced shadow */
-  --card-shadow-hover: 0 8px 35px rgba(0 0 0 / 0.2); /* stronger shadow on hover */
+  --color-text-primary: 24 24 27;
+  --color-text-secondary: 82 82 91;
 
-  /* Component Accent Colors - 亮色模式组件强调色 */
-  --accent-project: 59 130 246; /* #3b82f6 - 项目卡片蓝 */
-  --accent-advantage: 16 185 129; /* #10b981 - 优势卡片绿 */
-  --accent-work: 236 72 153; /* #ec4899 - 工作经历粉红 */
-  --accent-education: 245 158 11; /* #f59e0b - 教育卡片橙 */
-  --accent-value: 139 92 246; /* #8b5cf6 - 价值卡片紫 */
+  --card-bg: 255 255 255;
+  --card-bg-hover: 250 250 250;
+  --card-border: 228 228 231;
+  --card-border-hover: 212 212 216;
+  --card-shadow: 0 1px 3px rgba(0 0 0 / 0.06);
+  --card-shadow-hover: 0 4px 12px rgba(0 0 0 / 0.08);
 
-  /* Header Colors - 亮色模式Header文字保持白色（适配深色渐变背景） */
-  --header-text-primary: 255 255 255; /* #ffffff */
-  --header-text-secondary: 247 250 252; /* #f7fafc */
+  --color-hairline: rgb(var(--color-text-primary) / 0.08);
 
-  /* Header Gradient - 亮色模式头部背景 */
-  --gradient-header: linear-gradient(
-    135deg,
-    rgb(var(--color-secondary) / 0.08) 0%,
-    rgb(var(--color-primary) / 0.05) 50%,
-    rgb(var(--color-header-bg)) 100%
+  --gradient-glow: radial-gradient(
+    ellipse 55% 40% at 75% 0%,
+    rgb(var(--color-secondary) / 0.05),
+    transparent 70%
   );
-  --header-border-color: rgb(var(--color-secondary) / 0.2); /* 头部边框颜色 */
 
-  /* Code Colors - 亮色模式代码块颜色 */
-  --code-bg: 229 231 235; /* #e5e7eb - 浅灰背景 */
-  --code-text: 59 130 246; /* #3b82f6 - 亮蓝色，醒目 */
-  --code-text-alt: 245 158 11; /* #f59e0b - 橙色，用于代码强调 */
-
-  /* Text Emphasis Colors - 文本强调颜色（亮色模式） */
-  --text-bold-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗文本 */
-  --text-italic-color: 139 92 246; /* #8b5cf6 - 紫色，用于斜体文本 */
-  --text-bold-italic-color: 236 72 153; /* #ec4899 - 粉红色，用于加粗斜体 */
-
-  /* State Background Colors - 状态背景色（亮色模式） */
-  --loading-bg: 248 249 250; /* #f8f9fa - 加载状态背景 */
-  --error-bg: rgba(231, 76, 60, 0.1); /* 错误背景 */
-  --empty-bg: rgba(108, 117, 125, 0.1); /* 空状态背景 */
+  --loading-bg: 250 250 250;
+  --error-bg: rgb(var(--color-error) / 0.06);
+  --empty-bg: rgb(var(--color-gray-500) / 0.06);
 }

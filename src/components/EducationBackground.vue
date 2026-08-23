@@ -9,36 +9,20 @@
 
 <template>
   <section class="section education" id="education">
-    <h2 class="section-title">🎓 教育背景</h2>
+    <h2 class="section-title"><span class="section-index">04</span>教育背景</h2>
 
-    <div
-      class="education-card"
-      v-motion
-      :initial="{ opacity: 0, y: 30 }"
-      :visible-once="{ opacity: 1, y: 0 }"
-      :transition="{
-        delay: 300,
-        duration: 600,
-        type: 'spring',
-        stiffness: 100,
-      }"
-    >
-      <div class="school-info mb-6">
-        <h3 class="text-xl font-semibold text-primary mb-2">{{ data.school }}</h3>
-        <div class="flex flex-wrap gap-4 text-sm text-text-secondary">
-          <span class="major">{{ data.major }}</span>
-          <span class="duration">{{ data.duration }}</span>
-        </div>
+    <div class="item-header">
+      <div class="flex items-center gap-3 flex-wrap">
+        <h3 class="text-lg font-semibold text-primary m-0">{{ data.school }}</h3>
+        <span class="text-sm text-text-secondary">{{ data.major }}</span>
       </div>
-
-      <ul class="education-experience-list">
-        <li
-          v-for="(exp, index) in data.experiences"
-          :key="index"
-        >
-          <span v-html="renderInlineMarkdown(exp)"></span>
-        </li>
-      </ul>
+      <span class="duration">{{ data.duration }}</span>
     </div>
+
+    <ul class="marker-list mt-3">
+      <li v-for="(exp, index) in data.experiences" :key="index">
+        <span v-html="renderInlineMarkdown(exp)"></span>
+      </li>
+    </ul>
   </section>
 </template>

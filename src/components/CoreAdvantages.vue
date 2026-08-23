@@ -9,31 +9,13 @@
 
 <template>
   <section class="section core-advantages" id="core">
-    <h2 class="section-title">🔍 核心优势</h2>
+    <h2 class="section-title"><span class="section-index">01</span>核心优势</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div
-        v-for="(item, index) in advantages"
-        :key="index"
-        class="advantage-card"
-        v-motion
-        :initial="{ opacity: 0, y: 30, scale: 0.95 }"
-        :visible-once="{ opacity: 1, y: 0, scale: 1 }"
-        :transition="{
-          delay: index * 150,
-          duration: 600,
-          type: 'spring',
-          stiffness: 100,
-        }"
-      >
-        <h3 class="text-lg font-semibold text-secondary mb-4">{{ item.title }}</h3>
-        <ul>
-          <li
-            v-for="(point, pIndex) in item.items"
-            :key="pIndex"
-            class="relative pl-6 py-2 border-b border-b-[rgb(var(--card-border))] last:border-b-0"
-          >
-            <span class="absolute left-0 text-secondary">▹</span>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+      <div v-for="(item, index) in advantages" :key="index">
+        <h3 class="text-base font-semibold text-primary mb-3">{{ item.title }}</h3>
+        <ul class="marker-list text-[0.9375rem]">
+          <li v-for="(point, pIndex) in item.items" :key="pIndex">
             <span v-html="renderInlineMarkdown(point)"></span>
           </li>
         </ul>

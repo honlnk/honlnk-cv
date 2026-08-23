@@ -1,12 +1,38 @@
 <template>
   <button
     @click="toggleTheme"
-    :class="['theme-toggle', { 'theme-toggle--active': true }]"
+    class="theme-toggle"
     :title="`${getThemeLabel()} (点击切换)`"
     aria-label="主题切换"
     type="button"
   >
-    <span class="theme-toggle__icon">{{ getThemeIcon() }}</span>
+    <!-- Lucide 官方 SVG（sun / moon / monitor） -->
+    <svg
+      class="theme-toggle__icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <template v-if="theme === 'light'">
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+        />
+      </template>
+      <template v-else-if="theme === 'dark'">
+        <path
+          d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+        />
+      </template>
+      <template v-else>
+        <rect width="20" height="14" x="2" y="3" rx="2" />
+        <path d="M8 21h8m-4-4v4" />
+      </template>
+    </svg>
     <span class="theme-toggle__label">{{ getThemeLabel() }}</span>
   </button>
 </template>
@@ -14,67 +40,39 @@
 <script setup lang="ts">
   import { useTheme } from '@/composables/useTheme'
 
-  const { toggleTheme, getThemeIcon, getThemeLabel } = useTheme()
+  const { theme, toggleTheme, getThemeLabel } = useTheme()
 </script>
 
 <style scoped lang="scss">
   .theme-toggle {
-    @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium;
-    background-color: rgb(var(--color-section-bg));
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-lg);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    background-color: rgb(var(--card-bg));
     color: rgb(var(--color-text-secondary));
-    border: var(--border-width-1) solid rgb(var(--card-border));
+    border: var(--border-width-1) solid var(--color-hairline);
     cursor: pointer;
-    transition: all var(--duration-normal) var(--ease-out);
-    backdrop-filter: var(--backdrop-blur-sm);
-    position: relative;
-    overflow: hidden;
+    transition:
+      color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      background-color var(--duration-fast) var(--ease-out);
 
     &:hover {
-      background-color: rgb(var(--color-secondary) / 0.1);
       color: rgb(var(--color-secondary));
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
+      border-color: rgb(var(--color-secondary) / 0.35);
     }
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 var(--border-width-2) rgba(var(--color-secondary), 0.5);
+      box-shadow: 0 0 0 var(--border-width-2) rgb(var(--color-secondary) / 0.5);
     }
 
     &:active {
-      transform: translateY(0);
-    }
-
-    /* 主题切换动画 */
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(var(--color-secondary), 0.3) 0%, transparent 70%);
-      transform: translate(-50%, -50%);
-      transition: all var(--duration-normal) var(--ease-out);
-      pointer-events: none;
-    }
-
-    &:active::before {
-      width: 100px;
-      height: 100px;
-    }
-
-    /* 暗色模式适配 */
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme='light']) & {
-        background-color: rgb(var(--color-dark-bg-secondary));
-        border-color: rgb(var(--color-gray-200));
-
-        &:hover {
-          background-color: rgba(var(--color-secondary), 0.2);
-        }
-      }
+      transform: translateY(1px);
     }
 
     /* 响应式调整 */
@@ -84,18 +82,9 @@
   }
 
   .theme-toggle__icon {
-    font-size: var(--font-size-lg);
-    line-height: 1;
-    display: inline-block;
-    transition: transform var(--duration-normal) var(--ease-out);
-
-    @media (max-width: 640px) {
-      font-size: var(--font-size-xl);
-    }
-  }
-
-  .theme-toggle:hover .theme-toggle__icon {
-    transform: rotate(20deg);
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
   }
 
   .theme-toggle__label {

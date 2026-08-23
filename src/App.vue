@@ -39,24 +39,24 @@
     <div class="resume-container">
       <!-- 加载状态 -->
       <div v-if="isLoading" class="loading-state">
-        <div class="state-icon">⏳</div>
+        <span class="state-icon i-lucide:loader-circle" aria-hidden="true"></span>
         <div class="loading-title">正在加载简历数据...</div>
       </div>
 
       <!-- 错误状态 -->
       <div v-else-if="hasError" class="error-state">
-        <div class="state-icon">⚠️</div>
+        <span class="state-icon i-lucide:triangle-alert" aria-hidden="true"></span>
         <div class="error-title">加载失败</div>
         <div class="error-message">抱歉，无法加载简历数据。请检查网络连接或稍后重试。</div>
         <button @click="loadResumeData" class="retry-btn">
-          <span>🔄</span>
+          <span class="i-lucide:refresh-cw" aria-hidden="true"></span>
           <span>重新加载</span>
         </button>
       </div>
 
       <!-- 空数据状态 -->
       <div v-else-if="isEmpty" class="empty-state">
-        <div class="state-icon">📄</div>
+        <span class="state-icon i-lucide:inbox" aria-hidden="true"></span>
         <div class="empty-title">暂无简历数据</div>
         <div class="empty-message">请检查 README.md 文件是否存在并包含有效的简历信息。</div>
       </div>
@@ -65,7 +65,7 @@
       <template v-else-if="resumeData">
         <Header :data="resumeData" />
 
-        <main class="content flex flex-col gap-8">
+        <main class="content flex flex-col">
           <CoreAdvantages :advantages="resumeData.coreAdvantages" />
           <WorkExperience :work-experience="resumeData.workExperience" />
           <ProjectExperience :projects="resumeData.projects" />
@@ -78,5 +78,5 @@
 </template>
 
 <style lang="scss">
-  @import '@/styles/main.scss';
+  @use '@/styles/main.scss';
 </style>

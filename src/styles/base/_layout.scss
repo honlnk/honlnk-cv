@@ -1,6 +1,7 @@
 /**
  * Layout System
- * 应用布局系统
+ * 应用布局系统：单栏编辑式排版
+ * 区块之间用细分割线 + 大留白分隔，不使用卡片包裹
  */
 
 @layer base {
@@ -8,23 +9,38 @@
   .app-container {
     min-height: 100vh;
     background-color: rgb(var(--color-section-bg));
+    transition:
+      background-color var(--duration-normal) var(--ease-out),
+      color var(--duration-normal) var(--ease-out);
+
+    /* 背景环境光晕：极淡的强调色径向渐变，打破纯色的模板感 */
+    &::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: var(--gradient-glow);
+      pointer-events: none;
+      z-index: 0;
+    }
   }
 
-  /* 简历容器 */
+  /* 简历容器：窄栏文字流 */
   .resume-container {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    max-width: 1200px; /* 适合现代简历的宽度 */
+    max-width: 920px;
     margin: 0 auto;
-    padding: var(--spacing-2xl) var(--spacing-xl);
+    padding: var(--spacing-3xl) var(--spacing-xl);
     box-sizing: border-box;
 
     /* 响应式布局 */
     @media (max-width: 768px) {
-      padding: var(--spacing-lg) var(--spacing-md);
+      padding: var(--spacing-2xl) var(--spacing-lg);
     }
 
     @media (max-width: 480px) {
-      padding: var(--spacing-md) var(--spacing-sm);
+      padding: var(--spacing-xl) var(--spacing-md);
     }
 
     /* 打印样式 */
@@ -44,12 +60,25 @@
       margin-top: var(--spacing-xl);
     }
 
-    @media (max-width: 480px) {
-      margin-top: var(--spacing-lg);
+    @media print {
+      margin-top: 1rem;
+    }
+  }
+
+  /* 区块：细分割线 + 大留白（首个区块无顶部分割线） */
+  .section {
+    padding: var(--spacing-2xl) 0;
+
+    & + & {
+      border-top: var(--border-width-1) solid var(--color-hairline);
+    }
+
+    @media (max-width: 768px) {
+      padding: var(--spacing-xl) 0;
     }
 
     @media print {
-      margin-top: 1rem;
+      padding: var(--spacing-md) 0;
     }
   }
 }

@@ -11,6 +11,24 @@ marked.setOptions({
 })
 
 /**
+ * 中日韩统一表意文字范围（不含全角标点，避免标点前被加空格）
+ */
+const CJK_CHAR = '[\\u3400-\\u4dbf\\u4e00-\\u9fff\\uf900-\\ufaff]'
+
+/**
+ * 中英文/中文与数字之间自动加空格（中文文案排版规范）
+ * 只对纯文本生效；代码、链接等由渲染流程后续处理
+ * @param text - 原始文本
+ * @returns 加空格后的文本
+ */
+export function applyCjkSpacing(text: string): string {
+  if (!text) return text
+  return text
+    .replace(new RegExp(`(${CJK_CHAR})([A-Za-z0-9])`, 'g'), '$1 $2')
+    .replace(new RegExp(`([A-Za-z0-9])(${CJK_CHAR})`, 'g'), '$1 $2')
+}
+
+/**
  * 简单的内联 Markdown 渲染函数（同步）
  * @param content - Markdown 文本内容
  * @returns 渲染后的 HTML 字符串
@@ -20,7 +38,7 @@ export function renderInlineMarkdown(content: string): string {
 
   try {
     // 简单的正则替换来处理常见的 Markdown 语法
-    let html = content
+    let html = applyCjkSpacing(content)
 
     // 处理粗体 **text** 和 __text__
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -40,7 +58,7 @@ export function renderInlineMarkdown(content: string): string {
     const cleanHtml = DOMPurify.sanitize(html, {
       ALLOWED_TAGS: ['strong', 'b', 'em', 'i', 'u', 's', 'del', 'ins', 'a', 'span', 'code'],
       ALLOWED_ATTR: ['href', 'title', 'target', 'class'],
-      ALLOW_DATA_ATTR: false
+      ALLOW_DATA_ATTR: false,
     })
 
     return cleanHtml
@@ -82,7 +100,7 @@ export function renderNestedList(items: ListItem[]): string {
   return DOMPurify.sanitize(html, {
     ALLOWED_TAGS: ['ul', 'li', 'span', 'strong', 'b', 'em', 'i', 'code', 'a'],
     ALLOWED_ATTR: ['class', 'href', 'title', 'target'],
-    ALLOW_DATA_ATTR: false
+    ALLOW_DATA_ATTR: false,
   })
 }
 
@@ -101,14 +119,34 @@ export async function renderMarkdown(content: string): Promise<string> {
     // 使用 DOMPurify 清理 HTML，防止 XSS 攻击
     const cleanHtml = DOMPurify.sanitize(html, {
       ALLOWED_TAGS: [
-        'p', 'br', 'strong', 'b', 'em', 'i', 'u', 's', 'del', 'ins',
-        'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-        'ul', 'ol', 'li',
-        'a', 'span', 'code', 'pre',
-        'blockquote', 'hr'
+        'p',
+        'br',
+        'strong',
+        'b',
+        'em',
+        'i',
+        'u',
+        's',
+        'del',
+        'ins',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'ul',
+        'ol',
+        'li',
+        'a',
+        'span',
+        'code',
+        'pre',
+        'blockquote',
+        'hr',
       ],
       ALLOWED_ATTR: ['href', 'title', 'target', 'class'],
-      ALLOW_DATA_ATTR: false
+      ALLOW_DATA_ATTR: false,
     })
 
     return cleanHtml

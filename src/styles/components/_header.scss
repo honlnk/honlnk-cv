@@ -1,66 +1,49 @@
 /**
  * Header Components
- * 头部组件样式（Header 专用，从原 main.css 工具类迁移）
+ * 头部样式：文字驱动的编辑式头部
+ * 无渐变卡片、无盒中盒；超大姓名 + 一句话定位 + 图标联系方式行
  */
 
-@use '../mixins' as *;
-
 @layer utilities {
-  /* 通用卡片工具类（Header 内容卡片使用） */
-  .card {
-    @include card-base;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Header 文字专用样式 - 使用设计系统变量 */
-  .header-name {
-    color: rgb(var(--header-text-primary));
-    font-weight: var(--font-weight-extrabold);
-    letter-spacing: -0.025em; /* 轻微的字间距调整 */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 增强阴影确保可读性 */
-  }
-
-  .header-position {
-    color: rgb(var(--header-text-secondary));
-    font-weight: var(--font-weight-semibold);
-    opacity: 1; /* 移除透明度，确保清晰 */
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* 增强阴影确保可读性 */
-  }
-
-  /* Header 渐变边框样式 - 大盒子套小盒子实现 */
-  .header-container {
-    padding: 4px; /* 边框厚度 */
-    background: linear-gradient(135deg, rgb(var(--color-secondary)), rgb(var(--color-primary)));
-    border-radius: calc(var(--border-radius-card) + 4px);
-    position: relative;
-
-    /* 为暗色模式调整边框透明度（系统偏好） */
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme='light']) & {
-        background: linear-gradient(
-          135deg,
-          rgb(var(--color-secondary) / 0.8),
-          rgb(var(--color-primary) / 0.7)
-        );
-      }
+  .site-header {
+    .header-name {
+      font-size: clamp(2.25rem, 5vw, 3rem);
+      font-weight: var(--font-weight-extrabold);
+      letter-spacing: -0.03em;
+      line-height: var(--line-height-tight);
+      color: rgb(var(--color-text-primary));
+      margin: 0 0 var(--spacing-sm);
     }
-  }
 
-  .header-inner {
-    background: var(--gradient-header);
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--border-radius-card);
-  }
-}
+    .header-position {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: rgb(var(--color-text-secondary));
+      margin: 0 0 var(--spacing-lg);
+    }
 
-/* 手动暗色模式 */
-@layer utilities {
-  :root[data-theme='dark'] .header-container {
-    background: linear-gradient(
-      135deg,
-      rgb(var(--color-secondary) / 0.8),
-      rgb(var(--color-primary) / 0.7)
-    );
+    /* 联系方式：图标 + 文字的流式行 */
+    .contact-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm) var(--spacing-lg);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      font-size: var(--font-size-sm);
+      color: rgb(var(--color-text-secondary));
+    }
+
+    .contact-icon {
+      font-size: var(--font-size-base);
+      color: rgb(var(--color-secondary));
+      flex-shrink: 0;
+    }
   }
 }

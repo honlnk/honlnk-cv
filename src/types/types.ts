@@ -75,7 +75,7 @@ export interface BasicInfoField {
   key: string
   /** 显示名称 */
   label: string
-  /** 图标（内置，用户不需要在README中写emoji） */
+  /** 图标（UnoCSS presetIcons 类名，如 i-lucide:mail；用户不需要在 README 中写 emoji） */
   icon: string
   /** 是否必填字段 */
   required?: boolean

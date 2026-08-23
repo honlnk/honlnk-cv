@@ -96,21 +96,6 @@ export function useTheme() {
     applyTheme(targetTheme)
   }
 
-  // 获取主题图标
-  const getThemeIcon = (mode?: ThemeMode) => {
-    const currentMode = mode || theme.value
-    switch (currentMode) {
-      case 'light':
-        return '☀️'
-      case 'dark':
-        return '🌙'
-      case 'auto':
-        return '🔄'
-      default:
-        return '🔄'
-    }
-  }
-
   // 获取主题标签
   const getThemeLabel = (mode?: ThemeMode) => {
     const currentMode = mode || theme.value
@@ -155,7 +140,6 @@ export function useTheme() {
     appliedTheme,
     toggleTheme,
     setTheme,
-    getThemeIcon,
     getThemeLabel,
     getNextTheme,
   }

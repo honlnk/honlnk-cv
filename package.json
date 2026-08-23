@@ -19,7 +19,8 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.418",
+    "@iconify-json/lucide": "^1.2.125",
+    "@iconify-json/simple-icons": "^1.2.93",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.1",
     "@unocss/preset-icons": "^66.5.10",
@@ -29,7 +30,6 @@
     "@vitest/ui": "^4.0.15",
     "@vue/eslint-config-typescript": "^14.3.0",
     "@vue/tsconfig": "^0.7.0",
-    "@vueuse/motion": "^3.0.3",
     "eslint": "^9.18.0",
     "eslint-plugin-vue": "^9.32.0",
     "jiti": "^2.4.2",
