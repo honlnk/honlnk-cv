@@ -16,6 +16,16 @@
     '📚': 'i-lucide:book-open',
     '🛡️': 'i-lucide:shield-check',
     '🔧': 'i-lucide:wrench',
+    '🛠️': 'i-lucide:wrench',
+    '🏆': 'i-lucide:trophy',
+    '💡': 'i-lucide:lightbulb',
+    '📖': 'i-lucide:book-open',
+    '🎯': 'i-lucide:target',
+    '⚡': 'i-lucide:zap',
+    '🌟': 'i-lucide:sparkles',
+    '⭐': 'i-lucide:star',
+    '📌': 'i-lucide:pin',
+    '📝': 'i-lucide:pen-line',
   }
 
   function getValueIcon(emoji: string): string {

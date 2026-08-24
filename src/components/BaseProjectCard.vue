@@ -37,14 +37,14 @@
   <article class="project-item" :class="{ 'project-item--nested': variant === 'work-nested' }">
     <!-- 项目头部：标题 + 角色徽章 + 时间 -->
     <div class="item-header">
+      <h3 v-if="variant === 'project'" class="text-lg font-semibold text-primary m-0">
+        {{ project.title }}
+      </h3>
+      <h4 v-else class="text-base font-semibold text-primary m-0">{{ project.title }}</h4>
       <div class="flex items-center gap-3 flex-wrap">
-        <h3 v-if="variant === 'project'" class="text-lg font-semibold text-primary m-0">
-          {{ project.title }}
-        </h3>
-        <h4 v-else class="text-base font-semibold text-primary m-0">{{ project.title }}</h4>
         <span v-if="project.role" class="role-chip">{{ project.role }}</span>
+        <span v-if="project.duration" class="duration">{{ project.duration }}</span>
       </div>
-      <span v-if="project.duration" class="duration">{{ project.duration }}</span>
     </div>
 
     <!-- 项目亮点 -->

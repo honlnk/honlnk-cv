@@ -20,11 +20,11 @@
     >
       <!-- 工作经历头部 -->
       <div class="item-header">
+        <h3 class="text-lg font-semibold text-primary m-0">{{ work.company }}</h3>
         <div class="flex items-center gap-3 flex-wrap">
-          <h3 class="text-lg font-semibold text-primary m-0">{{ work.company }}</h3>
           <span class="role-chip">{{ work.position }}</span>
+          <span class="duration">{{ work.duration }}</span>
         </div>
-        <span class="duration">{{ work.duration }}</span>
       </div>
 
       <div class="mt-5">
