@@ -43,5 +43,6 @@
     "vite-plugin-vue-devtools": "^7.7.1",
     "vitest": "^4.0.15",
     "vue-tsc": "^2.2.0"
-  }
+  },
+  "packageManager": "pnpm@10.21.0"
 }
