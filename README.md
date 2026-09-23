@@ -1,4 +1,4 @@
-# 鸿影 | AI Agent 开发工程师（智能体 / MCP 方向）
+# 鸿影 | AI Agent 开发工程师
 
 ## 基本信息
 
@@ -18,11 +18,11 @@
 - **姓名**: 鸿影（Honlnk）
 - **年龄**: 22岁
 - **职位**: AI Agent 开发工程师（智能体 / MCP 方向）
-- **期望薪资**: 面议
-- **学历**: 专科
-- **期望城市**: 济南、北京、杭州、成都
-- **工作经验**: 1年半
-- **求职状态**: 在职-月内到岗
+- **期望薪资**: 13-16K（具体可面议）
+- **学历**: 山东商业职业技术大学
+- **期望城市**: 北京
+- **工作经验**: 1.5年
+- **求职状态**: 离职-随时到岗
 - **手机**: 19563491369
 - **微信**: q3251099516
 - **邮箱**: honlnk@qq.com
@@ -31,46 +31,89 @@
 
 ## 核心优势
 
-### 智能体与 MCP 开发
+### 智能体与 Harness 工程
 
-- 自研多个生产级 MCP Server（联网搜索 linkseek、视觉识别 picsense），覆盖 stdio 与 Streamable HTTP 两种传输，日常自用并在线运行
-- Agent 工具系统设计：文件工具集（读 / 写 / 编辑 / 防陈旧写入）、RAG 主动召回工具、执行层安全约束——中文自然语言约束（如「只改当前文件」）解析为强制策略，三层防御
-- 流式 tool_calls 解析与分片重组，解析失败自动降级非流式重试并保留诊断信息
-- 多智能体实践：双 Agent 独立记忆与视角翻转、用子智能体评审开发计划并逐条复核
+- 研读 DeepSeek Harness 的实现并逐项落地到自有项目：Agent Loop、Tool Use、Memory、RAG、渐进式披露（progressive disclosure）
+- 自研生产级 MCP Server ×2（联网搜索 linkseek、视觉识别 picsense），覆盖 stdio 与 Streamable HTTP 传输，日常自用并在线运行
+- Prompt / Context / Harness Engineering 与 LLM API 工程实战：滚动摘要防记忆漂移、长上下文压缩组装；SSE 流式解析、中断与超时治理，OpenAI / Anthropic / Gemini 多协议适配
 
-### LLM 应用与 RAG 工程
+### AI 协作开发
 
-- RAG 全链路：向量增量索引（contentHash 短路复用）、中文召回策略（放大召回 + 本地精确过滤）、长上下文组装
-- LLM 流式工程：手写 SSE 解析、可重置空闲超时、用户中断与超时区分处理
-- 多协议适配：OpenAI / OpenAI-Responses / Anthropic / Gemini
-- Prompt 与记忆工程：模式化提示词、防改写机制、第一人称滚动摘要防记忆漂移
+- 一人 + AI 协作产出约 20 万行可维护代码：契约文档先行、ADR 决策留档、100+ 测试文件与 CI 全绿门禁，AI 产出可审计可回溯
+- 前端出身，在 AI 辅助下进入传统行业实现互联网赋能：独立交付企业平台 Java 后端 / 管理端 / 前台 / 部署全链路（已上线）
 
-### 全栈与跨端交付
+### Agent 产品高强度用户
 
-- 前端：TypeScript、Vue 3、Nuxt 3（SSR）、Tauri 桌面端、Qiankun 微前端（企业生产落地）
-- 后端：Node.js（Fastify）、Java（Spring Boot 3 / RuoYi-Vue-Plus）、MySQL、Redis
-- 同一套核心代码交付四种形态：纯浏览器 / 本地 CLI（npm）/ Docker 服务端 / 桌面 App
-- 企业实战：独立负责公司平台全链路（后端 / 管理端 / 前台 / 部署发布工程）
+- 代码类 / 通用类 Agent 深度融入日常工作流，多 Agent 并行施工是常态；对模型行为有品味与判断力，对开发者体验有强感知
+- 把使用体感做成产品：dsh-input-assist、NovAI、MD Opener 均源于自己作为重度用户的真实痛点
 
-### AI 协作工程化与部署
+### 开源贡献与全栈交付
 
-- 一人 + AI 协作产出约 15 万行可维护代码：契约文档（AGENTS.md）先行、100+ 测试文件、CI 全绿门禁
-- 决策留档：ADR、逐 PR 演进记录、「方案 - 决策记录 - Runbook」三层文档方法论
-- Docker 多阶段构建与生产编排、GitHub Actions / 云效 Flow CI/CD、阿里云 ECS / OSS / CDN / ACR
-- 生产发布纪律：release tag 锚定版本、构建直达生产、版本参数回滚
+- 开源社区深度参与：GitHub 38 个公开仓库、4 个 npm 包与 Docker 镜像发布；dsh 官方讨论区双语发布帖，收录 PR 均合并
+- 小团队快速迭代：2026.04 至今 7 个项目从 0 做到上线并有真实用户，同一套核心代码交付纯浏览器 / CLI / Docker / 桌面端四种形态
+
+## 项目经历
+
+### dsh-input-assist — DeepSeek Harness 输入助手插件
+
+**角色**: 独立开发 | **时间**: 2026.08 - 至今
+
+**链接**: [GitHub](https://github.com/honlnk/dsh-input-assist) | [官网 / 演示](https://honlnk.github.io/dsh-input-assist/)
+
+- **定位**: 探索一个尚无成熟参照的开放问题——如何让 AI 在用户打字过程中帮上忙而不打断思路（Claude Code / Codex / Cursor 均未做输入框内辅助）：为 dsh（DeepSeek Harness）Web UI 做的输入助手插件，Copilot 式流式补全 + 中英错别字检查，dsh 生态首个输入框增强实现
+- 实现：ghost text 流式补全（FIM + SSE 逐字渐显、中文按词采纳、在途请求取消）+ 错别字双层检测（本地词典即时标红 + LLM 上下文校对，红字波浪线逐条修正、绝不全量替换）
+- 交付与验证：双名 npm 发布（OIDC 免 token）、跨 dsh 0.1.1 → 0.1.5 三个大版本适配；awesome / deepseek1024 收录 PR 均已合并，月下载 3,100+
+- **探索中**: 交互形态已立，「好用」未达成——瓶颈不在交互而在上下文：模型只看得到输入框里的只言片语，不理解对话上文与用户真实意图，补全与纠错的质量还不够像样。正在实验上下文注入与触发时机的方案，尚无满意答案；同一实现已内置进 NovAI（见下文），正在真实小说创作中检验它能带来多少实际帮助
+
+**技术栈**: TypeScript | DeepSeek FIM | SSE | dsh 插件体系（cordis）| tsdown
+
+### NovAI — 长篇小说 AI 创作工作台（文件 Agent + RAG）
+
+**角色**: 独立开发 | **时间**: 2026.04 - 至今
+
+**链接**: [GitHub](https://github.com/honlnk/NovAI) | [在线体验](https://novai.honlnk.com)
+
+- **定位**: 为长篇创作原生设计的 Agent 工作台——主流 AI 写作产品仍停留在「续写」级别，而想要 agentic 体验的作者只能借用为代码设计的编程 Agent
+- **形态**: NovAI 把 Agent Loop 带进纯浏览器：零安装、本地文件夹即小说项目，Agent 直接读写章节文件，验证「文件 + RAG」替代聊天记忆，聊天只是控制面板
+- **工具系统与安全执行**: 不赋 shell 能力——Agent 只能经结构化文件工具读写项目内文件，路径防逃逸、删除只进回收站，破坏面架构性收敛在用户授权的单个文件夹内；联网搜索工具接入自托管 linkseek，Agent 可自主查证写作资料
+- **设定资产积累（与编程 Agent 的本质差异）**: 代码可 grep，但「人物性格」「伏笔走向」无文本可匹配——长篇的上下文必须沉淀为资产：LLM 从章节抽取六类要素入结构化 Markdown 库，向量索引只索引要素而非正文以控噪声，Agent 自主决定何时 RagSearch 召回而非每轮全量注入
+
+**技术栈**: TypeScript | Vue 3 | Orama | File System Access API | Agent Loop
+
+### gpt-image-studio — AI 图片创作工作台（旗舰项目|已结项）
+
+**角色**: 独立开发（产品 / 架构 / 实现） | **时间**: 2026.05 - 2026.09
+
+**链接**: [GitHub](https://github.com/honlnk/gpt-image-studio) | [在线体验](https://image.honlnk.com)
+
+- **定位**: 一套核心代码交付四种形态——纯浏览器 / 本地 CLI（npm 已发布）/ Docker 服务端 / macOS 桌面端（Tauri）；另有 qiankun 微前端嵌入形态，已在企业生产管理台落地
+- **规模实证**: 从 0 到上线独立维护的完整产品——443 次提交、5.6 万行 TypeScript / Vue、95 个测试文件，CI 门禁（typecheck + test + build）全程全绿
+- **真实用户**: npm 累计下载 5,500+、Docker 镜像拉取 470+、GitHub 23★；桌面端三平台 CI 构建发布 + 免签名分发（curl|sh 一键安装）
+- **产品能力**: 聊天式创作 + partial_image 渐进预览、浏览器内遮罩编辑、四档提示词模式 + 防改写、图片库批量管理与 ZIP 备份（密钥永不入备份）
+- **结项**: 同类成熟产品众多、差异化空间有限，验证目标达成后主动结项转入维护，精力转向 dsh-input-assist 与 NovAI
+
+**技术栈**: TypeScript | Vue 3 | Pinia | Vite | Fastify | SQLite | Tauri | Qiankun | Docker
+
+### 更多开源项目
+
+- **duet** — 多智能体自主对话聊天室：给几个 AI 话题与身份让它们自己聊，独立记忆 + 滚动摘要防漂移 + 双层成本控制。[GitHub](https://github.com/honlnk/duet) · [在线体验](https://duet.honlnk.com)
+- **linkseek** — 自托管 MCP 联网搜索服务：为 AI 工具提供联网搜索与网页抓取，SSRF 三层防线 + 用量统计管理后台，日常自用运营中。[GitHub](https://github.com/honlnk/linkseek) · [在线体验](https://linkseek.honlnk.com)
+- **picsense** — 视觉识别 MCP Server：给纯文本模型「装眼睛」，图片 / 视频抽帧 / 文档插图识别，支持会话内多轮追问细节。[GitHub](https://github.com/honlnk/picsense) · [在线体验](https://picsense.honlnk.com) · [npm](https://www.npmjs.com/package/@honlnk/picsense)
+- **zcode-prompt-sanitizer** — prompt 清洗反向代理：从真实 Bug 做成的通用工具，请求体改写 + SSE 逐块透传，npm / Docker / 可编程 API 三种交付。[GitHub](https://github.com/honlnk/zcode-prompt-sanitizer) · [在线体验](https://sanitize.honlnk.com) · [npm](https://www.npmjs.com/package/@honlnk/zcode-prompt-sanitizer)
+- **MD Opener** — 零联网权限的移动端 Markdown 查看器：系统级 .md 文件关联、GB18030 编码回退（中文老文件不乱码）、导出 PDF；Android / iOS 双端单仓库，共享同一套渲染资产。[GitHub](https://github.com/honlnk/MDOpener) · [官网](https://mdopener.honlnk.com)
 
 ## 工作经历
 
 ### 山东易宏达照明电器有限公司
 
-**职位**: 全栈开发工程师（独立负责平台） | **时间**: 2026.03 - 至今
+**职位**: 全栈开发工程师（独立负责平台） | **时间**: 2026.03 - 2026.08
 
 #### 数字化平台（激光灯素材网 · 企业门户 · 灯具商城）
 
-**角色**: 独立设计与开发 | **时间**: 2026.03 - 至今
+**角色**: 独立设计与开发 | **时间**: 2026.03 - 2026.08
 
 - 传统照明企业（景区亮化行业）的数字化平台，一人负责全链路：后端 API（Java / RuoYi-Vue-Plus）、管理端（Vben）、前台站点（Nuxt 3 SSR）、部署与发布工程
-- 已上线激光灯素材网与企业门户，灯具商城开发中
+- 激光灯素材网、企业门户、灯具商城均已交付上线——商城打通素材 / 订单 / 支付 / 下载授权的交易闭环
 - 设计三层 Git 子模块拓扑（根仓库 → 框架仓库 → 业务仓库，共 9 仓库）：业务与开源基座彻底分层，上游框架可同步、业务可整体迁移，提交前守卫保证不改基座源码
 - 建立 tag 驱动发布流程：release tag 锚定版本、流水线构建直达生产、按版本参数回滚；云效 Flow + 阿里云 ACR / OSS / CDN
 - 架构升级「方案 - 决策记录 - Runbook」三层文档先行：10 项编号决策留档、7 阶段执行手册逐步骤含验收标准与回滚方法
@@ -81,89 +124,13 @@
 
 **职位**: 前端开发工程师 | **时间**: 2025.03 - 2026.03
 
-#### 企业级前端项目群（教学资源平台 · AI 智能笔记 · 文件管理系统）
+#### 主要成就
 
-**角色**: 前端核心开发 | **时间**: 2025.03 - 2026.03
-
-- AI 对话界面与 SSE 流式响应系统：智能体管理、实时消息推送、AbortController 中断与重试、常驻聊天抽屉双模式布局
-- Qiankun 微前端架构集成 3D 编辑器子应用，完成本地化改造与路由 / 性能优化
-- 独立开发 Markdown 渲染器子应用（代码高亮 / 数学公式 / Mermaid / ECharts），跨项目复用
-- pnpm workspace monorepo 管理 8 个子应用；视频播放器与字幕编辑系统
-
-**技术栈**: Vue 3 | TypeScript | VbenAdmin | SoybeanAdmin | Element Plus | Naive UI | Qiankun | SSE
-
-## 项目经历
-
-### gpt-image-studio — AI 图片创作工作台（旗舰项目）
-
-**角色**: 独立开发（产品 / 架构 / 实现） | **时间**: 2026.05 - 至今
-
-- **定位**: 一套代码交付四种形态——纯浏览器 / 本地 Companion CLI（npm 已发布）/ Docker 服务端 / macOS 桌面端（Tauri）
-- 产品能力：聊天式创作 + partial_image 渐进预览、浏览器内遮罩编辑、四档提示词模式 + 防改写、图片库批量管理与 ZIP 备份（密钥永不入备份）
-- 工程：存储抽象层五种实现 + 参数化契约测试、88 个测试文件、CI 全绿门禁（typecheck + test + build）
-- 已上线运行（image.honlnk.com），qiankun 微前端嵌入能力已在企业生产管理台落地
-
-**技术栈**: TypeScript | Vue 3 | Pinia | Vite | Fastify | SQLite | Tauri | Qiankun | Docker
-
-### NovAI — 长篇小说 AI 创作工作台（文件 Agent + RAG）
-
-**角色**: 独立开发 | **时间**: 2026.04 - 至今
-
-- **定位**: 验证一个产品判断——长篇创作中「文件 + RAG」替代聊天记忆：本地文件夹是小说数据源，Agent 像 Claude Code 操作代码一样直接读写章节文件，聊天只是控制面板
-- Claude Code 式 Agent 工具系统：读 / 写 / 编辑 / 更名 / 检索项目文件，EditFile 强制先 Read 防陈旧写入
-- 设定资产积累：章节要素（人物 / 地点 / 情节）自动提取入库 → 向量索引 → 后续创作时 Agent 主动检索召回，保持几十万字设定一致
-- RAG 工程：contentHash 增量索引短路（口径排除时间戳防误重算）、中文标签「放大召回 + 本地精确过滤」策略
-- 安全设计：中文自然语言约束解析为执行层强制策略，三层防御，不是 prompt 祈祷
-
-**技术栈**: TypeScript | Vue 3 | Orama | File System Access API | Agent Loop
-
-### duet — 双 AI 自主对话聊天室
-
-**角色**: 独立开发 | **时间**: 2026.07 - 至今
-
-- **定位**: 给两个 AI 话题与身份让它们自己聊——独立双记忆（视角翻转、身份不串）、无限对话 + 自动记忆压缩
-- 记忆工程：每 N 轮第一人称滚动摘要（保留旧摘要关键事实原句防漂移）+ 滑动窗口；对方思维链绝不进入自己的上下文
-- 成本工程：token 与成本常驻显示、双层熔断（用户上限 + 全局硬熔断）
-- AI 协作实践：用子智能体审核开发计划，对提出的 5 个「硬伤」逐条复核，以 curl 实测证据驳回 1 条、采纳 4 条并落地
-
-**技术栈**: Fastify | WebSocket | SSE | 原生 JS
-
-### linkseek — 自托管 MCP 联网搜索服务
-
-**角色**: 独立开发 | **时间**: 2026.07 - 至今
-
-- **定位**: 通过 HTTP 给 AI 编程工具提供联网搜索 / 网页获取能力（SearXNG 元搜索聚合多引擎），自托管保证查询数据主权，日常自用
-- 产品化：API Key 分发与启停、单 Key 用量统计与趋势、管理后台——从自用脚本到可运营服务
-- SSRF 三层防线：IP 段阻断（含 IPv6 映射归一化）、自定义 DNS lookup 防 rebinding、重定向逐跳校验；并明确标注代理模式下防线的失效边界
-- 抓取降级链：WAF 挑战页三层识别 → stealth 浏览器渲染兜底，AI 始终拿到干净 Markdown
-
-**技术栈**: TypeScript | Express | MCP Streamable HTTP | Prisma | MySQL | SearXNG | Vue 3 | Docker
-
-### picsense — 视觉识别 MCP Server
-
-**角色**: 独立开发 | **时间**: 2026.07 - 至今
-
-- **定位**: 给单模态基座模型「装眼睛」——本地 MCP 服务，让纯文本模型也能识别图片 / 视频 / 文档插图
-- 核心差异化：多轮迭代观察——Agent 拿到 session_id 后可反复追问细节（「重点描述导航栏样式」），「边干边查」而非一次性快照
-- 视频抽帧识别（ffmpeg，默认 1fps / 30 帧上限，平衡 token 成本与信息密度）、文档图片批量标注
-- npm Trusted Publishing（OIDC 免 token 发布），npx 即装即用
-
-**技术栈**: TypeScript | MCP stdio | ffmpeg | OpenAI Responses API
-
-### zcode-prompt-sanitizer — prompt 清洗反向代理
-
-**角色**: 独立开发 | **时间**: 2026.08 - 至今
-
-- **定位**: 从一个真实 Bug 做成的通用工具——AI 工具自动注入的 git 提示被第三方 API 网关误判拦截，定位根因后做成可配置的本地反向代理
-- 手写 node:http 反向代理：请求体缓冲改写 + 重算 content-length，SSE 响应逐块透传绝不缓冲
-- 规则引擎：字面 substring 替换（刻意不用正则）、按角色域过滤、链式叠加；npm / Docker / 可编程 API 三种交付
-- 36 个真场景测试：假上游端到端验证改写生效、假 SSE 上游验证流式不缓冲
-
-**技术栈**: TypeScript | node:http | Docker
+- 企业级前端项目群（教学资源平台 / AI 智能笔记 / 文件管理系统）核心开发：AI 对话界面与 SSE 流式、Qiankun 微前端集成 3D 编辑器、独立 Markdown 渲染器子应用，pnpm monorepo 管理 8 个子应用
 
 ## 教育背景
 
-**学校**: 山东商业职业技术学院 | **专业**: 软件技术（专科） | **时间**: 2022 - 2025
+**学校**: 山东商业职业技术大学 | **专业**: 软件技术（专科） | **时间**: 2022 - 2025
 
 - 2023 年起项目实践：首个完整项目「志愿之舟·高考志愿填报系统」（3 人团队，前端核心）获国家级奖项 1 项、省级奖项多项
 - 云计算实训中心学生负责人（1.5 年）；创建 200+ 人技术社群，组织技术分享 15 次
@@ -173,9 +140,9 @@
 
 ### 🚀 开源产出与在线运行
 
-- GitHub 32 个公开仓库，本人项目代码约 15 万行；3 个 npm 包与 Docker 镜像公开发布
-- 多个项目在线运行：image / novai / linkseek / duet .honlnk.com，个人门户 honlnk.com
-- 2026 年 4 月至今高强度开源输出：6 个主力项目均在此期间从 0 做到上线
+- [GitHub 38 个公开仓库](https://github.com/honlnk)，本人项目代码约 20 万行；4 个 npm 包与 Docker 镜像公开发布
+- 多个项目在线运行：[image.honlnk.com](https://image.honlnk.com)、[novai.honlnk.com](https://novai.honlnk.com)、[linkseek.honlnk.com](https://linkseek.honlnk.com)、[duet.honlnk.com](https://duet.honlnk.com)、[picsense.honlnk.com](https://picsense.honlnk.com)、[sanitize.honlnk.com](https://sanitize.honlnk.com)、[mdopener.honlnk.com](https://mdopener.honlnk.com)，个人门户 [honlnk.com](https://www.honlnk.com)
+- 2026 年 4 月至今高强度开源输出：7 个主力项目均在此期间从 0 做到上线
 
 ### 🛠️ 工程习惯
 
