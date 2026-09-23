@@ -58,7 +58,7 @@
 
 **角色**: 独立开发 | **时间**: 2026.08 - 至今
 
-**链接**: [GitHub](https://github.com/honlnk/dsh-input-assist) | [官网 / 演示](https://honlnk.github.io/dsh-input-assist/)
+**链接**: [GitHub](https://github.com/honlnk/dsh-input-assist) | [官网 / 演示](https://dsh-input-assist.honlnk.com/)
 
 - **定位**: 探索一个尚无成熟参照的开放问题——如何让 AI 在用户打字过程中帮上忙而不打断思路（Claude Code / Codex / Cursor 均未做输入框内辅助）：为 dsh（DeepSeek Harness）Web UI 做的输入助手插件，Copilot 式流式补全 + 中英错别字检查，dsh 生态首个输入框增强实现
 - 实现：ghost text 流式补全（FIM + SSE 逐字渐显、中文按词采纳、在途请求取消）+ 错别字双层检测（本地词典即时标红 + LLM 上下文校对，红字波浪线逐条修正、绝不全量替换）
