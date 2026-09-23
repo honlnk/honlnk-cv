@@ -151,6 +151,7 @@ export function useResumeData() {
             title,
             role: '',
             duration: '',
+            links: [],
             highlights: [],
             techStack: [],
           }
@@ -220,6 +221,16 @@ export function useResumeData() {
 
         if (roleMatch) currentProject.role = roleMatch[1]
         if (timeMatch) currentProject.duration = timeMatch[1]
+      }
+      // 解析项目链接（**链接**: [GitHub](url) | [在线体验](url)）
+      else if (currentSection === '项目经历' && trimmed.includes('**链接**:') && currentProject) {
+        const linkText = trimmed.replace('**链接**:', '')
+        const links: { label: string; url: string }[] = []
+        for (const part of linkText.split('|')) {
+          const m = part.trim().match(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/)
+          if (m && m[1] && m[2]) links.push({ label: m[1], url: m[2] })
+        }
+        currentProject.links = links
       }
       // 解析工作职位和时间
       else if (currentSection === '工作经历' && trimmed.includes('**职位**:') && currentWork) {

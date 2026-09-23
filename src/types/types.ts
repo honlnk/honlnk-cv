@@ -23,10 +23,18 @@ export interface ResumeData {
 // 子类型定义
 // ============================================================================
 
+export interface ProjectLink {
+  /** 链接文字，如 GitHub、在线体验 */
+  label: string
+  url: string
+}
+
 export interface ProjectData {
   title: string
   role?: string
   duration?: string
+  /** 项目链接（GitHub / 在线体验等），在 README 中用 `**链接**: [文字](url) | ...` 声明 */
+  links?: ProjectLink[]
   highlights: ListItem[]
   techStack?: string[]
 }

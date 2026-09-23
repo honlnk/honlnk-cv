@@ -54,10 +54,16 @@ export function renderInlineMarkdown(content: string): string {
     // 处理删除线 ~~text~~
     html = html.replace(/~~(.*?)~~/g, '<del>$1</del>')
 
+    // 处理链接 [text](url)（仅 http/https，新窗口打开）
+    html = html.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    )
+
     // 使用 DOMPurify 清理 HTML，防止 XSS 攻击
     const cleanHtml = DOMPurify.sanitize(html, {
       ALLOWED_TAGS: ['strong', 'b', 'em', 'i', 'u', 's', 'del', 'ins', 'a', 'span', 'code'],
-      ALLOWED_ATTR: ['href', 'title', 'target', 'class'],
+      ALLOWED_ATTR: ['href', 'title', 'target', 'rel', 'class'],
       ALLOW_DATA_ATTR: false,
     })
 
@@ -99,7 +105,7 @@ export function renderNestedList(items: ListItem[]): string {
   // 最终净化整个 HTML 结构
   return DOMPurify.sanitize(html, {
     ALLOWED_TAGS: ['ul', 'li', 'span', 'strong', 'b', 'em', 'i', 'code', 'a'],
-    ALLOWED_ATTR: ['class', 'href', 'title', 'target'],
+    ALLOWED_ATTR: ['class', 'href', 'title', 'target', 'rel'],
     ALLOW_DATA_ATTR: false,
   })
 }

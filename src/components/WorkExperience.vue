@@ -10,7 +10,7 @@
 
 <template>
   <section class="section work-experience" id="work">
-    <h2 class="section-title"><span class="section-index">02</span>工作经历</h2>
+    <h2 class="section-title"><span class="section-index">03</span>工作经历</h2>
 
     <div
       v-for="(work, workIndex) in workExperience"

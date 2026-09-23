@@ -47,6 +47,26 @@
       </div>
     </div>
 
+    <!-- 项目链接：GitHub / 在线体验等 -->
+    <div v-if="project.links?.length" class="project-links flex flex-wrap gap-4 mt-2">
+      <a
+        v-for="link in project.links"
+        :key="link.url"
+        :href="link.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-link"
+      >
+        <span
+          v-if="link.label.includes('GitHub')"
+          class="i-lucide:github"
+          aria-hidden="true"
+        ></span>
+        <span v-else class="i-lucide:external-link" aria-hidden="true"></span>
+        <span>{{ link.label }}</span>
+      </a>
+    </div>
+
     <!-- 项目亮点 -->
     <ul class="highlights-list mt-3">
       <li
@@ -79,6 +99,21 @@
     /* 嵌套在工作经历中的项目：收紧间距 */
     &--nested {
       padding: var(--spacing-md) 0;
+    }
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: rgb(var(--color-secondary));
+    transition: opacity var(--duration-fast) var(--ease-out);
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
     }
   }
 </style>

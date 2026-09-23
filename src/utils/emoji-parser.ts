@@ -18,8 +18,10 @@ export function extractEmojiFromStart(str: string): { emoji: string; text: strin
     /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F900}-\u{1F9FF}]|[\u{1F018}-\u{1F270}]/u
 
   // 更复杂的模式，支持emoji修饰符和零宽连字
+  // 注意：base 是交替结构，必须先包成 (?:...) 再加 FE0F/ZWJ 后缀，
+  // 否则修饰符只会挂到交替的最后一支，FE0F 会漏进标题文本
   const complexEmojiPattern =
-    '^(' + baseEmojiRegex.source + '(?:\\uFE0F|\\u200D(?:' + baseEmojiRegex.source + '))*)+'
+    '^((?:' + baseEmojiRegex.source + ')(?:\\uFE0F|\\u200D(?:' + baseEmojiRegex.source + '))*)+'
 
   // 尝试匹配字符串开头的连续emoji
   const match = str.match(new RegExp(complexEmojiPattern, 'u'))
