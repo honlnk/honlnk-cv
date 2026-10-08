@@ -35,11 +35,12 @@
 
 - 研读 DeepSeek Harness 的实现并逐项落地到自有项目：Agent Loop、Tool Use、Memory、RAG、渐进式披露（progressive disclosure）
 - 自研生产级 MCP Server ×2（联网搜索 linkseek、视觉识别 picsense），覆盖 stdio 与 Streamable HTTP 传输，日常自用并在线运行
-- Prompt / Context / Harness Engineering 与 LLM API 工程实战：滚动摘要防记忆漂移、长上下文压缩组装；SSE 流式解析、中断与超时治理，OpenAI / Anthropic / Gemini 多协议适配
+- 梳理 Agent Skills 仓库（honlnk-skills）：把协作规范、工具用法与开发经验沉淀为按任务自动加载的 skill，规范化 AI 的工作流程、让做法一致可预期
+- Prompt / Context / Harness Engineering 与 LLM API 工程实战：动态提示词编排、滚动摘要防记忆漂移、长上下文压缩组装；SSE 流式解析、中断与超时治理，OpenAI / Anthropic / Gemini 多协议适配
 
 ### AI 协作开发
 
-- 一人 + AI 协作产出约 20 万行可维护代码：契约文档先行、ADR 决策留档、100+ 测试文件与 CI 全绿门禁，AI 产出可审计可回溯
+- 一人 + AI 协作产出约 20 万行可维护开源代码：契约文档先行、ADR 决策留档、100+ 测试文件与 CI 全绿门禁，AI 产出可审计可回溯
 - 前端出身，在 AI 辅助下进入传统行业实现互联网赋能：独立交付企业平台 Java 后端 / 管理端 / 前台 / 部署全链路（已上线）
 
 ### Agent 产品高强度用户
@@ -73,10 +74,11 @@
 
 **链接**: [GitHub](https://github.com/honlnk/NovAI) | [在线体验](https://novai.honlnk.com)
 
-- **定位**: 为长篇创作原生设计的 Agent 工作台——主流 AI 写作产品仍停留在「续写」级别，而想要 agentic 体验的作者只能借用为代码设计的编程 Agent
-- **形态**: NovAI 把 Agent Loop 带进纯浏览器：零安装、本地文件夹即小说项目，Agent 直接读写章节文件，验证「文件 + RAG」替代聊天记忆，聊天只是控制面板
+- **定位**: 为长篇创作原生设计的 Harness Agent 工作台；主流 AI 写作产品仍停留在「续写」级别，而想要 agentic 体验的作者只能借用为代码开发设计的编程 Agent
+- **形态**: NovAI 把 Harness 带进纯浏览器：零安装、本地文件夹即小说项目，Agent 直接读写章节、要素文件，验证「文件 + RAG + 渐进式披露」替代聊天记忆和字符串匹配搜索
+- **资产积累与召回**: 长篇的故事章节沉淀为要素资产：从章节抽取六类要素入结构化 Markdown 库按需召回；召回按增长模式分流：内容无界增长走 RAG（Agent 自主决定何时 RagSearch），规模有界走渐进披露注入（摘要常驻、要素正文按需加载）
+- **要素管理子智能体（LLM Wiki 的抽象实现）**: 把 Karpathy 提出的 LLM Wiki 笔记仓库管理模式抽象为产品功能：ELEMENT.md 定义要素库规范，专职子智能体像 Wiki 管理员一样维护要素库
 - **工具系统与安全执行**: 不赋 shell 能力——Agent 只能经结构化文件工具读写项目内文件，路径防逃逸、删除只进回收站，破坏面架构性收敛在用户授权的单个文件夹内；联网搜索工具接入自托管 linkseek，Agent 可自主查证写作资料
-- **设定资产积累（与编程 Agent 的本质差异）**: 代码可 grep，但「人物性格」「伏笔走向」无文本可匹配——长篇的上下文必须沉淀为资产：LLM 从章节抽取六类要素入结构化 Markdown 库，向量索引只索引要素而非正文以控噪声，Agent 自主决定何时 RagSearch 召回而非每轮全量注入
 
 **技术栈**: TypeScript | Vue 3 | Orama | File System Access API | Agent Loop
 
@@ -88,7 +90,7 @@
 
 - **定位**: 一套核心代码交付四种形态——纯浏览器 / 本地 CLI（npm 已发布）/ Docker 服务端 / macOS 桌面端（Tauri）；另有 qiankun 微前端嵌入形态，已在企业生产管理台落地
 - **规模实证**: 从 0 到上线独立维护的完整产品——443 次提交、5.6 万行 TypeScript / Vue、95 个测试文件，CI 门禁（typecheck + test + build）全程全绿
-- **真实用户**: npm 累计下载 5,500+、Docker 镜像拉取 470+、GitHub 23★；桌面端三平台 CI 构建发布 + 免签名分发（curl|sh 一键安装）
+- **真实用户**: npm 累计下载 5,500+、Docker 镜像拉取 470+、GitHub 23★；桌面端三平台 CI 构建发布 + MacOS免签名分发（curl|sh 一键安装）
 - **产品能力**: 聊天式创作 + partial_image 渐进预览、浏览器内遮罩编辑、四档提示词模式 + 防改写、图片库批量管理与 ZIP 备份（密钥永不入备份）
 - **结项**: 同类成熟产品众多、差异化空间有限，验证目标达成后主动结项转入维护，精力转向 dsh-input-assist 与 NovAI
 
